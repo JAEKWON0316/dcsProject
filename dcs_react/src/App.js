@@ -1,10 +1,19 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './assets/Header';
+import Main from './components/Main';
+import Footer from './assets/Footer'
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Router>
+        <Header />
+        <Routes>
+          <Route path='/' element={<Main />} />
+        </Routes>
+        <Footer />
+      </Router>
     </div>
   );
 }
