@@ -25,7 +25,7 @@ code {
 .header .container{padding: 0 clamp(40px, 3.125vw, 80px);margin: 0 auto;}
 .header .header-content{width: 100%;max-width: 192rem;display: flex;justify-content: center;margin: auto;position: relative;height: var(--header-height, 100px);}
 .header .logo{position: absolute;top: 50%;transform: translateY(-50%);left: 0;}
-.header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: 0px;transition: color 0.3s ease;}
+.header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: 0px;transition: color 0.3s ease; font-size:18px;}
 .header a{text-decoration: none; color: #fff;}
 .header .nav .gnb{display: flex;}
 .header .nav ul{list-style-type: none;padding: 0;margin: 0;gap: 7.1333333333em;}

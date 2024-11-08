@@ -89,6 +89,13 @@ const Header = () => {
         { link: '/notice', label: '언론 보도' },
       ],
     },
+    {
+        depth1: '후원하기',
+        depth2: [
+          { link: '/notice', label: '후원하기' },
+          { link: '/notice', label: '후원신청' },
+        ],
+      },
   ];
   return (
     <header>

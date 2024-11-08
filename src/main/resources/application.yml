@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: dcsProject
+  datasource:
+    url: jdbc:mysql://localhost:3306/dcs_db
+    username: root
+    password: 'diwo0206^'
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mvc:
+    view:
+      prefix: classpath:/static/
+      suffix: .html
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
