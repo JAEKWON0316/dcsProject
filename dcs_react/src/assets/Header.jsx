@@ -5,17 +5,26 @@ const Header = () => {
   const [isFixed, setIsFixed] = useState(false);
   const [isDepth2Visible, setIsDepth2Visible] = useState(false);
   const [isHover, setIsHover] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(null);
 
-  const handleMouseEnter = (index) => {
+  const handleMouseEnter = () => {
     setIsDepth2Visible(true);
     setIsHover(true);
-    
   }
   const handleMouseLeave = () => {
     setIsDepth2Visible(false);
     setIsHover(false);
   }
-
+  const handleCombinedMouseEnter = (index) => {
+    handleMouseEnter();
+    setActiveIndex(index);
+  };
+  
+  const handleCombinedMouseLeave = () => {
+    handleMouseLeave();
+    setActiveIndex(null);
+  };
+  
   useEffect(()=>{
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -44,124 +53,83 @@ const Header = () => {
       window.removeEventListener('resize', updateDepth2Height);
     };
   }, []);
+  const menuData = [
+    {
+      depth1: '법인 소개',
+      depth2: [
+        { link: '/', label: '개요' },
+        { link: '/', label: '이사장 인사말' },
+        { link: '/', label: '목표와 비전' },
+        { link: '/', label: '조직 구조' },
+        { link: '/', label: '임원명단' },
+        { link: '/', label: '시/도지부' },
+      ],
+    },
+    {
+      depth1: '프로그램',
+      depth2: [
+        { link: '/', label: '미래전략포럼' },
+        { link: '/', label: 'AI 혁신위원회' },
+        { link: '/', label: '지역청년 네트워킹' },
+        { link: '/', label: 'ESG 청년연합봉사활동' },
+        { link: '/', label: '글로벌네트워킹' },
+      ],
+    },
+    {
+      depth1: '갤러리',
+      depth2: [
+        { link: '/', label: '활동사진' },
+        { link: '/', label: '언론 보도' },
+      ],
+    },
+    {
+      depth1: '공지사항',
+      depth2: [
+        { link: '/notice', label: '공지사항' },
+        { link: '/notice', label: '언론 보도' },
+      ],
+    },
+  ];
   return (
     <header>
-      <div className={`header ${isFixed ? 'fixed' : ''} ${isHover ? 'hover' : ''}`} onMouseLeave={handleMouseLeave}>
-        <div className={`container ${isHover ? 'hover' : ''}`}>
-          <div className='header-content'>
-          <Link to='/' className='logo'>로고</Link>
-          <nav className='nav'>
-            <ul className='gnb'>
-              
-              <li onMouseEnter={handleMouseEnter}>
-                <Link 
-                  to='/' 
-                  className={`depth1`}
-                  aria-haspopup="true"
-                  aria-expanded={isDepth2Visible}
-                >
-                  <span>법인 소개</span>
+    <div className={`header ${isFixed ? 'fixed' : ''} ${activeIndex !== null ? 'hover' : ''}`} onMouseLeave={handleCombinedMouseLeave}>
+      <div className={`container ${isHover ? 'hover' : ''}`}>
+        <div className="header-content">
+          <Link to="/" className="logo">로고</Link>
+          <nav className="nav">
+            <ul className="gnb">
+              {menuData.map((menu, index) => (
+                <li
+                  key={index}
+                  onMouseEnter={() => handleCombinedMouseEnter(index)}
                   
-                </Link>
-                <div className={`depth2 ${isHover ? 'hover' : ''}`}>
-                  <ul>
-                    <li>
-                      <Link to='/'>개요</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>이사장 인사말</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>목표와 비전</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>조직 구조</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>임원명단</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>시/도지부</Link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-
-              <li onMouseEnter={handleMouseEnter}>
-                <Link to='/' className='depth1'
-                  aria-haspopup="true"
-                  aria-expanded={isDepth2Visible}
                 >
-                  프로그램
-                </Link>
-                <div className={`depth2 ${isHover ? 'hover' : ''}`}>
-                  <ul>
-                    <li>
-                      <Link to='/'>미래전략포럼</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>AI 혁신위원회</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>지역청년 네트워킹</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>ESG 청년연합봉사활동</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>글로벌네트워킹</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>교육/세미나</Link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-
-              <li onMouseEnter={handleMouseEnter}>
-                <Link to='/' className='depth1'
-                  aria-haspopup="true"
-                  aria-expanded={isDepth2Visible}
-                >
-                  갤러리
-                </Link>
-                <div className={`depth2 ${isHover ? 'hover' : ''}`}>
-                  <ul>
-                    <li>
-                      <Link to='/'>활동사진</Link>
-                    </li>
-                    <li>
-                      <Link to='/'>언론 보도</Link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-
-              <li onMouseEnter={handleMouseEnter}>
-                <Link to='/' className='depth1'
+                  <Link
+                    to="/"
+                    className={`depth1 ${activeIndex === index ? 'underline hover' : ''}`}
                     aria-haspopup="true"
                     aria-expanded={isDepth2Visible}
-                >
-                  공지사항
-                </Link>
-                <div className={`depth2 ${isHover ? 'hover' : ''}`}>
-                  <ul>
-                    <li>
-                      <Link to='/notice'>공지사항</Link>
-                    </li>
-                    <li>
-                      <Link to='/notice'>언론 보도</Link>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-
+                  >
+                    {menu.depth1}
+                  </Link>
+                  <div className={`depth2 ${activeIndex === index ? 'hover' : ''}`}>
+                    <ul>
+                      {menu.depth2.map((subMenu, subIndex) => (
+                        <li key={subIndex}>
+                          <Link to={subMenu.link}>{subMenu.label}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ))}
             </ul>
           </nav>
-          </div>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
+  
   )
 }
 

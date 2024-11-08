@@ -25,7 +25,7 @@ code {
 .header .container{padding: 0 clamp(40px, 3.125vw, 80px);margin: 0 auto;}
 .header .header-content{width: 100%;max-width: 192rem;display: flex;justify-content: center;margin: auto;position: relative;height: var(--header-height, 100px);}
 .header .logo{position: absolute;top: 50%;transform: translateY(-50%);left: 0;}
-.header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: 30px;}
+.header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: 0px;transition: color 0.3s ease;}
 .header a{text-decoration: none; color: #fff;}
 .header .nav .gnb{display: flex;}
 .header .nav ul{list-style-type: none;padding: 0;margin: 0;gap: 7.1333333333em;}
@@ -44,24 +44,40 @@ code {
 .gnb .depth1[aria-expanded="true"] .subcontent {
   height: calc(var(--depth2-height, 100%));
 }
-.depth1.underline {
-  text-decoration: underline;
+.depth1.hover, .depth2.hover {
+  color: #007bff; /* hover 시 파란색 */
 }
 
-@keyframes slideDown {
-  0% {
-    transform: translateY(-100%);
+.depth1.underline::after {
+  content: "";
+  position: absolute;
+  bottom: 0; /* 글자 바로 아래로 배치 */
+  left: 0;
+  width: 100%;
+  height: 2px; /* 언더라인 두께 */
+  background-color: #007bff; /* 언더라인 색상 */
+  animation: underlineEnter 0.3s forwards; /* 애니메이션 */
+}
+@keyframes underlineEnter {
+  from {
+    width: 100%;
+    left: 0;
   }
-  100% {
-    transform: translateY(0);
+  to {
+    width: 0;
+    left: 100%;
   }
 }
-@keyframes slideUp {
-  0% {
-    transform: translateY(0);
+
+@keyframes underlineExit {
+  from {
+    width: 0;
+    left: 100%;
   }
-  100% {
-    transform: translateY(-100%);
+  to {
+    
+    width: 100%;
+    left: 0;
   }
 }
 /****** main ******/
