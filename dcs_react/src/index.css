@@ -21,7 +21,7 @@ code {
 .header{width: 100%;position: fixed;background-color: rgba(255, 255, 255, 0);z-index: 1000;transition: background-color 0.3s, box-shadow 0.3s;transition: transform calc(var(--anim-duration)* 6) cubic-bezier(.165,.84,.44,1), background calc(var(--anim-duration)* 3);letter-spacing: 0.05em;}
 .header::before{content: "";position: absolute;top: 0;left: 0;right: 0;background: rgb(20 38 129 / 57%);height: var(--header-bg-height, 0%);opacity: var(--header-bg-opacity, 1);transition: height calc(var(--anim-duration)* 5) cubic-bezier(.23,1,.32,1), opacity calc(var(--anim-duration)* 3);transition-delay: calc(var(--anim-duration)* 1);}
 .header.hover::before {height: calc(var(--depth2-height, 100%)) !important; opacity: 1;}
-.header.fixed::before{height: var(--header-bg-height, 100%);}
+.header.fixed::before{height: var(--header-bg-height, 100%);box-shadow: 0px 4px 10px rgb(9 26 70 /57%);}
 .header .container{padding: 0 clamp(40px, 3.125vw, 80px);margin: 0 auto;}
 .header .header-content{width: 100%;max-width: 192rem;display: flex;justify-content: center;margin: auto;position: relative;height: var(--header-height, 100px);}
 .header .logo{position: absolute;top: 50%;transform: translateY(-50%);left: 0;}
