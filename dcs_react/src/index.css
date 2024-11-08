@@ -44,6 +44,8 @@ code {
 .gnb .depth1[aria-expanded="true"] .subcontent {height: calc(var(--depth2-height, 100%));}
 .depth1.hover, .depth2.hover {color: #007bff; }
 .depth1.underline::after {content: "";position: absolute;bottom: 0; left: 0;width: 100%;height: 2px; background-color: #007bff;animation: underlineEnter 0.3s forwards; transform: translateY(-2em);}
+.depth2 a{transition: color 0.3s ease; /* 색상 전환 효과 */}
+.depth2 a:hover{color: #007bff; }
 @keyframes underlineEnter {
   from {
     width: 100%;
