@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Header = () => {
   const [isFixed, setIsFixed] = useState(false);
   const [isDepth2Visible, setIsDepth2Visible] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
+  const location = useLocation();
+  const isNotMain = location.pathname !== '/';
 
   const handleMouseEnter = () => {
     setIsDepth2Visible(true);
@@ -100,7 +102,7 @@ const Header = () => {
   ];
   return (
     <header>
-    <div className={`header ${isFixed ? 'fixed' : ''} ${activeIndex !== null ? 'hover' : ''}`} onMouseLeave={handleCombinedMouseLeave}>
+    <div className={`header ${isFixed ? 'fixed' : ''} ${activeIndex !== null ? 'hover' : ''} ${isNotMain ? 'white' : ''}`} onMouseLeave={handleCombinedMouseLeave}>
       <div className={`container ${isHover ? 'hover' : ''}`}>
         <div className="header-content">
           <Link to="/" className="logo">로고</Link>
