@@ -71,32 +71,32 @@ const Header = () => {
     {
       depth1: '프로그램',
       depth2: [
-        { link: '/id=1-1', label: '미래전략포럼' },
-        { link: '/id=1-2', label: 'AI 혁신위원회' },
-        { link: '/id=1-3', label: '지역청년 네트워킹' },
-        { link: '/id=1-4', label: 'ESG 청년연합봉사활동' },
-        { link: '/id=1-5', label: '글로벌네트워킹' },
+        { link: '/board/5', label: '미래전략포럼' },
+        { link: '/board/6', label: 'AI 혁신위원회' },
+        { link: '/board/7', label: '지역청년 네트워킹' },
+        { link: '/board/8', label: 'ESG 청년연합봉사활동' },
+        { link: '/board/9', label: '글로벌네트워킹' },
       ],
     },
     {
       depth1: '갤러리',
       depth2: [
-        { link: '/id=2-1', label: '활동사진' },
-        { link: '/id=2-2', label: '언론 보도' },
+        { link: '/board/3', label: '활동사진' },
+        { link: '/board/4', label: '언론 보도' },
       ],
     },
     {
       depth1: '공지사항',
       depth2: [
-        { link: '/board', label: '공지사항' },
-        { link: '/id=3-2', label: '언론 보도' },
+        { link: '/board/1', label: '공지사항' },
+        { link: '/board/2', label: '언론 보도' },
       ],
     },
     {
         depth1: '후원하기',
         depth2: [
-          { link: '/notice', label: '후원하기' },
-          { link: '/notice', label: '후원신청' },
+          { link: '/sponsor', label: '후원하기' },
+          { link: '/sponsor', label: '후원신청' },
         ],
       },
   ];

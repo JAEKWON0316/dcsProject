@@ -34,6 +34,9 @@ public class BoardEntity extends TimesEntity {    //spring-boot에서는 entity�
 
     @Column
     private int hit;
+    
+    @Column
+    private int role;
 
     public static BoardEntity toBoardEntity(BoardDto bDto){
         
@@ -44,9 +47,11 @@ public class BoardEntity extends TimesEntity {    //spring-boot에서는 entity�
         bEntity.setTitle(bDto.getTitle());
         bEntity.setContent(bDto.getContent());
         bEntity.setHit(0);
+        bEntity.setRole(bDto.getRole());
 
         //날짜는 db에서 저절로 생성되기 때문에 안해줘도 된다.
 
+        
         return bEntity;
     }
 
@@ -60,6 +65,7 @@ public class BoardEntity extends TimesEntity {    //spring-boot에서는 entity�
         bEntity.setTitle(bDto.getTitle());
         bEntity.setContent(bDto.getContent());
         bEntity.setHit(bDto.getHit());
+        bEntity.setRole(bDto.getRole());
 
         return bEntity;
     }

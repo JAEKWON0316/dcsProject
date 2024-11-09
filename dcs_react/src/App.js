@@ -12,7 +12,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path="/board" element={<Notice />} />
+          <Route path="/board/:role" element={<Notice />} />
         </Routes>
         <Footer />
       </Router>

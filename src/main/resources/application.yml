@@ -15,3 +15,10 @@ spring:
         format_sql: true
         jdbc:
           time_zone: UTC  # Hibernate가 사용할 시간대 설정 (UTC)
+  
+  resources:
+    static-locations: classpath:/static/  # 정적 리소스 위치 설정
+  mvc:
+    view:
+      prefix: /WEB-INF/views/  # JSP 파일 위치
+      suffix: .jsp  # JSP 파일 확장자

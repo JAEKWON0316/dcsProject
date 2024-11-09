@@ -15,6 +15,9 @@ import com.dcs.dcs_project.entity.BoardEntity;
 
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long>{  //레포지토리에 entity이름(column 클래스) 과 key타입(id) 설정
+    
+     // role을 기준으로 게시글 리스트 반환
+     List<BoardEntity> findByRole(int role, Sort sort);
 
     /* 조회수 증가 */
     @Modifying

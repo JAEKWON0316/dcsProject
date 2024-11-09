@@ -39,16 +39,18 @@ public class BoardDto {
         bDto.setTitle(bEntity.getTitle());
         bDto.setContent(bEntity.getContent());
         bDto.setHit(bEntity.getHit());
+        bDto.setRole(bEntity.getRole());
         bDto.setBbsCreatedTime(bEntity.getCreatedTime());
         bDto.setBbsUpdatedTime(bEntity.getUpdatedTime());
 
         return bDto;
     }
-    public BoardDto(Long id, String writer, int hit, String title, LocalDateTime bbsCreatedTime){
+    public BoardDto(Long id, String writer, int hit, String title, int role, LocalDateTime bbsCreatedTime){
         this.id = id;
         this.writer = writer;
         this.hit = hit;
         this.title = title;
+        this.role = role;
         this.bbsCreatedTime = bbsCreatedTime;
     }
 }
