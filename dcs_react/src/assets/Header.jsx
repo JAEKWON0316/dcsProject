@@ -52,6 +52,7 @@ const Header = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateDepth2Height);
     };
+    
   }, []);
   const menuData = [
     {
@@ -68,25 +69,25 @@ const Header = () => {
     {
       depth1: '프로그램',
       depth2: [
-        { link: '/', label: '미래전략포럼' },
-        { link: '/', label: 'AI 혁신위원회' },
-        { link: '/', label: '지역청년 네트워킹' },
-        { link: '/', label: 'ESG 청년연합봉사활동' },
-        { link: '/', label: '글로벌네트워킹' },
+        { link: '/id=1-1', label: '미래전략포럼' },
+        { link: '/id=1-2', label: 'AI 혁신위원회' },
+        { link: '/id=1-3', label: '지역청년 네트워킹' },
+        { link: '/id=1-4', label: 'ESG 청년연합봉사활동' },
+        { link: '/id=1-5', label: '글로벌네트워킹' },
       ],
     },
     {
       depth1: '갤러리',
       depth2: [
-        { link: '/', label: '활동사진' },
-        { link: '/', label: '언론 보도' },
+        { link: '/id=2-1', label: '활동사진' },
+        { link: '/id=2-2', label: '언론 보도' },
       ],
     },
     {
       depth1: '공지사항',
       depth2: [
-        { link: '/notice', label: '공지사항' },
-        { link: '/notice', label: '언론 보도' },
+        { link: '/id=3-1', label: '공지사항' },
+        { link: '/id=3-2', label: '언론 보도' },
       ],
     },
     {
@@ -112,7 +113,7 @@ const Header = () => {
                   
                 >
                   <Link
-                    to="/"
+                    to={menu.depth2[0].link}
                     className={`depth1 ${activeIndex === index ? 'underline hover' : ''}`}
                     aria-haspopup="true"
                     aria-expanded={isDepth2Visible}

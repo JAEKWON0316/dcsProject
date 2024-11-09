@@ -12,7 +12,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/notice' element={<Noitce />} />
+          <Route path='/:id' element={<Noitce />} />
         </Routes>
         <Footer />
       </Router>
