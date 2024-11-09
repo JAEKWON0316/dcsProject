@@ -93,14 +93,18 @@ const Main = () => {
             {menuData.map((nav, index) => (
               <li key={index}>
                 <Link to={nav.path}>
-                  <div>
-                  <img src={Img2} alt="" />
-                    <strong>
-                      {nav.nav}
-                    </strong>
-                    <p>
-                      {nav.content}
-                    </p>
+                  <div className='item'>
+                    <div className='icon'>
+                      <img src={Img2} alt="" />
+                    </div>
+                    <div className='desc'>
+                      <strong>
+                          {nav.nav}
+                      </strong>
+                      <p>
+                        {nav.content}
+                      </p>
+                    </div>
                   </div>
                 </Link>
               </li>
