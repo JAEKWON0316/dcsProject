@@ -69,7 +69,7 @@ const Main = () => {
           <div className='visual1'>
             <div className='about-l'>
               <h1>
-                <span className='blue'>급변하는</span> 기술혁신,{' '}
+                <span className='blue'>급변하는</span> 기술혁신,<br />
                 <span className='blue'>뒤처지는</span> 인식의 간극
               </h1>
             </div>
@@ -110,6 +110,71 @@ const Main = () => {
               </li>
             ))}
           </ul>
+        </section>
+
+        <section 
+        ref={(el) => (sectionRefs.current[2] = el)}
+        className={`section visual3 motion ${isVisible[2] ? 'action' : ''}`}
+        >
+          <div className='noitce'>
+            <h4>Noitce</h4>
+            <ul className='ul'>
+              <li>
+                <Link to='/'>
+                  <em>공지</em>
+                  <strong>한국토지주택공사 광주전남지역본부 기간제근로자</strong>
+                </Link>
+              </li>
+              <li>
+                <Link to='/'>
+                  <em>공지</em>
+                  <strong>한국토지주택공사 광주전남지역본부 기간제근로자</strong>
+                </Link>
+              </li>
+              <li>
+                <Link to='/'>
+                  <em>공지</em>
+                  <strong>한국토지주택공사 광주전남지역본부 기간제근로자</strong>
+                </Link>
+              </li>
+              <li>
+                <Link to='/'>
+                  <em>공지</em>
+                  <strong>한국토지주택공사 광주전남지역본부 기간제근로자</strong>
+                </Link>
+              </li>
+              <li>
+                <Link to='/'>
+                  <em>공지</em>
+                  <strong>한국토지주택공사 광주전남지역본부 기간제근로자</strong>
+                </Link>
+              </li>
+              <li>
+                <Link to='/'>
+                  <em>공지</em>
+                  <strong>한국토지주택공사 광주전남지역본부 기간제근로자</strong>
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div className='active'>
+            <div className='popupzone'>
+              <Link to>
+                <div className='swiper pop_slide'>
+                    
+                </div>
+              </Link>
+            </div>
+          </div>
+          <div className='give'>
+            <p>
+              작은 나눔이 
+              <br />
+              큰 힘이 됩니다.
+            </p> 
+            <Link to='/'>후원하기</Link>
+            <Link tp='/'>{/* 이미지 */}</Link>
+          </div>
         </section>
 
       </div>
