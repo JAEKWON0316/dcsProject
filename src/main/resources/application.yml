@@ -2,7 +2,7 @@ spring:
   application:
     name: dcsProject
   datasource:
-    url: jdbc:mysql://localhost:3306/dcs_db
+    url: jdbc:mysql://localhost:3306/dcs_db?serverTimezone=UTC  # MySQL 서버 시간대 설정 (UTC)
     username: root
     password: 'diwo0206^'
   jpa:
@@ -13,15 +13,5 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  mvc:
-    view:
-      prefix: classpath:/static/
-      suffix: .html
-  web:
-    resources:
-      static-locations: classpath:/static/
-
-logging:
-  level:
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+        jdbc:
+          time_zone: UTC  # Hibernate가 사용할 시간대 설정 (UTC)

@@ -1,0 +1,54 @@
+package com.dcs.dcs_project.dto;
+
+import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.dcs.dcs_project.entity.BoardEntity;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString 
+@NoArgsConstructor  //기본생성자 생성
+@AllArgsConstructor //필드 모든생성자 생성
+public class BoardDto {
+    private long id;
+    private String writer;
+    private String imnum;
+    private String title;
+    private String content;
+    private int hit;
+    private int role;
+
+    @JsonFormat(pattern = "yyyy.MM.dd")
+    private LocalDateTime bbsCreatedTime; //insert
+
+    @JsonFormat(pattern = "yyyy.MM.dd")
+    private LocalDateTime bbsUpdatedTime; //update
+
+    public static BoardDto toBoardDto(BoardEntity bEntity){
+        BoardDto bDto = new BoardDto();
+
+        bDto.setId(bEntity.getId());
+        bDto.setWriter(bEntity.getWriter());
+        bDto.setImnum(bEntity.getImnum());
+        bDto.setTitle(bEntity.getTitle());
+        bDto.setContent(bEntity.getContent());
+        bDto.setHit(bEntity.getHit());
+        bDto.setBbsCreatedTime(bEntity.getCreatedTime());
+        bDto.setBbsUpdatedTime(bEntity.getUpdatedTime());
+
+        return bDto;
+    }
+    public BoardDto(Long id, String writer, int hit, String title, LocalDateTime bbsCreatedTime){
+        this.id = id;
+        this.writer = writer;
+        this.hit = hit;
+        this.title = title;
+        this.bbsCreatedTime = bbsCreatedTime;
+    }
+}

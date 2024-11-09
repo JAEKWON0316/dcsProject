@@ -88,7 +88,7 @@ const Header = () => {
     {
       depth1: '공지사항',
       depth2: [
-        { link: '/id=3-1', label: '공지사항' },
+        { link: '/board', label: '공지사항' },
         { link: '/id=3-2', label: '언론 보도' },
       ],
     },
