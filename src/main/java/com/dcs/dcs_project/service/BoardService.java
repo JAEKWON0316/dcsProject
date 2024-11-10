@@ -25,9 +25,9 @@ import lombok.RequiredArgsConstructor;
 public class BoardService {
 
     private final BoardRepository boardRepository; //다시 수정할 수 없도록 final로 가지고 온다.
-    
-   
-
+      
+      
+ 
     public List<BoardDto> findByRole(int role) {
            // 내림차순으로 정렬된 데이터 가져오기 (가장 최신 항목이 위로 오도록)
     List<BoardEntity> boards = boardRepository.findByRole(role, Sort.by(Sort.Direction.DESC, "id"));
@@ -35,7 +35,13 @@ public class BoardService {
                  .map(BoardDto::toBoardDto)
                  .collect(Collectors.toList());
     }
-
+    //role,id값으로 content 뽑기
+    public BoardDto findByRoleAndId(int role, Long id) {
+        BoardEntity boardEntity = boardRepository.findByRoleAndId(role, id)
+            .orElseThrow(() -> new RuntimeException("게시글이 존재하지 않습니다."));
+        return BoardDto.toBoardDto(boardEntity);
+    }
+     
     public void write(BoardDto bDto){
         BoardEntity bEntity = BoardEntity.toBoardEntity(bDto);  //dto를 받아서 entity안에 넣어준다.
         boardRepository.save(bEntity);  //레포지토리에서 save 되면서 쿼리문이 만들어진다. save는 레포지토리 내장메소드

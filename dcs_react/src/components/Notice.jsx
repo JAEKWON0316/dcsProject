@@ -76,7 +76,7 @@ const Notice = () => {
               currentBoards.map((board) => (
                 <tr key={board.id}>
                   <td>{board.displayNumber}</td>
-                  <td><a href={`/board/${board.id}`}>{board.title}</a></td>
+                  <td><a href={`/board/${role}/${board.id}`}>{board.title}</a></td>
                   <td>{board.writer}</td>
                   <td>{format(new Date(board.bbsCreatedTime), 'yyyy.MM.dd')}</td>
                   <td>{board.hit}</td>

@@ -51,7 +51,12 @@ public class BoardController {
         Map<String, Object> response = bService.paging(pageable); // 서비스에서 페이징 데이터 가져오기
         return ResponseEntity.ok(response); // JSON 형태로 응답
     }
-
+    
+    @GetMapping("/role/{role}/{id}")
+    public ResponseEntity<BoardDto> getBoardByRoleAndId(@PathVariable("role") int role, @PathVariable("id") Long id) {
+        BoardDto boardDto = bService.findByRoleAndId(role, id); // role과 id에 맞는 게시글 조회
+        return ResponseEntity.ok(boardDto); // JSON 형태로 반환
+    }
 
     @GetMapping("/{id}")
     public String detailView(@PathVariable("id") Long id, Model model) {

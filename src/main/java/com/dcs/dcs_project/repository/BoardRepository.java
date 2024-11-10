@@ -1,6 +1,7 @@
 package com.dcs.dcs_project.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,7 +19,10 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long>{  //�
     
      // role을 기준으로 게시글 리스트 반환
      List<BoardEntity> findByRole(int role, Sort sort);
-
+     
+     //id, role로 content 뽑기
+     Optional<BoardEntity> findByRoleAndId(int role, Long id); // role과 id로 조회
+   
     /* 조회수 증가 */
     @Modifying
     @Query(value = "update BoardEntity b set b.hit=b.hit+1 where b.id=:id")// update bboard set hits=hits+1 where id = ? 와 똑같다.  
