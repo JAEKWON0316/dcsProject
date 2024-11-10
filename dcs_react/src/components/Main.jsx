@@ -21,7 +21,6 @@ const Main = () => {
     {'url' : Img5, 'content': '선화보틀 프로젝트 업무협약식에 참석'},
     {'url' : Img6, 'content': '(주)마라톤의 후원금 전달식'}
   ];
-
   useEffect(() => {
     const currentSections = sectionRefs.current; 
   
@@ -195,35 +194,33 @@ const Main = () => {
             <h4 className='visual3m'>Active</h4>
             <div className='popupzone'>
             {slide.map((image, index) => (
-  <div key={index}>
-    <div
-      className={`swiper pop_slide ${currentIndex === index ? 'active' : 'inactive'}`}
-      style={{
-        backgroundImage: `url(${image.url})`,  // image.url로 경로 참조
-        opacity: currentIndex === index ? 1 : 0,
-        transition: 'opacity 1s ease-in-out',
-        width: '100%',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-    </div>
-    <div 
-      className={`activecomment ${currentIndex === index ? 'active' : 'inactive'}`}
-      style={{
-        opacity: currentIndex === index ? 1 : 0,
-        transition: 'opacity 1s ease-in-out',
-        position: 'absolute',
-        bottom : 0
-      }}
-    >
-      {image.content}
-    </div>
-  </div>
-))}
-
-
+              <Link to=''>
+                <div key={index}>
+                  <div
+                    className={`swiper pop_slide ${currentIndex === index ? 'active' : 'inactive'}`}
+                    style={{
+                      backgroundImage: `url(${image.url})`,  // image.url로 경로 참조
+                      opacity: currentIndex === index ? 1 : 0,
+                      transition: 'opacity 1s ease-in-out',
+                      width: '100%',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat'
+                    }}
+                  >
+                  </div>
+                  <div 
+                    className={`activecomment ${currentIndex === index ? 'active' : 'inactive'}`}
+                    style={{
+                      opacity: currentIndex === index ? 1 : 0,
+                      transition: 'opacity 1s ease-in-out'
+                    }}
+                  >
+                    {image.content}
+                  </div>
+                </div>
+                </Link>
+              ))}
 
               <div className='controls'>
                 <button type='button' className='arrow prev' onClick={prevSlide} tabIndex='0' aria-ralbel='Previous slide'>
@@ -251,6 +248,52 @@ const Main = () => {
           </div>
         </section>
 
+        <section 
+        ref={(el) => (sectionRefs.current[3] = el)}
+        className={`section visual4 motion ${isVisible[3] ? 'action' : ''}`}
+        >
+          <div className='title'>
+            <p>숫자로 보는 대한청년을세계로</p>
+            <span>미담장학회는 13개 대학교의 학생들이 활동하는 전국 8개의 기초·광역자치단체에서 청소년들에게 교육 기회를 나누어 주고 꿈을 꿀 수 있도록 도와주고 있습니다. <br />연간 평균 400여명의 대학생들이 4,000여명의 청소년들을 대상으로 교육기부를 진행하고 있습니다.</span>
+          </div>
+          <div className='wrap'>
+            <ul>
+              <li 
+                className="profile wrap-menu"
+              >
+                <Link to=''>
+                  <div className='wrap-title'>
+                    <p>대한청년세계로 소개</p>
+                    <span>대한청년세계로 이사회 의장과 상임이사의 인사와 지역별 대한세계로 회장을 만날 수 있습니다.</span>
+                    <p className='wrapLink'>바로가기</p>
+                  </div>
+                </Link>
+              </li>
+              <li 
+                className="story wrap-menu"
+              >
+                <Link to=''>
+                  <div className='wrap-title'>
+                    <p>대한청년세계로 소개</p>
+                    <span>대한청년세계로 이사회 의장과 상임이사의 인사와 지역별 대한세계로 회장을 만날 수 있습니다.</span>
+                    <p className='wrapLink'>바로가기</p>
+                  </div>
+                </Link>
+              </li>
+              <li 
+                className="sponser wrap-menu"
+              >
+                <Link to=''>
+                  <div className='wrap-title'>
+                    <p>대한청년세계로 소개</p>
+                    <span>대한청년세계로 이사회 의장과 상임이사의 인사와 지역별 대한세계로 회장을 만날 수 있습니다.</span>
+                    <p className='wrapLink'>바로가기</p>
+                  </div>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </section>
       </div>
     </div>
   );
