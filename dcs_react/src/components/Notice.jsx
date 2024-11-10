@@ -45,6 +45,7 @@ const Notice = () => {
   }, [role]); // role이 변경될 때마다 fetchBoards 호출
 
   return (
+    <div class="listbox">
     <div className='board'>
       <div className='main_wrap'>
         <div className='visual'>
@@ -116,6 +117,7 @@ const Notice = () => {
           <a className="page-link" onClick={() => handlePageChange(totalPages - 1)} disabled={currentPage === totalPages - 1}>last</a>
         </div>
       </div>
+    </div>
     </div>
   );
 };

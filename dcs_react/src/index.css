@@ -157,3 +157,99 @@ code {
 .footer .copyright{text-align: left;padding: 3rem 0 0 0;color: rgba(255, 255, 255, 0.4);font-size: 0.8rem;}
 .footer a{color: #fff;}
 .footer .pwr{font-size: 0.8rem;}
+
+
+
+
+/********* JACK *****************/
+
+/* 페이징 */
+.paging{
+  list-style-type:none;
+  display:flex;
+  justify-content: center;    
+}
+.paging li{
+   font-size:16px;
+   margin-left:5px;
+   margin-right:5px;
+}
+.paging li a{
+   color:#434c53;
+   padding:3px 10px;
+}
+.paging li a:hover,
+.paging li a.active{
+   background:#434c53;
+   border-radius:5px;
+   color:#fff;
+   text-decoration:none;
+}
+
+/** 검색 **/
+.searchform{
+   width:40%;
+   margin-left:auto;
+   margin-right:auto;
+}
+.dropdown-menu{
+   min-width:95%;
+}
+.dropdown-item{
+  padding: 0.25rem 1.1rem;
+}
+.input-group-prepend{
+   position: relative;
+}
+
+/** list_box **/
+
+.listbox{
+    border-bottom:1px solid #ddd;
+}
+.listbox h1{
+    font-size:25px;
+}
+.listbox .table{
+    border-bottom:1px solid #dee2e6;
+}
+
+.listbox th{
+    text-align:center;
+    position:relative;
+}
+.listbox th:not(:last-child)::after{
+    content:"";
+    display:block;
+    width:1px;
+    height:15px;
+    background:#c5bebe;
+    box-shadow:1px 0 0 #e8eaeb;
+    position:absolute;
+    right:0;
+    top:18px;
+}
+.listbox td a{
+    margin-left:15px;
+    color:#1d1e1f;
+    display:inline-block;
+    max-width:380px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    
+}
+.listbox td span{
+    font-size:13px;
+    margin-left:5px;
+    vertical-align: top;
+}
+.listbox td i{
+    font-size:16px;
+    margin-left:1px;
+    vertical-align: top;
+}
+
+.content_box{
+  white-space: pre-line
+}

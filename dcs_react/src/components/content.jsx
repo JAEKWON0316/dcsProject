@@ -1,23 +1,33 @@
-// src/components/Content.jsx
-
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { format } from 'date-fns';
 
 const Content = () => {
-  // URL에서 role과 id 파라미터 가져오기
   const { role, id } = useParams();
   
-  // 게시글 데이터와 상태 관리
   const [board, setBoard] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // API 요청으로 게시글 데이터 가져오기
   useEffect(() => {
     const fetchBoard = async () => {
       try {
         setLoading(true);
+        
+        // 로컬 스토리지에서 조회 시간 확인
+        const viewedBoards = JSON.parse(localStorage.getItem('viewedBoards')) || {};
+        const lastViewedTime = viewedBoards[id];
+        const currentTime = new Date().getTime();
+        
+        // 마지막 조회 시간이 24시간 이상 지났을 경우 조회수 증가
+        if (!lastViewedTime || currentTime - lastViewedTime > 24 * 60 * 60 * 1000) {
+          await axios.post(`http://localhost:8080/api/board/${id}/increment-hit`);
+          viewedBoards[id] = currentTime; // 현재 시간을 로컬 스토리지에 저장
+          localStorage.setItem('viewedBoards', JSON.stringify(viewedBoards));
+        }
+        
+        // 게시글 데이터 가져오기
         const response = await axios.get(`http://localhost:8080/api/board/role/${role}/${id}`);
         setBoard(response.data);
       } catch (err) {
@@ -29,20 +39,46 @@ const Content = () => {
     fetchBoard();
   }, [role, id]);
 
-  // 로딩 중인 상태 처리
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div>
       {board ? (
-        <div>
-          <h1>{board.title}</h1>
-          <p><strong>작성자:</strong> {board.writer}</p>
-          <p><strong>작성일:</strong> {new Date(board.bbsCreatedTime).toLocaleDateString()}</p>
-          <p><strong>조회수:</strong> {board.hit}</p>
-          <hr />
-          <p>{board.content}</p>
+        <div className="listbox">
+          <h3 className="mt-5"><i className="ri-arrow-right-double-line"></i> {board.title}</h3> 
+          <div className="mt-2 mb-5 pt-2 border-top text-right">
+            <span className="mr-4"><label className="font-italic">hit:</label> {board.hit}</span>
+            <span className="mr-4 font-weight-bold">{board.writer}</span>
+            <span className="mr-2">
+              {format(new Date(board.bbsCreatedTime), 'yyyy.MM.dd')}
+            </span>
+          </div>
+
+          <div className="mt-2 pt-2 border-top file-box">
+            <span>
+              <label className="font-italic">file :</label>
+              <a href="#">asdf.gif</a> <a href="#">afdfd.asdf</a>
+            </span>
+          </div>
+
+          <div className="mt-3">
+          {board.content.split('\\n').map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
+        </div>
+        {console.log(board.content)}
+
+
+          <div className="my-5 pt-5 text-right">
+            <a href="#" className="btn btn-primary mr-3">목록</a>
+            <a href="#" className="btn btn-primary">답글쓰기</a>
+            <a href="#" className="btn btn-primary">수정</a>
+            <a href="#" id="delete" className="btn btn-danger">삭제</a>                      
+          </div>
         </div>
       ) : (
         <p>게시글이 존재하지 않습니다.</p>

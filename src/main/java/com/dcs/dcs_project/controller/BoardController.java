@@ -58,6 +58,13 @@ public class BoardController {
         return ResponseEntity.ok(boardDto); // JSON 형태로 반환
     }
 
+    //조회수 증가
+    @PostMapping("/{id}/increment-hit")
+    public ResponseEntity<Void> incrementHit(@PathVariable Long id) {
+        bService.updateHits(id);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/{id}")
     public String detailView(@PathVariable("id") Long id, Model model) {
         /**
