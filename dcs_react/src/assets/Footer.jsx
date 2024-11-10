@@ -14,21 +14,21 @@ const Footer = () => {
             대한청년을세계로
             </div>
             <div className='t-top-r'>
-              <span><Link to='/'><FaInstagram /></Link></span>
+              <span><Link to='https://www.instagram.com/dae_cheong_se/?igsh=MWtraDk0emY0Mms0bg%3D%3D#'><FaInstagram /></Link></span>
               <span><Link to='/'><FaFacebookSquare /></Link></span>
               <span><Link to='/'><FaYoutube /></Link></span>
-              <span><Link to='/'><RiKakaoTalkFill /></Link></span>
+              <span><Link to='http://pf.kakao.com/_zxixeAn'><RiKakaoTalkFill /></Link></span>
             </div>
           </div>
           <div className='f-bottom'>
-            <p>(34051)대전광역시 유성구 문지로 193 (KAIST 문자캠퍼스)F동 102호</p>
-            <span>대표 장능인</span>
-            <span>TEL 042) 350-0352</span>
-            <span>FAX 042) 350-0353</span>
+            <p>(35233) 대전광역시 서구 둔산로 63, 403-225</p>
+            <span>대표 정민기</span>
+            <span>TEL 042) 710-2177</span>
+            {/* <span>FAX 042) 350-0353</span> */}
             <p className='pwr'>Powered by SmartCreator Inc.</p>
           </div>
           <div className='copyright'>
-            Copyrights 2023 미담장학회. All Rights Reserved.
+            Copyrights &copy; 2024 대한청년을세계로. All Rights Reserved.
           </div>
         </div>
       </div>

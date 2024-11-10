@@ -1,3 +1,5 @@
+@import '~remixicon/fonts/remixicon.css';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -114,15 +116,59 @@ code {
 .main .visual2 li{margin-right: 3.2rem;width: calc(25% - 2.8rem);}
 
 
-.main .section.visual3{display: flex;align-items: baseline;justify-content: space-between;}
-.main .section.visual3 .noitce{border: 0.07rem solid #e2e2e2; padding: 1rem 2rem;border-radius: 1rem;}
-.main .section.visual3 .noitce ul{display: grid;gap: 1.5rem;}
-.main .section.visual3 .noitce ul li{padding: 0 6rem 1.2rem 0; border-bottom: 0.07rem dashed #e2e2e2;}
-.main .section.visual3 .noitce h4{text-align: left;}
-.main .section.visual3 .noitce em{background: green;padding: 0.3rem 0.4rem;color: #fff; font-weight: 600;border-radius: 1rem;}
+.main .section.visual3{display: flex;align-items: flex-start;justify-content: space-between;}
+.main .section.visual3 .noitce{border: 0.07rem solid #e2e2e2; padding: 3rem 1.6rem;border-radius: 1rem;}
+.main .section.visual3 .noitce ul{display: grid;gap: 1rem;}
+.main .section.visual3 .noitce ul li{padding: 0 16rem 1.2rem 5rem; border-bottom: 0.07rem dashed #e2e2e2;position: relative;line-height: 1.9rem;}
+.main .section.visual3 .visual3m{text-align: left;font-size: 1.7rem;margin: 0;margin-bottom: 2.4rem;font-weight: 600;}
+.main .section.visual3 .noitce em{background: #E5E5E5;padding: 0rem 1rem;color: #000; font-weight: 600;border-radius: 1rem;font-style: normal;position: absolute;top: 0;left: 0;font-weight: 900;}
+.main .section.visual3 .noitce strong{font-size: 1.1rem;font-weight: 600;}
 .main .section.visual3 ul{list-style-type: none;padding: 0;}
 .main .section.visual3 .noitce a{text-decoration: none;color: #000;}
+.main .section.visual3 .blue{color: #2F5BC1 !important;background: #DEE8FF !important;}
 
+.main .section.visual3 .action .controls button{position: relative;border: 0 none;background: none;padding: 0 none;cursor: pointer;z-index: 1;width: 2rem;height: 2rem;line-height: 2rem;}
+.controls .arrow:before, .popupzone .controls .con_btn:before {content: '\EFDA';font-family: "remixicon";display: block;width: 100%;height: 100%;color: #000;font-size: 1.6rem;}
+.controls .arrow.prev:before {content: '\EA64';}
+.controls .arrow.next:before {content: '\EA6E';}
+.popupzone .controls .con_btn.play{opacity: 0;overflow: hidden;display: none;}
+.popupzone .controls .con_btn.stop{opacity: 0;overflow: hidden;display: none;}
+.popupzone .controls .con_btn.stop.active{opacity: 1;overflow: visible;display: inline;}
+.popupzone .controls .con_btn.play.active{opacity: 1;overflow: visible;display: inline;}
+.popupzone .controls .con_btn.play.active:before {content: "\F012";}
+.activecomment{background: #007bff;padding: 1rem;width: 100%;text-align: left;font-weight: 600;color: #fff;border-bottom-left-radius: 1rem;border-bottom-right-radius: 1rem;transition: 'opacity 1s ease-in-out';top : 24rem;position: absolute;font-size: 1.3rem;}
+.swiper.active {opacity: 1;z-index: 1;}
+.swiper.inactive {opacity: 0;z-index: 0;}
+.swiper {margin-left: auto;margin-right: auto;position: relative;overflow: hidden;list-style: none;padding: 0;z-index: 1;position: absolute;top: 0;left: 0;width: 100%;height: 100%;transition: opacity 1s ease-in-out;opacity: 0;}
+.swiper-pointer-events {touch-action: pan-y;}
+.main .section.visual3 .actives{width: calc(100% - 54.78571% - 0.1rem);}
+.main .section.visual3 .popupzone{position: relative;display: block;width: 100%;height: 27.3rem;}
+.main .section.visual3 .actives{position: relative;padding: 2rem;border: 0.07rem solid #e2e2e2;border-radius: 1rem;}
+.main .section.visual3 .popupzone .controls{position: absolute;top: -4rem;right: 0rem;}
+.main .section.visual3 .popupzone .controls button{padding: 0;border: 0 none; background: none;}
+.main .section.visual3 .popupzone img{width: 100%;}
+.popupzone .pop_slide_wrap{position: relative;}
+.popupzone .pop_slide{height: 24rem;border-top-right-radius: 1rem; border-top-left-radius: 1rem;}
+
+
+.main .section.visual4 {padding: 0rem 0 5rem;}
+.main .section.visual4 .title{text-align: left;}
+.main .section.visual4 .title p{font-size: 2rem;font-weight: 800;color: #007bff;}
+.main .section.visual4 .title span{font-size: 1.2rem;}
+.main .section.visual4 .wrap ul{list-style-type: none; padding: 0;display: flex;align-items: flex-start;justify-content: space-between;}
+.main .section.visual4 .wrap ul li a{text-decoration: none; }
+.main .section.visual4 .wrap-menu{text-align: left;background: #005eb8;border-radius: 1rem;padding: 2rem 3.6rem;width: 31%;transition: all 0.3s ease;}
+.main .section.visual4 .wrap-menu:hover{transform: translateY(-2rem);box-shadow: 0px 4px 10px rgb(9 26 70 / 78%);border-radius: 1rem;}
+.main .section.visual4 .profile{background: #0086bf !important;}
+.main .section.visual4 .sponser{background: #003f77 !important;}
+.main .section.visual4 .wrap-menu a{color: #fff;font-size: 1.3rem;font-weight: 700;}
+.wrapLink{font-size: 1rem;margin-top: 4rem;position: relative;}
+.wrapLink::before{content: '';width:100%;position: absolute;bottom: 0;height: 0.07rem;background: #fff;}
+.wrapLink::after{content: '>';width: 2rem;height: 2rem;position: absolute;bottom: -1.3rem;right: -1.4rem;font-weight: 400;}
+.main .section.visual4 .wrap-menu span{font-size: 1rem;font-weight: 500;}
+.main .section.visual4 .wrap-menu:hover {box-shadow: 0px 4px 10px rgba(9, 26, 70, 0.78);border-radius: 1rem;}
+.main .section.visual4 .sponser:hover {transform: translateY(-2rem);}
+.sr-only{overflow: hidden;position: absolute;width: 1px;height: 1px;margin: -1px;padding: 0;border: 0 none;clip: rect(0,0,0,0);}
 @media (max-width: 1024px) {
   .main .visual2 ul {
       flex-wrap: wrap !important;
