@@ -7,6 +7,7 @@ const Content = () => {
   const { role, id } = useParams();
   
   const [board, setBoard] = useState(null);
+  const [images, setImages] = useState([]);  // 이미지를 저장할 상태 추가
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,14 +29,19 @@ const Content = () => {
         }
         
         // 게시글 데이터 가져오기
-        const response = await axios.get(`http://localhost:8080/api/board/role/${role}/${id}`);
-        setBoard(response.data);
+        const boardResponse = await axios.get(`http://localhost:8080/api/board/role/${role}/${id}`);
+        setBoard(boardResponse.data);
+
+        // 이미지 데이터 가져오기
+        const imageResponse = await axios.get(`http://localhost:8080/api/images/board/${id}`);
+        setImages(imageResponse.data);  // 이미지를 상태에 저장
       } catch (err) {
         setError('게시글을 불러오는 중 오류가 발생했습니다.');
       } finally {
         setLoading(false);
       }
     };
+
     fetchBoard();
   }, [role, id]);
 
@@ -47,6 +53,7 @@ const Content = () => {
       {board ? (
         <div className="listbox">
           <h3 className="mt-5"><i className="ri-arrow-right-double-line"></i> {board.title}</h3> 
+          
           <div className="mt-2 mb-5 pt-2 border-top text-right">
             <span className="mr-4"><label className="font-italic">hit:</label> {board.hit}</span>
             <span className="mr-4 font-weight-bold">{board.writer}</span>
@@ -54,6 +61,20 @@ const Content = () => {
               {format(new Date(board.bbsCreatedTime), 'yyyy.MM.dd')}
             </span>
           </div>
+          {console.log(images)}
+          {/* 이미지가 있을 경우 보여주기 */}
+          {images.length > 0 && (
+            <div className="image-gallery mt-3">
+              {images.map((image) => (
+                <img
+                  key={image.id}
+                 src={`http://localhost:8080/uploads/${image.imageUrl}`}   // 전체 URL로 수정
+                  alt="게시글 이미지"
+                  style={{ maxWidth: '100%', height: 'auto', marginBottom: '10px' }}
+                />
+              ))}
+            </div>
+          )}
 
           <div className="mt-2 pt-2 border-top file-box">
             <span>
@@ -63,21 +84,19 @@ const Content = () => {
           </div>
 
           <div className="mt-3">
-          {board.content.split('\\n').map((line, index) => (
-            <React.Fragment key={index}>
-              {line}
-              <br />
-            </React.Fragment>
-          ))}
-        </div>
-        {console.log(board.content)}
-
+            {board.content.split('\\n').map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
+          </div>
 
           <div className="my-5 pt-5 text-right">
             <a href="#" className="btn btn-primary mr-3">목록</a>
             <a href="#" className="btn btn-primary">답글쓰기</a>
             <a href="#" className="btn btn-primary">수정</a>
-            <a href="#" id="delete" className="btn btn-danger">삭제</a>                      
+            <a href="#" id="delete" className="btn btn-danger">삭제</a>                       
           </div>
         </div>
       ) : (

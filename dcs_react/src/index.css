@@ -299,3 +299,9 @@ code {
 .content_box{
   white-space: pre-line
 }
+
+/*** 이미지 ***/
+.image_box{
+  width:200px;
+  height:200px;
+}

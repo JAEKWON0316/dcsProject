@@ -9,8 +9,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer  {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/");
+            // 외부 폴더의 이미지를 "/uploads/**" 경로로 접근 가능하게 설정
+         registry.addResourceHandler("/uploads/**")
+         .addResourceLocations("file:/C:/dcs_img/");
                 
     }
 
@@ -22,4 +23,6 @@ public class WebConfig implements WebMvcConfigurer  {
                 .allowedHeaders("*") // 모든 헤더 허용
                 .allowCredentials(true); // 자격 증명 허용
     }
+
+    
 }

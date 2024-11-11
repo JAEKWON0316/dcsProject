@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class BoardController {
     
     private final BoardService bService;
+
     
     /*
     @GetMapping("/")
@@ -57,6 +58,7 @@ public class BoardController {
         BoardDto boardDto = bService.findByRoleAndId(role, id); // role과 id에 맞는 게시글 조회
         return ResponseEntity.ok(boardDto); // JSON 형태로 반환
     }
+    
 
     //조회수 증가
     @PostMapping("/{id}/increment-hit")

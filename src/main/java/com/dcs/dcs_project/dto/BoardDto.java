@@ -52,5 +52,6 @@ public class BoardDto {
         this.title = title;
         this.role = role;
         this.bbsCreatedTime = bbsCreatedTime;
+      
     }
 }
