@@ -8,6 +8,10 @@ import Img4 from '../images/002.jpg';
 import Img5 from '../images/003.jpg';
 import Img6 from '../images/004.jpg';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
 const Main = () => {
   const sectionRefs = useRef([]);
   const [isVisible, setIsVisible] = useState({});
@@ -63,6 +67,11 @@ const Main = () => {
     { nav: 'AI 혁신위원회', path: '/id=1-2', content: "AI를 통한 청년 혁신과 역량 강화" },
     { nav: '지역청년네트워킹', path: '/id=1-3', content: "지역 청년 간 교류와 네트워크 형성" },
     { nav: '글로벌네트워킹', path: '/id=1-5', content: "국제 교류를 통한 글로벌 협력" },
+  ];
+  const menuData2 = [
+    { title : '대한청년세계로 소개', content : '대한청년세계로 이사회 의장과 상임인사의 인사와 지역별 대한세계로 회장을 만날 수 있습니다.', path : '/', class :'profile'},
+    { title : '대한청년세계로 연혁', content : '대한청년세계가 설립된 해부터 현재까지의 활동 발자취를 한눈에 볼 수 있습니다.', path : '/', class : 'story'},
+    { title : '후원하기', content : '작은 나눔이 큰 힘이 됩니다.', path : '/', class: 'sponser'},
   ];
 
   const handlePlayToggle = () => {
@@ -258,40 +267,93 @@ const Main = () => {
           </div>
           <div className='wrap'>
             <ul>
-              <li 
-                className="profile wrap-menu"
-              >
-                <Link to=''>
-                  <div className='wrap-title'>
-                    <p>대한청년세계로 소개</p>
-                    <span>대한청년세계로 이사회 의장과 상임이사의 인사와 지역별 대한세계로 회장을 만날 수 있습니다.</span>
-                    <p className='wrapLink'>바로가기</p>
-                  </div>
-                </Link>
-              </li>
-              <li 
-                className="story wrap-menu"
-              >
-                <Link to=''>
-                  <div className='wrap-title'>
-                    <p>대한청년세계로 소개</p>
-                    <span>대한청년세계로 이사회 의장과 상임이사의 인사와 지역별 대한세계로 회장을 만날 수 있습니다.</span>
-                    <p className='wrapLink'>바로가기</p>
-                  </div>
-                </Link>
-              </li>
-              <li 
-                className="sponser wrap-menu"
-              >
-                <Link to=''>
-                  <div className='wrap-title'>
-                    <p>대한청년세계로 소개</p>
-                    <span>대한청년세계로 이사회 의장과 상임이사의 인사와 지역별 대한세계로 회장을 만날 수 있습니다.</span>
-                    <p className='wrapLink'>바로가기</p>
-                  </div>
-                </Link>
-              </li>
+              {menuData2.map((nav, index) => (
+                <li className={`wrap-menu ${nav.class}`}>
+                  <Link to={nav.path}>
+                    <div className='wrap-title'>
+                      <p>{nav.title}</p>
+                      <span>{nav.content}</span>
+                      <p className='wrapLink'>
+                        바로가기
+                      </p>
+                    </div>
+                  </Link>
+                </li>
+              ))}
             </ul>
+          </div>
+        </section>
+
+        <section 
+        ref={(el) => (sectionRefs.current[4] = el)}
+        className={`section visual5 motion ${isVisible[4] ? 'action' : ''}`}
+        >
+          <div className="footbanner">
+              <Swiper
+                className="swiper-container"
+                modules={[Autoplay, Pagination, Navigation]}  // 플러그인을 모듈로 추가
+                slidesPerView={5}
+                loop={true}
+                autoplay={{ delay: 2000 }}  // Autoplay 딜레이 설정
+                
+                navigation  // Navigation 활성화
+              >
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img3} alt="slide1" />
+                </a>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img4} alt="slide2" />
+                </a>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img5} alt="slide3" />
+                </a>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img6} alt="slide3" />
+                </a>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img3} alt="slide1" />
+                </a>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img4} alt="slide2" />
+                </a>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img5} alt="slide3" />
+                </a>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img6} alt="slide3" />
+                </a>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img4} alt="slide2" />
+                </a>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img5} alt="slide3" />
+                </a>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <a href="">
+                  <img src={Img6} alt="slide3" />
+                </a>
+              </SwiperSlide>
+            </Swiper>
           </div>
         </section>
       </div>
