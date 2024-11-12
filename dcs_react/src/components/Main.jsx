@@ -88,7 +88,7 @@ const Main = () => {
   return (
     <div className='main'>
       <video
-        src="/media/videos/dcsVideo.mp4"
+        src="/media/videos/dcsVideo2.mp4"
         autoPlay
         loop
         muted
