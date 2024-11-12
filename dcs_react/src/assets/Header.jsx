@@ -60,12 +60,13 @@ const Header = () => {
     {
       depth1: '법인 소개',
       depth2: [
-        { link: '/', label: '개요' },
-        { link: '/', label: '이사장 인사말' },
-        { link: '/', label: '목표와 비전' },
-        { link: '/', label: '조직 구조' },
-        { link: '/', label: '임원명단' },
-        { link: '/', label: '시/도지부' },
+        { link: '/summary', label: '개요' },
+        { link: '/history', label: '연혁' },
+        { link: '/greeting', label: '이사장 인사말' },
+        { link: '/vision', label: '목표와 비전' },
+        { link: '/organizationChart', label: '조직 구조' },
+        { link: '/boardMembers', label: '임원명단' },
+        { link: '/regionaloffices', label: '시/도지부' },
       ],
     },
     {
