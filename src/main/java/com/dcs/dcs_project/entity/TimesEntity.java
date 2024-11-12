@@ -15,6 +15,7 @@ import lombok.Getter;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 public class TimesEntity {
+
     @CreationTimestamp
     @Column(name = "created_time", updatable = false)  
     private LocalDateTime createdTime;
@@ -22,4 +23,5 @@ public class TimesEntity {
     @UpdateTimestamp
     @Column(name = "updated_time", insertable = false)
     private LocalDateTime updatedTime;
+
 }

@@ -88,7 +88,7 @@ const Main = () => {
   return (
     <div className='main'>
       <video
-        src="/media/videos/766463_Office Angry Rage Frozen Moment_By_MXR_Productions_Artlist_HD.mp4"
+        src="/media/videos/dcsVideo.mp4"
         autoPlay
         loop
         muted

@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer  {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
             // 외부 폴더의 이미지를 "/uploads/**" 경로로 접근 가능하게 설정
          registry.addResourceHandler("/uploads/**")
-         .addResourceLocations("file:/C:/dcs_img/");
+         .addResourceLocations("file:/C:/dcsDB/");
                 
     }
 
