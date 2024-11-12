@@ -299,59 +299,59 @@ const Main = () => {
                 navigation  // Navigation 활성화
               >
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img3} alt="slide1" />
-                </a>
+                </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img4} alt="slide2" />
-                </a>
+                </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img5} alt="slide3" />
-                </a>
+                </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img6} alt="slide3" />
-                </a>
+                </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img3} alt="slide1" />
-                </a>
+                </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img4} alt="slide2" />
-                </a>
+                </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img5} alt="slide3" />
-                </a>
+                </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img6} alt="slide3" />
-                </a>
+                </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img4} alt="slide2" />
-                </a>
+                </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img5} alt="slide3" />
-                </a>
+                </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="">
+                <Link to="">
                   <img src={Img6} alt="slide3" />
-                </a>
+                </Link>
               </SwiperSlide>
             </Swiper>
           </div>
