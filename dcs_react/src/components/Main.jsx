@@ -102,7 +102,7 @@ const Main = () => {
         }}
       />
       <div className='main_wrap'>
-        
+        cd 
         <section
           ref={(el) => (sectionRefs.current[0] = el)}
           className={`section visual motion ${isVisible[0] ? 'action' : ''}`}
