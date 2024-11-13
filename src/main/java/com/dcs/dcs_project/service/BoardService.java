@@ -61,6 +61,47 @@ public class BoardService {
         return bDtos;
     }
 
+    /*검색기능 추가 */
+    public List<BoardDto> searchBoards(int role, String searchType, String searchValue) {
+        List<BoardEntity> searchResults;
+
+        switch (searchType) {
+            case "writer":
+                searchResults = boardRepository.findByRoleAndWriterContaining(role, searchValue);
+                break;
+            case "title":
+                searchResults = boardRepository.findByRoleAndTitleContaining(role, searchValue);
+                break;
+            case "content":
+                searchResults = boardRepository.findByRoleAndContentContaining(role, searchValue);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid search type: " + searchType);
+        }
+
+        // BoardEntity를 BoardDto로 변환
+        return searchResults.stream()
+                .map(BoardDto::toBoardDto) // 여기서 기존의 toBoardDto 메서드를 사용
+                .collect(Collectors.toList());
+    }
+
+      /* btn 네비게이션 */
+      public Optional<BoardDto> findPrevBoardByRoleAndId(int role, Long id) {
+        return boardRepository.findFirstByRoleAndIdLessThanOrderByIdDesc(role, id)
+                .map(this::convertToDto);  // BoardEntity를 BoardDto로 변환
+    }
+
+    public Optional<BoardDto> findNextBoardByRoleAndId(int role, Long id) {
+        return boardRepository.findFirstByRoleAndIdGreaterThanOrderByIdAsc(role, id)
+                .map(this::convertToDto);  // BoardEntity를 BoardDto로 변환
+    }
+
+    private BoardDto convertToDto(BoardEntity bentity) {
+        return new BoardDto(bentity.getId(), bentity.getWriter(), bentity.getTitle(),
+                            bentity.getContent(), bentity.getHit(), bentity.getRole(),
+                            bentity.getCreatedTime(), bentity.getUpdatedTime());
+    }
+
     /*게시글 조회수 증가 */
     @Transactional
     public void updateHits(Long id) {

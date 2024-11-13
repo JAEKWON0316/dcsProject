@@ -1,19 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
+import Img from '../images/sub_visual6.jpg';
+
+import { Button } from 'react-bootstrap';
 
 const Content = () => {
   const { role, id } = useParams();
-  
+  const location = useLocation();
   const [board, setBoard] = useState(null);
+  const navigate = useNavigate(); // navigate 함수 생성
   const [images, setImages] = useState([]);  // 이미지 데이터를 저장할 상태
   const [files, setFiles] = useState([]);    // 파일 데이터를 저장할 상태 추가
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [previousId, setPreviousId] = useState(null);
+  const [nextId, setNextId] = useState(null);
+
+  const generateNavigationUrl = (id) => {
+    const urlParts = location.pathname.split('/');
+    if (urlParts.includes('role')) {
+      // URL에 'role'이 포함된 경우
+      return `/board/role/${role}/${id}`;
+    } else {
+      // URL에 'role'이 포함되지 않은 경우
+      return `/board/${role}/${id}`;
+    }
+  };
 
   useEffect(() => {
     const fetchBoard = async () => {
+   
       try {
         setLoading(true);
         
@@ -32,6 +50,14 @@ const Content = () => {
         // 게시글 데이터 가져오기
         const boardResponse = await axios.get(`http://localhost:8080/api/board/role/${role}/${id}`);
         setBoard(boardResponse.data);
+
+
+    
+        // 이전/다음 게시글 ID 가져오기
+        const response = await axios.get(`http://localhost:8080/api/board/${role}/${id}/btn`);
+        setPreviousId(response.data.prev?.id || null);
+        setNextId(response.data.next?.id || null);
+      
 
         // 이미지 데이터 가져오기
         const imageResponse = await axios.get(`http://localhost:8080/api/images/board/${id}`);
@@ -81,37 +107,43 @@ const Content = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
+    <div className='container2'>
+      
+      <span className='img'>
+            <img src={Img} alt='' />
+          </span>
+
       {board ? (
         <div className="listbox">
-          <h3 className="mt-5"><i className="ri-arrow-right-double-line"></i> {board.title}</h3> 
-          
-          <div className="mt-2 mb-5 pt-2 border-top text-right">
-            <span className="mr-4"><label className="font-italic">hit:</label> {board.hit}</span>
-            <span className="mr-4 font-weight-bold">{board.writer}</span>
-            <span className="mr-2">
-              {format(new Date(board.bbsCreatedTime), 'yyyy.MM.dd')}
+       <div className="btn_box my-5 pt-5">
+       <div className="btn_box1">
+      {previousId !== null && (
+        <Button variant="primary" onClick={() => navigate(generateNavigationUrl(previousId))}>
+          이전글
+        </Button>
+      )}
+      {nextId !== null && (
+        <Button variant="primary" onClick={() => navigate(generateNavigationUrl(nextId))}>
+          다음글
+        </Button>
+      )}
+      </div>
+      <Button variant="primary" onClick={() => navigate(`/board/${role}`)}>목록</Button>
+    </div>
+
+          <div className="mt-2 pt-2 board-box">
+          <span className="ft-bold">작성자: {board.writer}</span>
+          <span className="mr-2">
+              등록일: {format(new Date(board.bbsCreatedTime), 'yyyy.MM.dd')}
             </span>
+            <span className="mr-4"><label className="font-italic">조회</label> {board.hit}회</span>
           </div>
-
-          {/* 이미지가 있을 경우 보여주기 */}
-          {images.length > 0 && (
-            <div className="image-gallery mt-3">
-              {images.map((image) => (
-                <img
-                  key={image.id}
-                  src={`http://localhost:8080/uploads/${image.imageUrl}`}
-                  alt="게시글 이미지"
-                  style={{ maxWidth: '100%', height: 'auto', marginBottom: '10px' }}
-                />
-              ))}
-            </div>
-          )}
-
-          {/* 파일이 있을 경우 파일 목록 표시 */}
-          {files.length > 0 && (
+          
+           <h5 className="mt-3 title_box p-3">{board.title}</h5> 
+            {/* 파일이 있을 경우 파일 목록 표시 */}
+            {files.length > 0 && (
             <div className="mt-2 pt-2 border-top file-box">
-              <h4>첨부 파일:</h4>
+              <h5 className='fw-bold'>첨부 파일:<i class="ri-folder-fill"></i></h5>
               <ul>
                 {files.map((file) => (
                   <li key={file.id}>
@@ -121,32 +153,62 @@ const Content = () => {
                         handleFileDownload(file); // 파일 다운로드 함수 호출
 
                       }}>
-
                       <span>{file.fileName}</span></a> <span>({file.fileSize})</span>
-                    
-                    <span> | 다운로드 횟수: {file.count}</span>
+                    <br/>
+                    <span> 다운로드 횟수: {file.count}</span>
                     <span> DATE:{format(new Date(file.uploadDate), 'yyyy.MM.dd')}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
+         
+        
 
-          <div className="mt-3">
+        {/* 이미지가 있을 경우 보여주기 */}
+          {images.length > 0 && (
+            <div className="image-gallery">
+              {images.map((image) => (
+                <div>
+                <img
+                  key={image.id}
+                  src={`http://localhost:8080/uploads/${image.imageUrl}`}
+                  alt="게시글 이미지"
+                />
+                </div>
+              ))}
+            </div>
+          )}
+
+        
+
+          <div className="mt-3 content_box">
             {board.content.split('\\n').map((line, index) => (
-              <React.Fragment key={index}>
+              <p 
+                key={index} 
+                className="content-paragraph"
+                style={{ fontWeight: index === 0 ? 'bold' : 'normal' }}
+              >
                 {line}
-                <br />
-              </React.Fragment>
+              </p>
             ))}
           </div>
 
-          <div className="my-5 pt-5 text-right">
-            <a href="#" className="btn btn-primary mr-3">목록</a>
-            <a href="#" className="btn btn-primary">답글쓰기</a>
-            <a href="#" className="btn btn-primary">수정</a>
-            <a href="#" id="delete" className="btn btn-danger">삭제</a>                       
-          </div>
+        <div className="btn_box my-5 pt-5">
+          <div className="btn_box1">
+      {previousId !== null && (
+        <Button variant="primary" onClick={() => navigate(generateNavigationUrl(previousId))}>
+          이전글
+        </Button>
+      )}
+      {nextId !== null && (
+        <Button variant="primary" onClick={() => navigate(generateNavigationUrl(nextId))}>
+          다음글
+        </Button>
+      )}
+      </div>
+      <Button variant="primary" onClick={() => navigate(`/board/${role}`)}>목록</Button>
+    </div>
         </div>
       ) : (
         <p>게시글이 존재하지 않습니다.</p>

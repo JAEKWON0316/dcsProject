@@ -29,4 +29,18 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long>{  //�
     void updateHits(@Param("id") Long id);
 
     @NonNull List<BoardEntity> findAll(@NonNull Sort sort);
+
+    /* btn 네비게이션 */
+    Optional<BoardEntity> findFirstByRoleAndIdLessThanOrderByIdDesc(int role, Long id);
+    Optional<BoardEntity> findFirstByRoleAndIdGreaterThanOrderByIdAsc(int role, Long id);
+
+    /*검색 기능추가 */
+     
+    List<BoardEntity> findByRoleAndTitleContaining(int role, String title );
+
+      
+    List<BoardEntity> findByRoleAndWriterContaining(int role, String writer);
+   
+     
+    List<BoardEntity> findByRoleAndContentContaining(int role, String content);
 }

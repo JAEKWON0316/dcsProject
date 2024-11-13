@@ -13,6 +13,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+a{
+  text-decoration: none !important;
+ 
+}
 :root{
   --anim-duration: 100ms;
   --header-height: 100px;
@@ -242,25 +246,39 @@ code {
 .paging{
   list-style-type:none;
   display:flex;
-  justify-content: center;    
+  justify-content: center;   
 }
 .paging li{
    font-size:16px;
    margin-left:5px;
    margin-right:5px;
+
 }
 .paging li a{
    color:#434c53;
    padding:3px 10px;
+
 }
-.paging li a:hover,
-.paging li a.active{
-   background:#434c53;
+.paging a:hover{
+  cursor: pointer;
+
+}
+.paging a{
+  color:#333;
+}
+.paging a:hover,
+.paging a.active{
+   background:#000080;
    border-radius:5px;
    color:#fff;
    text-decoration:none;
-}
 
+}
+.total-pg-info{
+  display: flex;
+  text-align: left;
+  border-bottom: 2px solid #333;
+}
 /** 검색 **/
 .searchform{
    width:40%;
@@ -269,6 +287,7 @@ code {
 }
 .dropdown-menu{
    min-width:95%;
+
 }
 .dropdown-item{
   padding: 0.25rem 1.1rem;
@@ -281,23 +300,33 @@ code {
 
 .listbox{
     border-bottom:1px solid #ddd;
+   text-align: center;
+    max-width: 1440px;
+  margin: 0 auto;
+
 }
 .listbox h1{
     font-size:25px;
-}
-.listbox .table{
-    border-bottom:1px solid #dee2e6;
 }
 
 .listbox th{
     text-align:center;
     position:relative;
 }
+
+
+.listbox tr th{
+  padding:20px;
+  border-bottom: 1px solid #333;
+
+}
+.listbox tbody tr{
+  color: #9a9da2;
+}
+
 .listbox th:not(:last-child)::after{
     content:"";
     display:block;
-    width:1px;
-    height:15px;
     background:#c5bebe;
     box-shadow:1px 0 0 #e8eaeb;
     position:absolute;
@@ -314,6 +343,9 @@ code {
     text-overflow: ellipsis;
     
 }
+.listbox tr {
+  border-color:#fff;
+}
 .listbox td span{
     font-size:13px;
     margin-left:5px;
@@ -325,12 +357,62 @@ code {
     vertical-align: top;
 }
 
-.content_box{
-  white-space: pre-line
+.title_box{
+  border-top: 3px solid #333;
+  border-bottom: 1px solid #333;
+  padding: 10px;
+  font-weight: bold;
 }
 
+.board-box{
+  text-align: right;
+}
+.board-box span{
+  margin-right:10px;
+
+}
+td:nth-child(2) { 
+  text-align: left;
+}
+/** 파일 **/
+.file-box{
+  padding: 0 10px;
+  border-bottom: 1px solid #eee;
+  background: #f5f6fa;
+  text-align: left;
+}
+.file-box ul{
+  padding: 0;
+}
+.file-box li{
+  list-style-type: none
+}
+.file-box li a{
+   color : #333;
+   text-decoration: none;
+   font-weight: bold;
+}
 /*** 이미지 ***/
-.image_box{
-  width:200px;
-  height:200px;
+.image-gallery {
+  margin-top: 1rem;
+}
+
+.image-gallery img {
+  max-width: 800px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+ 
+}
+/** 내용 **/
+.content-paragraph {
+  margin:3px;
+  padding: 0;
+  text-align: left;
+}
+
+/** 버튼 **/
+.btn_box{
+  display: flex;
+  justify-content: space-between;
 }

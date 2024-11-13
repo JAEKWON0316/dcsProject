@@ -18,7 +18,6 @@ import lombok.ToString;
 public class BoardDto {
     private long id;
     private String writer;
-    private String imnum;
     private String title;
     private String content;
     private int hit;
@@ -35,7 +34,6 @@ public class BoardDto {
 
         bDto.setId(bEntity.getId());
         bDto.setWriter(bEntity.getWriter());
-        bDto.setImnum(bEntity.getImnum());
         bDto.setTitle(bEntity.getTitle());
         bDto.setContent(bEntity.getContent());
         bDto.setHit(bEntity.getHit());
@@ -52,6 +50,6 @@ public class BoardDto {
         this.title = title;
         this.role = role;
         this.bbsCreatedTime = bbsCreatedTime;
-      
+        
     }
 }

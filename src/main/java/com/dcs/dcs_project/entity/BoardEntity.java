@@ -22,9 +22,7 @@ public class BoardEntity extends TimesEntity {    //spring-boot에서는 entity�
 
     @Column(length=20, nullable = false)
     private String writer;
-    
-    @Column(length=45, nullable = false)
-    private String imnum;
+
 
     @Column(length=255, nullable = false)
     private String title;
@@ -44,7 +42,6 @@ public class BoardEntity extends TimesEntity {    //spring-boot에서는 entity�
         BoardEntity bEntity = new BoardEntity();
 
         bEntity.setWriter(bDto.getWriter());
-        bEntity.setImnum(bDto.getImnum());
         bEntity.setTitle(bDto.getTitle());
         bEntity.setContent(bDto.getContent());
         bEntity.setHit(0);
@@ -61,7 +58,6 @@ public class BoardEntity extends TimesEntity {    //spring-boot에서는 entity�
 
         bEntity.setId(bDto.getId());
         bEntity.setWriter(bDto.getWriter());
-        bEntity.setImnum(bDto.getImnum());
         bEntity.setTitle(bDto.getTitle());
         bEntity.setContent(bDto.getContent());
         bEntity.setHit(bDto.getHit());

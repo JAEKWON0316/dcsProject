@@ -1,7 +1,10 @@
 package com.dcs.dcs_project.controller;
 
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +48,23 @@ public class BoardController {
         return ResponseEntity.ok(boards); // JSON 형태로 반환
     }
 
+    //btn 네비게이션
+    @GetMapping("/{role}/{id}/btn")
+    public ResponseEntity<Map<String, Optional<BoardDto>>> getPrevAndNextBoard(
+    @PathVariable int role,
+    @PathVariable Long id) {
+
+        Optional<BoardDto> prevBoard = bService.findPrevBoardByRoleAndId(role, id);
+        Optional<BoardDto> nextBoard = bService.findNextBoardByRoleAndId(role, id);
+
+        Map<String, Optional<BoardDto>> result = new HashMap<>();
+        result.put("prev", prevBoard);
+        result.put("next", nextBoard);
+
+        return ResponseEntity.ok(result);
+    }
+
+
     // /board/paging?page=1
        @GetMapping("/paging")
     public ResponseEntity<Map<String, Object>> paging(@RequestParam(defaultValue = "0") int page) {
@@ -65,7 +85,21 @@ public class BoardController {
     public ResponseEntity<Void> incrementHit(@PathVariable Long id) {
         bService.updateHits(id);
         return ResponseEntity.ok().build();
+    }   
+
+    //검색로직추가
+    @GetMapping("/role/{role}/search")
+    public ResponseEntity<List<BoardDto>> searchBoards(
+            @PathVariable("role") int role,
+            @RequestParam String searchType,
+            @RequestParam String searchValue) {
+        List<BoardDto> searchResults = bService.searchBoards(role, searchType, searchValue);
+
+          // 게시글을 최신순으로 정렬 (예시: bbsCreatedTime 기준 내림차순)
+        searchResults.sort(Comparator.comparing(BoardDto::getBbsCreatedTime).reversed());
+        return ResponseEntity.ok(searchResults);
     }
+
 
     @GetMapping("/{id}")
     public String detailView(@PathVariable("id") Long id, Model model) {
