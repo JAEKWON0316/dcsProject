@@ -34,9 +34,9 @@ a{
 .header .container{padding: 0 clamp(40px, 3.125vw, 80px);margin: 0 auto;}
 .header .header-content{width: 100%;max-width: 192rem;display: flex;justify-content: center;margin: auto;position: relative;height: var(--header-height, 100px);}
 .header .logo{position: absolute;top: 50%;transform: translateY(-50%);left: 0;}
-.header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: 0px;transition: color 0.3s ease; font-size:18px;}
+.header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: .3rem;transition: color 0.3s ease; font-size:18px;position: relative;display: block;}
 .header a{text-decoration: none; color: #fff;}
-.header .nav .gnb{display: flex;}
+.header .nav .gnb{display: flex;height: 17rem;}
 .header .nav button{opacity: 0;visibility: hidden;}
 .header .nav .gnb2{opacity: 0;visibility: hidden;}
 .header .nav ul{list-style-type: none;padding: 0;margin: 0;gap: 7.1333333333em;}
@@ -181,15 +181,15 @@ a{
       flex-wrap: wrap !important;
       justify-content: space-between;
   }
-  /* .header .depth2 {
+  .header .depth2 {
     right: 8rem;
 }
   .header-content .nav .gnb{opacity: 0;visibility: hidden;}
   .header-content .nav .gnb2{opacity: 1;visibility: visible;position: absolute;right: 0;top: 5rem;}
-  .header-content .nav button{color: #fff;background: none 0;border: 0;font-size: 3rem;position: absolute;right: 0;top: 50%;transform: translate(0, -50%);}
+  .header-content .nav button{color: #fff;background: none 0;border: 0;font-size: 3rem;position: absolute;right: 0;top: 50%;transform: translate(0, -50%);opacity: 1;visibility: visible;}
   .header-content .nav .gnb2 li{opacity: 0;visibility: hidden;}
   .header-content .nav .gnb2.click li{opacity: 1;visibility: visible;}
-  .header .container {padding: 0 2rem;margin: 0;} */
+  .header .container {padding: 0 2rem;margin: 0;}
 }
 @media (min-width: 768px) {
   .container, .container-md, .container-sm {
@@ -221,9 +221,6 @@ a{
     opacity: 0;
     visibility: hidden;
     box-shadow: none;
-  }
-  .header::before{
-    /* background: 0 none; */
   }
 }
 @media (max-width: 1425px) {
@@ -259,6 +256,9 @@ a{
 @keyframes visual_scale {
   100%{transform:scale(1)}
 }
+
+/****** vision ******/
+.vision_wrap img{width: 100%;}
 
 /****** intro ******/
 .intro .visual{position: relative;height: 26.3rem;margin-bottom: 5rem;color: #fff;text-align: left;}

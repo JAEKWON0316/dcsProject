@@ -12,7 +12,9 @@ const Vision = () => {
           </span>
         </div>
       </div>
-      <img src={Img2} alt="" />
+      <div className='vision_wrap'>
+        <img src={Img2} alt="목표와 경영비전" />
+      </div>
     </div>
   )
 }
