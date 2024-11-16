@@ -116,7 +116,7 @@ const Header = () => {
     <div className={`header ${isFixed ? 'fixed' : ''} ${activeIndex !== null ? 'hover' : ''} ${isNotMain ? 'white' : ''} ${clcikButton ? 'click' : ''}`} onMouseLeave={handleCombinedMouseLeave}>
       <div className={`container ${isHover ? 'hover' : ''}`}>
         <div className="header-content">
-          <Link to="/" className="logo">로고</Link>
+          <Link to="/" className="logo"><img src="./logo03.png" alt="로고" /></Link>
           <nav className="nav"> 
             <ul className={`gnb ${clcikButton ? 'click' : ''}`}>
               {menuData.map((menu, index) => (
