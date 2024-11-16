@@ -6,14 +6,24 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebConfig implements WebMvcConfigurer  {
+public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-            // 외부 폴더의 이미지를 "/uploads/**" 경로로 접근 가능하게 설정
-         registry.addResourceHandler("/uploads/**")
-         .addResourceLocations("file:/C:/dcsDB/");
-                
+        String os = System.getProperty("os.name").toLowerCase();
+        String uploadPath;
+
+        if (os.contains("win")) {
+            uploadPath = "file:///C:/dcsDB/";
+        } else if (os.contains("mac")) {
+            uploadPath = "file:///Users/an-yeseon//dcsDB/";
+        } else {
+            uploadPath = "file:///home/YourUsername/dcsDB/";
+        }
+
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations(uploadPath);
     }
+
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
