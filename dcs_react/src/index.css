@@ -183,13 +183,27 @@ a{
   }
   .header .depth2 {
     right: 8rem;
+    top: 0;
 }
   .header-content .nav .gnb{opacity: 0;visibility: hidden;}
-  .header-content .nav .gnb2{opacity: 1;visibility: visible;position: absolute;right: 0;top: 5rem;}
+  .header-content .nav .gnb2{opacity: 1;visibility: visible;position: absolute;right: 0;top: 5rem;display: grid;gap: 4rem;}
   .header-content .nav button{color: #fff;background: none 0;border: 0;font-size: 3rem;position: absolute;right: 0;top: 50%;transform: translate(0, -50%);opacity: 1;visibility: visible;}
-  .header-content .nav .gnb2 li{opacity: 0;visibility: hidden;}
+  .header-content .nav .gnb2 li{opacity: 0;visibility: hidden;position: relative;}
   .header-content .nav .gnb2.click li{opacity: 1;visibility: visible;}
   .header .container {padding: 0 2rem;margin: 0;}
+  .header::before {
+    transition: none;
+    transition-delay: none;
+  }
+  header .depth1 {
+    line-height: 0;
+    font-weight: 700;
+    padding-bottom:0;
+    transition: color 0.3s ease;
+    font-size: 18px;
+    position: relative;
+    display: block;
+}
 }
 @media (min-width: 768px) {
   .container, .container-md, .container-sm {
