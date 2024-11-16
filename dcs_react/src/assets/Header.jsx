@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { IoMenu } from "react-icons/io5";
 
 const Header = () => {
   const [isFixed, setIsFixed] = useState(false);
   const [isDepth2Visible, setIsDepth2Visible] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
+  const [clcikButton, setClickButton] = useState(false);
+
   const location = useLocation();
   const isNotMain = location.pathname !== '/';
+
+  const handleClick = () => {
+    setClickButton((prevState) => !prevState)
+  }
 
   const handleMouseEnter = () => {
     setIsDepth2Visible(true);
@@ -73,10 +80,10 @@ const Header = () => {
       depth1: '프로그램',
       depth2: [
         { link: '/board/5', label: '미래전략포럼' },
-        { link: '/board/6', label: 'AI 혁신위원회' },
-        { link: '/board/7', label: '지역청년 네트워킹' },
-        { link: '/board/8', label: 'ESG 청년연합봉사활동' },
-        { link: '/board/9', label: '글로벌네트워킹' },
+        { link: '/board/6', label: 'AI혁신위원회' },
+        { link: '/board/7', label: '지역 청년 네트워킹' },
+        { link: '/board/8', label: 'ESG 청년 연합 봉사 활동' },
+        { link: '/board/9', label: '글로벌 네트워킹' },
       ],
     },
     {
@@ -89,7 +96,7 @@ const Header = () => {
     {
       depth1: '공지사항',
       depth2: [
-        { link: '/board/1', label: '공지사항' },
+        { link: '/board/1', label: 'qna' },
         { link: '/board/2', label: '언론 보도' },
       ],
     },
@@ -103,12 +110,40 @@ const Header = () => {
   ];
   return (
     <header>
-    <div className={`header ${isFixed ? 'fixed' : ''} ${activeIndex !== null ? 'hover' : ''} ${isNotMain ? 'white' : ''}`} onMouseLeave={handleCombinedMouseLeave}>
+    <div className={`header ${isFixed ? 'fixed' : ''} ${activeIndex !== null ? 'hover' : ''} ${isNotMain ? 'white' : ''} ${clcikButton ? 'click' : ''}`} onMouseLeave={handleCombinedMouseLeave}>
       <div className={`container ${isHover ? 'hover' : ''}`}>
         <div className="header-content">
           <Link to="/" className="logo">로고</Link>
           <nav className="nav">
             <ul className="gnb">
+              {menuData.map((menu, index) => (
+                <li
+                  key={index}
+                  onMouseEnter={() => handleCombinedMouseEnter(index)}
+                  
+                >
+                  <Link
+                    to={menu.depth2[0].link}
+                    className={`depth1 ${activeIndex === index ? 'underline hover' : ''}`}
+                    aria-haspopup="true"
+                    aria-expanded={isDepth2Visible}
+                  >
+                    {menu.depth1}
+                  </Link>
+                  <div className={`depth2 ${activeIndex === index ? 'hover' : ''}`}>
+                    <ul>
+                      {menu.depth2.map((subMenu, subIndex) => (
+                        <li key={subIndex}>
+                          <Link to={subMenu.link}>{subMenu.label}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <button type='button' onClick={handleClick} className={`${clcikButton ? 'click' : ''}`}><IoMenu /></button>
+            <ul className={`gnb2 ${clcikButton ? 'click' : ''}`}>
               {menuData.map((menu, index) => (
                 <li
                   key={index}
