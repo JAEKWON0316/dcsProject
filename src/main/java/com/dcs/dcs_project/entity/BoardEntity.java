@@ -37,6 +37,7 @@ public class BoardEntity extends TimesEntity {    //spring-boot에서는 entity�
     private int role;
 
 
+    
     public static BoardEntity toBoardEntity(BoardDto bDto){
         
         BoardEntity bEntity = new BoardEntity();
@@ -62,7 +63,7 @@ public class BoardEntity extends TimesEntity {    //spring-boot에서는 entity�
         bEntity.setContent(bDto.getContent());
         bEntity.setHit(bDto.getHit());
         bEntity.setRole(bDto.getRole());
-
+    
         return bEntity;
     }
 }

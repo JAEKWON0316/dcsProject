@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import Img from '../images/sub_visual6.jpg';
+import { FcOpenedFolder } from "react-icons/fc";
 
 import { Button } from 'react-bootstrap';
 
@@ -143,7 +144,7 @@ const Content = () => {
             {/* 파일이 있을 경우 파일 목록 표시 */}
             {files.length > 0 && (
             <div className="mt-2 pt-2 border-top file-box">
-              <h5 className='fw-bold'>첨부 파일:<i class="ri-folder-fill"></i></h5>
+              <h5 className='fw-bold'>첨부 파일: <FcOpenedFolder /></h5>
               <ul>
                 {files.map((file) => (
                   <li key={file.id}>

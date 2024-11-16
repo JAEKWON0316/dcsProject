@@ -440,9 +440,10 @@ a{
   border-color:#fff;
 }
 .listbox td span{
-    font-size:13px;
+    font-size:20px;
     margin-left:5px;
     vertical-align: top;
+    line-height: 1;
 }
 .listbox td i{
     font-size:16px;
@@ -485,6 +486,7 @@ td:nth-child(2) {
    text-decoration: none;
    font-weight: bold;
 }
+
 /*** 이미지 ***/
 .image-gallery {
   margin-top: 1rem;

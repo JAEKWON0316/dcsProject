@@ -22,12 +22,14 @@ public class BoardDto {
     private String content;
     private int hit;
     private int role;
+    
 
     @JsonFormat(pattern = "yyyy.MM.dd")
     private LocalDateTime bbsCreatedTime; //insert
 
     @JsonFormat(pattern = "yyyy.MM.dd")
     private LocalDateTime bbsUpdatedTime; //update
+
 
     public static BoardDto toBoardDto(BoardEntity bEntity){
         BoardDto bDto = new BoardDto();
@@ -43,13 +45,14 @@ public class BoardDto {
 
         return bDto;
     }
-    public BoardDto(Long id, String writer, int hit, String title, int role, LocalDateTime bbsCreatedTime){
+    public BoardDto(Long id, String writer,String title,  String content, int hit, int role, LocalDateTime bbsCreatedTime){
         this.id = id;
         this.writer = writer;
-        this.hit = hit;
         this.title = title;
+        this.content = content;
+        this.hit = hit;
         this.role = role;
         this.bbsCreatedTime = bbsCreatedTime;
-        
-    }
+             
+    }   
 }

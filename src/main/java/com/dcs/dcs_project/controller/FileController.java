@@ -38,4 +38,12 @@ public class FileController {
         List<FileEntity> files = fileService.getFilesByBoardId(dcsBoardId); 
         return ResponseEntity.ok(files);
     }
+
+      // 파일 존재 여부 확인
+      @GetMapping("/board/{dcsBoardId}/hasFile")
+      public ResponseEntity<Boolean> checkIfFileExists(@PathVariable Long dcsBoardId) {
+        boolean fileExists = fileService.doesFileExistForBoard(dcsBoardId);
+        return ResponseEntity.ok(fileExists);
+    }
+
 }

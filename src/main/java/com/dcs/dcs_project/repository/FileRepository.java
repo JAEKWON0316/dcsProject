@@ -16,13 +16,17 @@ import com.dcs.dcs_project.entity.FileEntity;
 public interface FileRepository extends JpaRepository<FileEntity, Long>{
 
 
-      List<FileEntity> findByDcsBoardId(Long dcsBoardId);
+    List<FileEntity> findByDcsBoardId(Long dcsBoardId);
 
+    // dcsBoardId에 해당하는 파일이 존재하는지 여부 확인
+    boolean existsByDcsBoardId(Long dcsBoardId);
 
        /* 다운로드 증가 */
     @Modifying
     @Query("UPDATE FileEntity f SET f.count = f.count + 1 WHERE f.id = :id")// update bboard set hits=hits+1 where id = ? 와 똑같다.  
     void incrementCount(@Param("id") Long fileId);
+
+
 
    
 }

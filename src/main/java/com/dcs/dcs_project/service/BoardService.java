@@ -18,6 +18,7 @@ import com.dcs.dcs_project.dto.BoardDto;
 import com.dcs.dcs_project.entity.BoardEntity;
 import com.dcs.dcs_project.repository.BoardRepository;
 
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -25,8 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardService {
 
     private final BoardRepository boardRepository; //다시 수정할 수 없도록 final로 가지고 온다.
-      
-      
+
  
     public List<BoardDto> findByRole(int role) {
            // 내림차순으로 정렬된 데이터 가져오기 (가장 최신 항목이 위로 오도록)
@@ -107,7 +107,7 @@ public class BoardService {
     public void updateHits(Long id) {
         boardRepository.updateHits(id);
     }
-
+   
 
     /* 게시물 보기 */
     public BoardDto findById(Long id){

@@ -46,4 +46,11 @@ public class FileService {
         return fileRepository.findByDcsBoardId(dcsBoardId);
 
     }
+
+    // dcs_board_id에 해당하는 파일이 존재하는지 확인하는 메소드
+    public boolean doesFileExistForBoard(Long dcsBoardId) {
+      return fileRepository.existsByDcsBoardId(dcsBoardId);
+  }
+
+
 }

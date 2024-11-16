@@ -3,6 +3,8 @@ import axios from 'axios';
 import Img from '../images/sub_visual6.jpg';
 import { format } from 'date-fns';
 import { useParams } from 'react-router-dom';  
+import { FcOpenedFolder } from "react-icons/fc";
+
 
 const Notice = () => {
   const [boards, setBoards] = useState([]);  
@@ -11,6 +13,7 @@ const Notice = () => {
   const [totalPosts, setTotalPosts] = useState(0);  // 전체 게시글 수
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchType, setSearchType] = useState('title');
+  const [filesExistence, setFilesExistence] = useState({});  // 파일 유무 상태 관리
 
   const itemsPerPage = 20; 
   const { role } = useParams();  
@@ -19,6 +22,7 @@ const Notice = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  
   const fetchBoards = async () => {
     try {
       const response = await axios.get(`http://localhost:8080/api/board/role/${role}`);
@@ -29,13 +33,30 @@ const Notice = () => {
           displayNumber: response.data.length - index,  
         }));
 
+
       setBoards(sortedBoards);
       setTotalPosts(response.data.length);  // 전체 게시글 수 설정
-      setTotalPages(Math.ceil(response.data.length / itemsPerPage)); 
+      setTotalPages(Math.ceil(response.data.length / itemsPerPage));      
+      // 파일 유무 확인
+      fetchFilesExistence(sortedBoards);
     } catch (error) {
       console.error('Failed to fetch boards: ', error.response ? error.response.data : error.message);
     }
   };
+
+ // dcsBoardId를 이용해서 파일 유무를 확인
+ const fetchFilesExistence = async (boards) => {
+  const fileStatus = {};
+  for (let board of boards) {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/files/board/${board.id}/hasFile`);
+      fileStatus[board.id] = response.data;  // 파일 유무 저장
+    } catch (error) {
+      fileStatus[board.id] = false;  // 오류가 나면 파일이 없다고 간주
+    }
+  }
+  setFilesExistence(fileStatus);  // 파일 유무 상태 업데이트
+};
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -60,6 +81,8 @@ const Notice = () => {
       setTotalPosts(response.data.length); // 검색된 전체 게시글 수 업데이트
       setTotalPages(Math.ceil(response.data.length / itemsPerPage)); // 페이지 수 업데이트
       setCurrentPage(0); // 검색 후 첫 페이지로 이동
+      fetchFilesExistence(response.data);  // 파일 유무 확인
+      
     } catch (error) {
       console.error("Failed to search: ", error.response ? error.response.data : error.message);
     }
@@ -101,11 +124,14 @@ const Notice = () => {
             </tr>
           </thead>
           <tbody>
-            {currentBoards.length > 0 ? (
-              currentBoards.map((board, index) => (
+          {currentBoards.length > 0 ? (
+              currentBoards.map((board) => (
                 <tr key={board.id}>
                   <td>{board.displayNumber}</td>
-                  <td><a href={`/board/${role}/${board.id}`}>{board.title}</a></td>
+                  <td>
+                    <a href={`/board/${role}/${board.id}`}>{board.title}</a>
+                    {filesExistence[board.id] && <span className='file_font'><FcOpenedFolder /></span>}
+                  </td>
                   <td>{board.writer}</td>
                   <td>{format(new Date(board.bbsCreatedTime), 'yyyy.MM.dd')}</td>
                   <td>{board.hit}</td>

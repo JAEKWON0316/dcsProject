@@ -12,11 +12,56 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
+const KakaoMap = () => {
+  const mapContainer = useRef(null); // 지도 요소를 참조할 ref
+  const [map, setMap] = useState(null); // 지도 상태
+
+  useEffect(() => {
+    // 카카오 맵 API 로드
+    const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&autoload=false`;
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      window.kakao.maps.load(() => {
+        const container = mapContainer.current;
+        const options = {
+          center: new window.kakao.maps.LatLng(36.3506, 127.3845), // 기본 위치 (대전)
+          level: 3, // 지도 확대 수준
+        };
+        const newMap = new window.kakao.maps.Map(container, options);
+        setMap(newMap);
+
+        // 마커 추가
+        const markerPosition = new window.kakao.maps.LatLng(36.3506, 127.3845); // 마커 위치
+        const marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+        });
+        marker.setMap(newMap);
+
+        // 확대/축소 컨트롤 추가
+        const zoomControl = new window.kakao.maps.ZoomControl();
+        newMap.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
+      });
+    };
+
+    return () => {
+      document.head.removeChild(script); // 컴포넌트가 unmount 될 때 스크립트 제거
+    };
+  }, []);
+
+  return <div ref={mapContainer} style={{ width: '100%', height: '400px' }}></div>;
+};
+
+
 const Main = () => {
   const sectionRefs = useRef([]);
   const [isVisible, setIsVisible] = useState({});
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  
 
   const slideInterval = useRef(null);
   const slide = [
@@ -85,6 +130,8 @@ const Main = () => {
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + slide.length) % slide.length);
   }
+
+  
   return (
     <div className='main'>
       <video
@@ -355,6 +402,12 @@ const Main = () => {
             </Swiper>
           </div>
         </section>
+
+        <section className="map-section mt-5">
+     
+        <KakaoMap />
+      </section>
+        
       </div>
     </div>
   );
