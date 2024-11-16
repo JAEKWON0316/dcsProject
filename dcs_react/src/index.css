@@ -37,12 +37,11 @@ a{
 .header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: .3rem;transition: color 0.3s ease; font-size:18px;position: relative;display: block;}
 .header a{text-decoration: none; color: #fff;}
 .header .nav .gnb{display: flex;height: 17rem;}
-.header .nav button{opacity: 0;visibility: hidden;}
-.header .nav .gnb2{opacity: 0;visibility: hidden;}
+.header button{opacity: 0;visibility: hidden;position: absolute;}
 .header .nav ul{list-style-type: none;padding: 0;margin: 0;gap: 7.1333333333em;}
 .header .depth2 ul{gap: .4333333333em; display: grid;place-items: start;}
 .header .depth2 ul a{white-space: nowrap;}
-.header .gnb > li{position: relative;}
+.header .gnb > li{position: relative;height: 4rem;}
 .header .depth2{position: absolute;opacity: 0;visibility: hidden;transition: opacity 0.3s ease, visibility 0.3s ease;left: 0;
   transform: translateY(0em);
   transition: opacity calc(var(--anim-duration)* 3), 
@@ -177,33 +176,22 @@ a{
   }
 }
 @media (max-width: 1024px) {
-  .main .visual2 ul {
-      flex-wrap: wrap !important;
-      justify-content: space-between;
-  }
-  .header .depth2 {
-    right: 8rem;
-    top: 0;
-}
+  .main .visual2 ul {flex-wrap: wrap !important;justify-content: space-between;}
+  .header .depth1 {line-height: 3rem;}
+  .header .depth2 {left: -12rem;top: 2rem;width: 14rem;padding-right: 3rem;}
+  .depth1.underline::after {bottom: -1.3rem;}
+  .header .depth2 ul {gap: .4333333333em;display: grid;place-items: flex-end;text-align: right;}
+  .gnb .depth1[aria-expanded="true"] + .depth2 {opacity: 0;visibility: hidden;transform: translateY(-1.6em);}
+  .gnb .depth1.hover .depth2{opacity: 1;visibility: visible;}
   .header-content .nav .gnb{opacity: 0;visibility: hidden;}
-  .header-content .nav .gnb2{opacity: 1;visibility: visible;position: absolute;right: 0;top: 5rem;display: grid;gap: 4rem;}
-  .header-content .nav button{color: #fff;background: none 0;border: 0;font-size: 3rem;position: absolute;right: 0;top: 50%;transform: translate(0, -50%);opacity: 1;visibility: visible;}
-  .header-content .nav .gnb2 li{opacity: 0;visibility: hidden;position: relative;}
-  .header-content .nav .gnb2.click li{opacity: 1;visibility: visible;}
+  .header .nav .gnb{opacity: 0;visibility: hidden;}
+  .header-content .nav .gnb.click{opacity: 1;visibility: visible;right: 0;top: 5rem;display: block;}
+  .header-content button{color: #fff;background: none 0;border: 0;font-size: 3rem;position: absolute;right: 0;top: 50%;transform: translate(0, -50%);opacity: 1;visibility: visible;}
+  .header-content .nav .gnb li{opacity: 0;visibility: hidden;position: relative;}
+  .header-content .nav .gnb.click li{opacity: 1;visibility: visible;}
   .header .container {padding: 0 2rem;margin: 0;}
-  .header::before {
-    transition: none;
-    transition-delay: none;
-  }
-  header .depth1 {
-    line-height: 0;
-    font-weight: 700;
-    padding-bottom:0;
-    transition: color 0.3s ease;
-    font-size: 18px;
-    position: relative;
-    display: block;
-}
+  .header::before {transition: none;transition-delay: none;}
+  header .depth1 {line-height: 0;font-weight: 700;padding-bottom:0;transition: color 0.3s ease;font-size: 18px;position: relative;display: block;}
 }
 @media (min-width: 768px) {
   .container, .container-md, .container-sm {
@@ -224,6 +212,7 @@ a{
   .hitory_wrap ol {
     padding: 0 2rem !important;
   }
+  .header .nav{position: absolute;right: 0;top: 5rem;}
   .header.fixed::before {
     height: 0;
     box-shadow: none;

@@ -8,6 +8,7 @@ const Header = () => {
   const [isHover, setIsHover] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
   const [clcikButton, setClickButton] = useState(false);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const location = useLocation();
   const isNotMain = location.pathname !== '/';
@@ -27,11 +28,13 @@ const Header = () => {
   const handleCombinedMouseEnter = (index) => {
     handleMouseEnter();
     setActiveIndex(index);
+    setExpandedIndex(index);
   };
   
   const handleCombinedMouseLeave = () => {
     handleMouseLeave();
     setActiveIndex(null);
+    setExpandedIndex(null)
   };
   
   useEffect(()=>{
@@ -114,41 +117,12 @@ const Header = () => {
       <div className={`container ${isHover ? 'hover' : ''}`}>
         <div className="header-content">
           <Link to="/" className="logo">로고</Link>
-          <nav className="nav">
-            <ul className="gnb">
+          <nav className="nav"> 
+            <ul className={`gnb ${clcikButton ? 'click' : ''}`}>
               {menuData.map((menu, index) => (
                 <li
                   key={index}
                   onMouseEnter={() => handleCombinedMouseEnter(index)}
-                  
-                >
-                  <Link
-                    to={menu.depth2[0].link}
-                    className={`depth1 ${activeIndex === index ? 'underline hover' : ''}`}
-                    aria-haspopup="true"
-                    aria-expanded={isDepth2Visible}
-                  >
-                    {menu.depth1}
-                  </Link>
-                  <div className={`depth2 ${activeIndex === index ? 'hover' : ''}`}>
-                    <ul>
-                      {menu.depth2.map((subMenu, subIndex) => (
-                        <li key={subIndex}>
-                          <Link to={subMenu.link}>{subMenu.label}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <button type='button' onClick={handleClick} className={`${clcikButton ? 'click' : ''}`}><IoMenu /></button>
-            <ul className={`gnb2 ${clcikButton ? 'click' : ''}`}>
-              {menuData.map((menu, index) => (
-                <li
-                  key={index}
-                  onMouseEnter={() => handleCombinedMouseEnter(index)}
-                  
                 >
                   <Link
                     to={menu.depth2[0].link}
@@ -171,6 +145,7 @@ const Header = () => {
               ))}
             </ul>
           </nav>
+          <button type='button' onClick={handleClick} className={`${clcikButton ? 'click' : ''}`}><IoMenu /></button>
         </div>
       </div>
     </div>
