@@ -53,10 +53,13 @@ const Notice = () => {
 
       const boardsWithNumbers = response.data.map((board, index) => ({
         ...board, 
-        displayNumber: index + 1, 
+        displayNumber: response.data.length - index, // 마지막 번호부터 역순으로 번호 매기기
       }));
-
+      
       setBoards(boardsWithNumbers); 
+      setTotalPosts(response.data.length); // 검색된 전체 게시글 수 업데이트
+      setTotalPages(Math.ceil(response.data.length / itemsPerPage)); // 페이지 수 업데이트
+      setCurrentPage(0); // 검색 후 첫 페이지로 이동
     } catch (error) {
       console.error("Failed to search: ", error.response ? error.response.data : error.message);
     }
