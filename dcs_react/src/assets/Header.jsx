@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { IoMenu } from "react-icons/io5";
 
+import Logo from '../images/logo03.png';
+import Logo2 from '../images/logo04.png';
+
 const Header = () => {
   const [isFixed, setIsFixed] = useState(false);
   const [isDepth2Visible, setIsDepth2Visible] = useState(false);
@@ -68,15 +71,20 @@ const Header = () => {
   }, []);
   const menuData = [
     {
-      depth1: '법인 소개',
+      depth1: '소개',
       depth2: [
         { link: '/summary', label: '개요' },
         { link: '/history', label: '연혁' },
         { link: '/greeting', label: '이사장 인사말' },
-        { link: '/vision', label: '목표와 비전' },
-        { link: '/organizationChart', label: '조직 구조' },
+        { link: '/organizationChart', label: '조직도' }
+      ],
+    },
+    {
+      depth1: '구성',
+      depth2: [
         { link: '/boardMembers', label: '임원명단' },
-        { link: '/regionaloffices', label: '시/도지부' },
+        { link: '/vision', label: '위원회' },
+        { link: '/regionaloffices', label: '지부' }
       ],
     },
     {
@@ -84,9 +92,10 @@ const Header = () => {
       depth2: [
         { link: '/board/5', label: '미래전략포럼' },
         { link: '/board/6', label: 'AI혁신위원회' },
-        { link: '/board/7', label: '지역 청년 네트워킹' },
-        { link: '/board/8', label: 'ESG 청년 연합 봉사 활동' },
-        { link: '/board/9', label: '글로벌 네트워킹' },
+        { link: '/board/7', label: '글로벌 네트워킹' },
+        { link: '/board/8', label: '지역 청년 네트워킹' },
+        { link: '/board/9', label: 'ESG 청년 연합 봉사 활동' }
+       
       ],
     },
     {
@@ -116,7 +125,10 @@ const Header = () => {
     <div className={`header ${isFixed ? 'fixed' : ''} ${activeIndex !== null ? 'hover' : ''} ${isNotMain ? 'white' : ''} ${clcikButton ? 'click' : ''}`} onMouseLeave={handleCombinedMouseLeave}>
       <div className={`container ${isHover ? 'hover' : ''}`}>
         <div className="header-content">
-          <Link to="/" className="logo"><img src="./logo03.png" alt="로고" /></Link>
+         
+          <Link to="/" className="logo">
+              <img src={isNotMain ? Logo2 : Logo} alt="로고" />
+            </Link>
           <nav className="nav"> 
             <ul className={`gnb ${clcikButton ? 'click' : ''}`}>
               {menuData.map((menu, index) => (

@@ -8,6 +8,7 @@ const History = () => {
     { class: "right", year: "2024", month: "9", detail: "세종청년을세계로(세종지부) 설립" },
     { class: "left", year: "2024", month: "10", detail: "서울청년을세계로(서울지부) 및 <br />충청청년을세계로(충청지부) 설립" },
     { class: "right", year: "2024", month: "11", detail: "대전청년을세계로(대전본부) 설립 및 (사)대한청년을세계로로 명칭 변경" },
+    { class: "left", year: "2024", month: "12", detail: "Florida Branch(해외지부) 설립" }
   ];
 
   const [currentBlock, setCurrentBlock] = useState(0);
