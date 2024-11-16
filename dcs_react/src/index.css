@@ -37,6 +37,8 @@ a{
 .header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: 0px;transition: color 0.3s ease; font-size:18px;}
 .header a{text-decoration: none; color: #fff;}
 .header .nav .gnb{display: flex;}
+.header .nav button{opacity: 0;visibility: hidden;}
+.header .nav .gnb2{opacity: 0;visibility: hidden;}
 .header .nav ul{list-style-type: none;padding: 0;margin: 0;gap: 7.1333333333em;}
 .header .depth2 ul{gap: .4333333333em; display: grid;place-items: start;}
 .header .depth2 ul a{white-space: nowrap;}
@@ -168,9 +170,35 @@ a{
 .main .section.visual4 .wrap-menu:hover {box-shadow: 0px 4px 10px rgba(9, 26, 70, 0.78);border-radius: 1rem;}
 .main .section.visual4 .sponser:hover {transform: translateY(-2rem);}
 .sr-only{overflow: hidden;position: absolute;width: 1px;height: 1px;margin: -1px;padding: 0;border: 0 none;clip: rect(0,0,0,0);}
+
+@media (min-width: 576px) {
+  .container, .container-sm {
+      max-width: 100% !important;
+  }
+}
 @media (max-width: 1024px) {
   .main .visual2 ul {
       flex-wrap: wrap !important;
+      justify-content: space-between;
+  }
+  /* .header .depth2 {
+    right: 8rem;
+}
+  .header-content .nav .gnb{opacity: 0;visibility: hidden;}
+  .header-content .nav .gnb2{opacity: 1;visibility: visible;position: absolute;right: 0;top: 5rem;}
+  .header-content .nav button{color: #fff;background: none 0;border: 0;font-size: 3rem;position: absolute;right: 0;top: 50%;transform: translate(0, -50%);}
+  .header-content .nav .gnb2 li{opacity: 0;visibility: hidden;}
+  .header-content .nav .gnb2.click li{opacity: 1;visibility: visible;}
+  .header .container {padding: 0 2rem;margin: 0;} */
+}
+@media (min-width: 768px) {
+  .container, .container-md, .container-sm {
+      max-width: 100% !important;
+  }
+}
+@media (max-width: 1204px) {
+  .hitory_wrap ol {
+    padding: 0 9rem !important;
   }
 }
 @media (max-width: 1024px) {
@@ -179,6 +207,32 @@ a{
       margin-top: 1rem;
   }
   .main .visual2 ul li:hover {transform: translateY(-0.6rem);}
+  .hitory_wrap ol {
+    padding: 0 2rem !important;
+  }
+  .header.fixed::before {
+    height: 0;
+    box-shadow: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .header.hover::before {
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: none;
+  }
+  .header::before{
+    /* background: 0 none; */
+  }
+}
+@media (max-width: 1425px) {
+  .hitory_wrap .right .year::before {
+    border-bottom: 0 none;
+}
+.hitory_wrap .left .year::before {
+  border-bottom: 0 none;
+}
 }
 @keyframes underlineEnter2 {
   from {
