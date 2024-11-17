@@ -403,9 +403,11 @@ const Main = () => {
             </Swiper>
           </div>
         </section>
-
+  
         <section className="map-section mt-5">
-     
+        <div className='title'>
+            <p>찾아오시는 길</p>
+          </div>       
         <KakaoMap />
       </section>
         

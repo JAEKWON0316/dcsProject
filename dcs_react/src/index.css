@@ -514,3 +514,11 @@ td:nth-child(2) {
   display: flex;
   justify-content: space-between;
 }
+
+/** map **/
+.map-section p {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #007bff;
+  text-align: start;
+}

@@ -7,7 +7,7 @@ const Greeting = () => {
     <div className='main_wrap'>
       <div className='intro'>
         <div className='visual'>
-          <strong className='title'>이사장 인사말</strong>
+          <strong className='title'>인사말</strong>
           <span className='img'>
               <img src={Img} alt="" />
           </span>

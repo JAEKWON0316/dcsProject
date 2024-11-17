@@ -96,12 +96,16 @@ const Notice = () => {
 
   return (
     <div className='container2'>
+      <div className='main_wrap'>
+      <div className='intro'>
+        <div className='visual'>
+          <strong className='title'>공지사항</strong>
       <span className='img'>
         <img src={Img} alt='' />
       </span>
-  
+      </div>
+      </div>
       <div className="listbox mt-5">
-         {/* 전체 게시글 수와 페이지 수 표시 */}
      <div className="total-pg-info">
           <p className='me-3'>전체 게시글 수: {totalPosts}</p>
           <p>총 페이지 수: {totalPages}</p>
@@ -188,6 +192,8 @@ const Notice = () => {
           </div>
         </form>
       </div>
+      </div>
+      
     </div>
   );
 };

@@ -106,8 +106,8 @@ const Header = () => {
     {
       depth1: '공지사항',
       depth2: [
-        { link: '/board/1', label: 'Q & A' },
-        { link: '/board/2', label: '언론 보도' },
+        { link: '/board/1', label: '공지사항' },
+        { link: '/board/2', label: 'Q & A' },
       ],
     },
     {
