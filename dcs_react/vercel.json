@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' *.kakao.com *.dapi.kakao.com t1.daumcdn.net *.vercel.com *.vercel.live; style-src 'self' 'unsafe-inline' *.googleapis.com *.kakao.com; font-src 'self' data: *.googleapis.com; img-src 'self' data: *.vercel.com *.kakao.com *.vercel.live; connect-src 'self' *.vercel.com *.kakao.com"
+          "value": "default-src 'self'; script-src 'self' *.kakao.com *.dapi.kakao.com t1.daumcdn.net *.vercel.com *.vercel.live; style-src 'self' 'unsafe-inline' *.googleapis.com *.kakao.com; font-src 'self' data: *.googleapis.com; img-src 'self' data: *.vercel.com *.kakao.com https://t1.daumcdn.net; connect-src 'self' *.vercel.com *.kakao.com"
         }
       ]
     }
