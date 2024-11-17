@@ -522,3 +522,8 @@ td:nth-child(2) {
   color: #007bff;
   text-align: start;
 }
+.road_underline{
+  border-bottom: 2px solid #007bff;
+  width:205px;
+  margin-bottom: 20px;
+}

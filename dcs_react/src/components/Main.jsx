@@ -406,7 +406,7 @@ const Main = () => {
   
         <section className="map-section mt-5">
         <div className='title'>
-            <p>찾아오시는 길</p>
+            <p className='road_underline'>찾아오시는 길</p>
           </div>       
         <KakaoMap />
       </section>
