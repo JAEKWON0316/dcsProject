@@ -49,7 +49,7 @@ a{
   visibility calc(var(--anim-duration)* 3), 
   transform calc(var(--anim-duration)* 5) cubic-bezier(.19,1,.22,1);
 }
-.depth2.hover{opacity: 1 !important; visibility: visible;}
+.depth2.click{opacity: 1 !important; visibility: visible;}
 .header .depth2 li{display: inline-flex;}
 .gnb .depth1[aria-expanded="true"] + .depth2 {opacity: 1;visibility: visible;transform: translateY(-1.6em);}
 .gnb .depth1[aria-expanded="true"] .subcontent {height: calc(var(--depth2-height, 100%));}
@@ -215,17 +215,30 @@ a{
   }
   .header .nav{position: absolute;right: 0;top: 5rem;}
   .header.fixed::before {
-    height: 0;
-    box-shadow: none;
-    visibility: hidden;
-    opacity: 0;
-  }
-  .header.hover::before {
-    height: 0;
     opacity: 0;
     visibility: hidden;
-    box-shadow: none;
+    height: 0;
   }
+  .header.click::before {
+    position: absolute;
+    width: 28rem !important;
+    left: 26rem !important;
+    height: 100vh !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .header.hover::before{
+    position: absolute;
+    width: 28rem;
+    left: 26rem;
+    height: 100vh !important;
+  }
+  .header.white::before{
+    background: rgb(8 15 61 / 78%);
+  }
+  .header.white.hover .depth1, .header.white.hover .depth2 a {
+    color: #fff;
+}
 }
 @media (max-width: 1425px) {
   .hitory_wrap .right .year::before {
