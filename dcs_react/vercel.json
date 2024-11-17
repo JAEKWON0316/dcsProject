@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' *.kakao.com *.dapi.kakao.com t1.daumcdn.net *.vercel.com *.vercel.live; img-src 'self' data: *.vercel.com *.kakao.com https://t1.daumcdn.net https://mts.daumcdn.net;"
+          "value": "default-src 'self'; script-src 'self' *.kakao.com *.dapi.kakao.com t1.daumcdn.net *.vercel.com *.vercel.live; img-src 'self' data: *.vercel.com *.kakao.com https://t1.daumcdn.net https://mts.daumcdn.net; font-src 'self' https://unpkg.com;"
         }
       ]
     }

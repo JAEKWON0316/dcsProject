@@ -10,8 +10,8 @@ import Img6 from '../images/004.jpg';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import 'swiper/css'; 
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
 
 const KakaoMap = () => {
   const mapContainer = useRef(null); // 지도 요소를 참조할 ref
