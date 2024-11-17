@@ -37,12 +37,12 @@ a{
 .header .logo img{width:200px; height:100px; object-fit: contain; }
 .header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: .3rem;transition: color 0.3s ease; font-size:18px;position: relative;display: block;}
 .header a{text-decoration: none; color: #fff;}
-.header .nav .gnb{display: flex;height: 17rem;}
+.header .nav .gnb{display: flex;}
 .header button{opacity: 0;visibility: hidden;position: absolute;}
 .header .nav ul{list-style-type: none;padding: 0;margin: 0;gap: 7.1333333333em;}
 .header .depth2 ul{gap: .4333333333em; display: grid;place-items: start;}
 .header .depth2 ul a{white-space: nowrap;}
-.header .gnb > li{position: relative;height: 4rem;}
+.header .gnb > li{position: relative;}
 .header .depth2{position: absolute;opacity: 0;visibility: hidden;transition: opacity 0.3s ease, visibility 0.3s ease;left: 0;
   transform: translateY(0em);
   transition: opacity calc(var(--anim-duration)* 3), 
