@@ -2,7 +2,7 @@
   "name": "dcs_react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jaekwon0316.github.io/dcsProject.github.io",
+  "homepage": "https://dcs-project.vercel.app/",
   "dependencies": {
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
