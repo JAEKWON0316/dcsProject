@@ -6,7 +6,7 @@ import Img2 from '../images/icon_sec1_2.png'
 import Img3 from '../images/001.jpg';
 import Img4 from '../images/002.jpg';
 import Img5 from '../images/003.jpg';
-import Img6 from '../images/004.jpg';
+import Img6 from '../images/004.jpg'; 
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
@@ -278,7 +278,7 @@ const Main = () => {
               ))}
 
               <div className='controls'>
-                <button type='button' className='arrow prev' onClick={prevSlide} tabIndex='0' aria-ralbel='Previous slide'>
+                <button type='button' className='arrow prev' onClick={prevSlide} tabIndex='0' aria-label='Previous slide'>
                   <span className='sr-only'>이전</span>
                 </button>
                 <button 
