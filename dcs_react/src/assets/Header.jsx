@@ -11,7 +11,7 @@ const Header = () => {
   const [isHover, setIsHover] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
   const [clcikButton, setClickButton] = useState(false);
-  const [expandedIndex, setExpandedIndex] = useState(null);
+
 
   const location = useLocation();
   const isNotMain = location.pathname !== '/';
@@ -31,13 +31,11 @@ const Header = () => {
   const handleCombinedMouseEnter = (index) => {
     handleMouseEnter();
     setActiveIndex(index);
-    setExpandedIndex(index);
   };
   
   const handleCombinedMouseLeave = () => {
     handleMouseLeave();
     setActiveIndex(null);
-    setExpandedIndex(null)
   };
   
   useEffect(()=>{
@@ -75,7 +73,7 @@ const Header = () => {
       depth2: [
         { link: '/summary', label: '개요' },
         { link: '/history', label: '연혁' },
-        { link: '/greeting', label: '이사장 인사말' },
+        { link: '/greeting', label: '인사말' },
         { link: '/organizationChart', label: '조직도' }
       ],
     },
@@ -144,7 +142,7 @@ const Header = () => {
                   >
                     {menu.depth1}
                   </Link>
-                  <div className={`depth2 ${activeIndex === index ? 'hover' : ''}`}>
+                  <div className={`depth2 `}>
                     <ul>
                       {menu.depth2.map((subMenu, subIndex) => (
                         <li key={subIndex}>
