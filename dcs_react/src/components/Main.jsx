@@ -10,6 +10,7 @@ import Img6 from '../images/004.jpg';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
+import 'swiper/css'; 
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 const KakaoMap = () => {
@@ -342,7 +343,7 @@ const Main = () => {
                 loop={true}
                 autoplay={{ delay: 2000 }}  // Autoplay 딜레이 설정
                 
-                navigation  // Navigation 활성화
+                navigation={true}  // Navigation 활성화
               >
               <SwiperSlide className="swiper-slide">
                 <Link to="">
