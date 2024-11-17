@@ -11,7 +11,7 @@ const Footer = () => {
         <div className='main_wrap'>
           <div className='f-top'>
             <div className='t-top-l'>
-            대한청년을세계로
+            (사)대한청년을세계로
             </div>
             <div className='t-top-r'>
               <span><Link to='https://www.instagram.com/dae_cheong_se/?igsh=MWtraDk0emY0Mms0bg%3D%3D#'><FaInstagram /></Link></span>
@@ -28,7 +28,7 @@ const Footer = () => {
             <p className='pwr'>Powered by SmartCreator Inc.</p>
           </div>
           <div className='copyright'>
-            Copyrights &copy; 2024 대한청년을세계로. All Rights Reserved.
+            Copyrights &copy; 2024 (사)대한청년을세계로. All Rights Reserved.
           </div>
         </div>
       </div>
