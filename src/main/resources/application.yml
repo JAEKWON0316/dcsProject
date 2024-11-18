@@ -2,9 +2,10 @@ spring:
   application:
     name: dcsProject
   datasource:
-     url: ${DATASOURCE_URL}
+    url: jdbc:${JAWSDB_URL}
     username: ${DATASOURCE_USERNAME}
     password: ${DATASOURCE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
