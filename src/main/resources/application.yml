@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: dcsProject
+  datasource:
+     url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Seoul  # Hibernate가 사용할 시간대 설정 (Asia/Seoul)
+
+server:
+  port: 8080    # 스프링 부트 애플리케이션이 실행될 포트 번호
+  servlet:
+    encoding:
+      charset: UTF-8    # 문자 인코딩을 UTF-8로 설정
+      force: true      # 클라이언트가 다른 인코딩을 요청해도 강제로 UTF-8 사용
