@@ -111,7 +111,7 @@ const Notice = () => {
   };
 
   const currentBoards = boards.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
-  
+  /*
   const formatDate = (dateStr) => {
     const isoDate = new Date(dateStr).toISOString(); // ISO 형식으로 변환
     const formattedDate = new Date(isoDate);
@@ -122,7 +122,7 @@ const Notice = () => {
     } else {
       return '날짜 정보 없음';
     }
-  };
+  }; */
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
