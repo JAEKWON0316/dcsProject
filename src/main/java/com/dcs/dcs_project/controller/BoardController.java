@@ -32,14 +32,6 @@ public class BoardController {
     
     private final BoardService bService;
 
-    
-    
-    @GetMapping("/")
-    public List<BoardDto> getList() {
-        System.out.println("list");
-        List<BoardDto> bDtoList = bService.findAll();
-        return bDtoList; // JSON 형식으로 반환
-    } 
 
     @GetMapping("/role/{role}")
     public ResponseEntity<List<BoardDto>> getBoardsByRole(@PathVariable("role") int role) {
