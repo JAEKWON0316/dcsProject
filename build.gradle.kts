@@ -27,6 +27,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-security") // Spring Security 추가
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
@@ -43,6 +44,6 @@ tasks.withType<Test> {
 
 // WAR 파일로 빌드하려면 다음을 추가해야 합니다.
 tasks.bootWar {
-    mainClass.set("com.dcs.dcs_project.DcsProjectApplication") 
+    mainClass.set("com.dcs.dcs_project.DcsProjectApplication")
     archiveFileName.set("dcs_project-0.0.1-SNAPSHOT.war") // WAR 파일 이름 설정
 }
