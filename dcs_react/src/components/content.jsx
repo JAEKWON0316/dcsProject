@@ -43,29 +43,29 @@ const Content = () => {
         
         // 마지막 조회 시간이 24시간 이상 지났을 경우 조회수 증가
         if (!lastViewedTime || currentTime - lastViewedTime > 24 * 60 * 60 * 1000) {
-          await axios.post(`https://dcs-site-5dccc5b2f0e4.herokuapp.com//api/board/${id}/increment-hit`);
+          await axios.post(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${id}/increment-hit`);
           viewedBoards[id] = currentTime;
           localStorage.setItem('viewedBoards', JSON.stringify(viewedBoards));
         }
         
         // 게시글 데이터 가져오기
-        const boardResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com//api/board/role/${role}/${id}`);
+        const boardResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}/${id}`);
         setBoard(boardResponse.data);
 
 
     
         // 이전/다음 게시글 ID 가져오기
-        const response = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com//api/board/${role}/${id}/btn`);
+        const response = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${role}/${id}/btn`);
         setPreviousId(response.data.prev?.id || null);
         setNextId(response.data.next?.id || null);
       
 
         // 이미지 데이터 가져오기
-        const imageResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com//api/images/board/${id}`);
+        const imageResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/images/board/${id}`);
         setImages(imageResponse.data);
 
         // 파일 데이터 가져오기
-        const fileResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com//api/files/board/${id}`);
+        const fileResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${id}`);
         setFiles(fileResponse.data);
 
       } catch (err) {
@@ -81,7 +81,7 @@ const Content = () => {
   const handleFileDownload = async (file) => {
     try {
       // 파일 다운로드 횟수 증가 요청 보내기 (POST 방식)
-      const response = await axios.post(`https://dcs-site-5dccc5b2f0e4.herokuapp.com//api/files/board/${file.id}`);
+      const response = await axios.post(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${file.id}`);
       
       // 서버에서 카운트 증가 후, 업데이트된 카운트를 받아오기
       if (response.status === 200) {
@@ -91,7 +91,7 @@ const Content = () => {
         setFiles(prevFiles => prevFiles.map(f => (f.id === updatedFile.id ? updatedFile : f)));
         
         // 파일 다운로드
-        const downloadLink = `https://dcs-site-5dccc5b2f0e4.herokuapp.com//uploads/${file.filePath}`;
+        const downloadLink = `https://dcs-site-5dccc5b2f0e4.herokuapp.com/uploads/${file.filePath}`;
         const link = document.createElement('a');
         link.href = downloadLink;
         link.download = file.fileName;  // 파일 이름을 다운로드로 설정
@@ -148,7 +148,7 @@ const Content = () => {
               <ul>
                 {files.map((file) => (
                   <li key={file.id}>
-                    <a  href={`https://dcs-site-5dccc5b2f0e4.herokuapp.com//uploads/${file.filePath}`}
+                    <a  href={`https://dcs-site-5dccc5b2f0e4.herokuapp.com/uploads/${file.filePath}`}
                         onClick={(e) => {
                           e.preventDefault();  // 기본 링크 동작 방지 (자동 다운로드 방지)
                         handleFileDownload(file); // 파일 다운로드 함수 호출
@@ -173,7 +173,7 @@ const Content = () => {
                 <div>
                 <img
                   key={image.id}
-                  src={`https://dcs-site-5dccc5b2f0e4.herokuapp.com//uploads/${image.imageUrl}`}
+                  src={`https://dcs-site-5dccc5b2f0e4.herokuapp.com/uploads/${image.imageUrl}`}
                   alt="게시글 이미지"
                 />
                 </div>
