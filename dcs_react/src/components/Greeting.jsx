@@ -24,8 +24,8 @@ const Greeting = () => {
             </div>
             <div className='img_bottom'>
               <p>(사)대한청년을세계로</p>
-              <p>이사장 | 사회복지학 박사</p>
-              <p>정민기 | Jeong Min Gi</p>
+              <p>이사장 | 정 민 기</p>
+              <p>Chairman | Jeong Min Ki</p>
             </div>
           </div>
           <div className='ask'> 
