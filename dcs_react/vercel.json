@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' *.kakao.com *.dapi.kakao.com t1.daumcdn.net *.vercel.com *.vercel.live; img-src 'self' data: *.vercel.com *.kakao.com https://t1.daumcdn.net https://mts.daumcdn.net; font-src 'self' https://unpkg.com data:;"
+          "value": "default-src 'self'; connect-src 'self' https://dcs-site-5dccc5b2f0e4.herokuapp.com; script-src 'self' *.kakao.com *.dapi.kakao.com t1.daumcdn.net *.vercel.com *.vercel.live; img-src 'self' data: *.vercel.com *.kakao.com https://t1.daumcdn.net https://mts.daumcdn.net; font-src 'self' https://unpkg.com data:;"
         }
       ]
     }
