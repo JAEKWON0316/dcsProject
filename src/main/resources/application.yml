@@ -2,9 +2,9 @@ spring:
   application:
     name: dcsProject
   datasource:
-    url: ${DATASOURCE_URL}
-    username: ${DATASOURCE_USERNAME}
-    password: ${DATASOURCE_PASSWORD}
+    url:  jdbc:mysql://zys9rwjypixx4ibg:tp0i66q7wn7o9a9h@ol5tz0yvwp930510.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zpfetl6fx84v5sit
+    username: zys9rwjypixx4ibg
+    password: tp0i66q7wn7o9a9h
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
