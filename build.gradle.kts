@@ -41,8 +41,8 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-// JAR 파일에 mainClass 지정
-tasks.bootJar {
+// WAR 파일로 빌드하려면 다음을 추가해야 합니다.
+tasks.bootWar {
     mainClass.set("com.dcs.DcsProjectApplication")  // 메인 클래스 지정
-    archiveFileName.set("dcs_project-0.0.1-SNAPSHOT.jar") // JAR 파일 이름 설정
+    archiveFileName.set("dcs_project-0.0.1-SNAPSHOT.war") // WAR 파일 이름 설정
 }
