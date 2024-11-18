@@ -92,20 +92,16 @@ public class BoardController {
         return ResponseEntity.ok(searchResults);
     }
 
-
+   /* 
     @GetMapping("/{id}")
     public String detailView(@PathVariable("id") Long id, Model model) {
-        /**
-         * 로직 
-         * 1.조회수(hit)를 1 올리고 
-         * 2.detial.html 을 출력
-         */
+       
         bService.updateHits(id);
         BoardDto bDto = bService.findById(id);
         model.addAttribute("board", bDto); 
         return "detail";
     }
-
+   
     @GetMapping("/write")
     public String getWrite() {
         System.out.println("write");
@@ -127,7 +123,7 @@ public class BoardController {
         return "update";
     }
     
-    /*
+    
     @PostMapping("/update")
     public String update(@ModelAttribute BoardDto bDto, Model model, RedirectAttributes redirectAttributes){  //getter에서 쓴 내용이 model에서 담겨져 온다 , redirectAttribute는 ruturn을 redirect로 할 때 쓴다!
         //비밀번호 검증을 위해 bDto에서 받을 비번과 boardDto에 담겨있는 비번을 비교한다.
