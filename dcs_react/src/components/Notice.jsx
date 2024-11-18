@@ -9,7 +9,7 @@ import gallImag from '../images/gall.png';
 import gallImag2 from '../images/gall2.png';
 import notImg from '../images/not.png';
 import notImg2 from '../images/not2.png';
-import { format } from 'date-fns';
+import { format,  parse } from 'date-fns';
 import { useParams } from 'react-router-dom';  
 import { FcOpenedFolder } from "react-icons/fc";
 
@@ -113,9 +113,15 @@ const Notice = () => {
   const currentBoards = boards.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
   
   const formatDate = (dateStr) => {
-    const formattedDate = new Date(dateStr);
+    const isoDate = new Date(dateStr).toISOString(); // ISO 형식으로 변환
+    const formattedDate = new Date(isoDate);
     const isValidDate = !isNaN(formattedDate.getTime());
-    return isValidDate ? format(formattedDate, 'yyyy.MM.dd') : '날짜 정보 없음';  // '날짜 정보 없음' 등
+    
+    if (isValidDate) {
+      return format(formattedDate, 'yyyy.MM.dd');
+    } else {
+      return '날짜 정보 없음';
+    }
   };
 
   const toggleDropdown = () => {
@@ -197,7 +203,7 @@ const Notice = () => {
                       {filesExistence[board.id] && <span className='file_font'><FcOpenedFolder /></span>}
                     </td>
                     <td>{board.writer}</td>
-                    <td>{formatDate(board.bbsCreatedTime)}</td>
+                    <td>{board.bbsCreatedTime}</td>
                     <td>{board.hit}</td>
                   </tr>
                 ))
