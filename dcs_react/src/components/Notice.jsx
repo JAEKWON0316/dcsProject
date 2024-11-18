@@ -100,11 +100,10 @@ const Notice = () => {
   };
 
   const currentBoards = boards.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
-
-useEffect(() => {
-  fetchBoards();  
-}, [role]);
-
+ 
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
   return (
     <div className='container2'>
       <div className='main_wrap'>
