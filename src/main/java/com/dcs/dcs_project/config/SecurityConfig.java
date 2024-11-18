@@ -11,12 +11,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // CORS 활성화 (실제 설정은 WebConfig에서 처리)
-        http.cors().and()
-            // Content Security Policy 설정
+        http.cors() // CORS 활성화
+            .and()
+            .csrf().disable() // CSRF 보호 비활성화
             .headers(headers -> headers
                 .addHeaderWriter(new ContentSecurityPolicyHeaderWriter(
-                    "default-src 'self'; connect-src 'self' https://www.daecheongse.com https://your-backend-api.com"
+                    "default-src 'self'; connect-src 'self' https://www.daecheongse.com https://dcs-site-5dccc5b2f0e4.herokuapp.com/"
                 )));
 
         return http.build();
