@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { format } from 'date-fns';
 import Img from '../images/sub_visual6.jpg';
 import { FcOpenedFolder } from "react-icons/fc";
 
@@ -135,7 +134,7 @@ const Content = () => {
           <div className="mt-2 pt-2 board-box">
           <span className="ft-bold">작성자: {board.writer}</span>
           <span className="mr-2">
-              등록일: {format(new Date(board.bbsCreatedTime), 'yyyy.MM.dd')}
+              등록일: {board.bbsCreatedTime}
             </span>
             <span className="mr-4"><label className="font-italic">조회</label> {board.hit}회</span>
           </div>
@@ -157,7 +156,7 @@ const Content = () => {
                       <span>{file.fileName}</span></a> <span>({file.fileSize})</span>
                     <br/>
                     <span> 다운로드 횟수: {file.count}</span>
-                    <span> DATE:{format(new Date(file.uploadDate), 'yyyy.MM.dd')}</span>
+                    <span> DATE:{file.uploadDate}</span>
                   </li>
                 ))}
               </ul>
