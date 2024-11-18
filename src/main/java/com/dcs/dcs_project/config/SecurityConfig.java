@@ -13,7 +13,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .headers(headers -> headers
-                .addHeaderWriter(new ContentSecurityPolicyHeaderWriter("default-src 'self'; connect-src 'self' https://dcs-site-5dccc5b2f0e4.herokuapp.com/"))
+                .addHeaderWriter(new ContentSecurityPolicyHeaderWriter(
+                    "default-src 'self'; connect-src 'self' https://www.daecheongse.com https://your-backend-api.com"
+                ))
             );
         
         return http.build();
