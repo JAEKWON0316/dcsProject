@@ -41,18 +41,9 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+
 // WAR 파일로 빌드하려면 다음을 추가해야 합니다.
 tasks.bootWar {
     mainClass.set("com.dcs.DcsProjectApplication")  // 메인 클래스 지정
     archiveFileName.set("dcs_project-0.0.1-SNAPSHOT.war") // WAR 파일 이름 설정
-}
-
-// Heroku에서 WAR 파일을 실행할 수 있도록 프로세스를 설정
-springBoot {
-    buildInfo()
-}
-
-// Heroku에서 WAR 배포를 위한 설정
-tasks.withType<War> {
-    webAppDirName = "src/main/webapp"
 }
