@@ -33,7 +33,18 @@ const Notice = () => {
   
   const fetchBoards = async () => {
     try {
-      const response = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}`);
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobile = userAgent.includes('mobile') || userAgent.includes('android') || userAgent.includes('iphone');
+  
+      const headers = isMobile
+        ? { 'Custom-Mobile-Header': 'This is a mobile-specific request' }
+        : {};
+  
+      const response = await axios.get(
+        `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}`,
+        { headers } // 헤더 추가
+      );
+  
       const sortedBoards = response.data
         .sort((a, b) => b.id - a.id) 
         .map((item, index) => ({
