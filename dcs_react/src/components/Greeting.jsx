@@ -1,7 +1,8 @@
 import React from 'react'
 import Img from '../images/intro.png';
 import Img2 from '../images/sign01.png';
-import Img3 from '../images/human.jpeg';
+import Img3 from '../images/mk01.jpg';
+
 
 const Greeting = () => {
   return (

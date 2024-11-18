@@ -35,6 +35,9 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("mysql:mysql-connector-java:8.0.32")
     implementation("io.github.cdimascio:dotenv-java:3.0.2")
+
+    // Thymeleaf 의존성 추가
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 }
 
 tasks.withType<Test> {
@@ -45,5 +48,4 @@ tasks.withType<Test> {
 tasks.bootWar {
     mainClass.set("com.dcs.dcs_project.DcsProjectApplication") 
     archiveFileName.set("dcs_project-0.0.1-SNAPSHOT.war") // WAR 파일 이름 설정
-
 }
