@@ -41,7 +41,13 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-// Kotlin DSL로 'bootWar' 설정
+// JAR 파일로 빌드하도록 설정
+tasks.withType<Jar> {
+    archiveFileName.set("dcs_project-0.0.1-SNAPSHOT.jar") // JAR 파일 이름 설정
+}
+
+// WAR 파일로 빌드하려면 다음을 추가해야 합니다.
 tasks.bootWar {
     mainClass.set("com.dcs.DcsProjectApplication")  // 메인 클래스 지정
+    archiveFileName.set("dcs_project-0.0.1-SNAPSHOT.war") // WAR 파일 이름 설정
 }
