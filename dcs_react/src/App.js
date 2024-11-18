@@ -13,6 +13,8 @@ import OrganizationChart from './components/OrganizationChart';
 import BoardMembers from './components/BoardMembers';
 import RegionalOffices from './components/RegionalOffices';
 import History from './components/History';
+import Sponsor from './components/Sponsor';
+import SponsorAppli from './components/SponsorAppli';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path='/boardmembers' element={<BoardMembers />} />
           <Route path='/regionaloffices' element={<RegionalOffices />} />
           <Route path='history' element={<History />} />
+          <Route path='sponsor' element={<Sponsor />} />
+          <Route path='sponsorappli' element={<SponsorAppli />} />
         </Routes>
         <Footer />
       </Router>

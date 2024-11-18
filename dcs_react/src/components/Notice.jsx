@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Img from '../images/sub_visual6.jpg';
+import proImg from '../images/pro.png';
+import proImg2 from '../images/pro2.png';
+import proImg3 from '../images/pro3.png';
+import proImg4 from '../images/pro4.png';
+import proImg5 from '../images/pro5.png';
+import gallImag from '../images/gall.png';
+import gallImag2 from '../images/gall2.png';
+import notImg from '../images/not.png';
+import notImg2 from '../images/not2.png';
 import { format } from 'date-fns';
 import { useParams } from 'react-router-dom';  
 import { FcOpenedFolder } from "react-icons/fc";
@@ -99,9 +107,34 @@ const Notice = () => {
       <div className='main_wrap'>
       <div className='intro'>
         <div className='visual'>
-          <strong className='title'>공지사항</strong>
+          <strong className='title'>
+            {role === '1' && '공지사항'}
+            {role === '2' && 'Q & A'}
+            {role === '3' && '활동사진'}
+            {role === '4' && '언론보도'}
+            {role === '5' && '미래전략포럼'}
+            {role === '6' && 'AI혁신위원회'}
+            {role === '7' && '글로벌 네트워킹'}
+            {role === '8' && '지역 청년 네트워킹'}
+            {role === '9' && 'ESG 청년 연합 봉사 활동'}
+          </strong>
       <span className='img'>
-        <img src={Img} alt='' />
+      <img 
+        src={
+          role === '1' ? notImg : 
+          role === '2' ? notImg2 : 
+          role === '3' ? gallImag : 
+          role === '4' ? gallImag2 : 
+          role === '5' ? proImg : 
+          role === '6' ? proImg2 : 
+          role === '7' ? proImg3 : 
+          role === '8' ? proImg4 : 
+          role === '9' ? proImg5 : 
+          '../images/default_visual.jpg' // 기본 이미지
+        } 
+      alt='' 
+      />
+        
       </span>
       </div>
       </div>
