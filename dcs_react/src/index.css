@@ -93,7 +93,7 @@ a{
 .main .visual1 .about-img::before{animation: rotate 20s infinite linear;content: "";position: absolute;left: 0;top: 0;width: 100%;height: 100%;background-size: contain;background: url(../src/images/img_sec1_2.png) no-repeat center;}
 .main .motion{opacity: 0;position: relative;transition: all .8s ease;transform: translateY(3rem);}
 .main .section.action{top: 0;opacity: 1;transform: translateY(0);}
-.blue{color: #007bff;}
+.blue{color: #007bff !important;}
 @keyframes rotate{
   100%{transform:rotate(360deg)}
 }
@@ -274,6 +274,22 @@ a{
   100%{transform:scale(1)}
 }
 
+/****** greeting ******/
+.greeting_wrap{padding: 0 8rem;}
+.greeting_wrap .greeting_title{display: flex;align-items: center;justify-content: space-between;font-size: 2.7rem !important;font-weight: 700;}
+.greeting_wrap .img_top img{width: 24rem;}
+.greeting_wrap .img_bottom{margin-top: 1.5rem;}
+.greeting_wrap .img_bottom p:nth-child(1){font-size: 1.5rem;margin-bottom: .5rem;}
+.greeting_wrap .img_bottom p:nth-child(2){margin-bottom: .3rem;}
+.greeting_wrap .img_bottom p:nth-child(2),
+.greeting_wrap .img_bottom p:nth-child(3){letter-spacing: .1rem;}
+.greeting_wrap .ask p:nth-child(8),
+.greeting_wrap .ask p:nth-child(9){margin-bottom: 0;}
+.greeting_wrap .ask{margin-left:4rem;text-align: justify;}
+.greeting_wrap .ask p{font-size: 1.2rem;color: #454444;}
+.greeting_wrap .ask p + p{margin-bottom: 1.5rem;line-height: 2rem;}
+.greeting_wrap .ask .tit{font-weight: 700;}
+.flex{display: flex;}
 /****** vision ******/
 .vision_wrap img{width: 100%;}
 

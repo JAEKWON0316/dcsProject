@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Img from '../images/sub_visual7.jpg';
+import Img from '../images/intro3.png';
 
 const History = () => {
   const History = [
@@ -31,7 +31,7 @@ const History = () => {
   }, []);
 
   return (
-    <div className='main_wrap'>
+    <div className='main_wrap hitory'>
       <div className='intro'>
         <div className='visual'>
           <strong className='title'>연혁</strong>
