@@ -13,8 +13,8 @@ import OrganizationChart from './components/OrganizationChart';
 import BoardMembers from './components/BoardMembers';
 import RegionalOffices from './components/RegionalOffices';
 import History from './components/History';
-import Sponsor from './components/\bSponsor';
-import SponsorAppli from './components/\bSponsorAppli';
+import Sponsor from './components/Sponsor';
+import SponsorAppli from './components/SponsorAppli';
 
 function App() {
   return (
