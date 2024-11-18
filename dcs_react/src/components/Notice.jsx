@@ -56,18 +56,20 @@ const Notice = () => {
   };
 
   const fetchFilesExistence = async (boards) => {
-    const fileStatus = {};
-    for (let board of boards) {
+    const fileStatusPromises = boards.map(async (board) => {
       try {
         const response = await axios.get(
           `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${board.id}/hasFile`,
           { withCredentials: true }
         );
-        fileStatus[board.id] = response.data; 
+        return { [board.id]: response.data };
       } catch (error) {
-        fileStatus[board.id] = false;
+        return { [board.id]: false };
       }
-    }
+    });
+  
+    const results = await Promise.all(fileStatusPromises);
+    const fileStatus = Object.assign({}, ...results);
     setFilesExistence(fileStatus);
   };
 
@@ -113,7 +115,7 @@ const Notice = () => {
   const formatDate = (dateStr) => {
     const formattedDate = new Date(dateStr);
     const isValidDate = !isNaN(formattedDate.getTime());
-    return isValidDate ? format(formattedDate, 'yyyy.MM.dd') : 'Invalid date';  // 유효한 날짜 체크
+    return isValidDate ? format(formattedDate, 'yyyy.MM.dd') : '날짜 정보 없음';  // '날짜 정보 없음' 등
   };
 
   const toggleDropdown = () => {
@@ -179,8 +181,12 @@ const Notice = () => {
             </thead>
             <tbody>
               {loading ? (  // 로딩 중이면 로딩 메시지 표시
-                <tr>
-                  <td colSpan="5">Loading...</td>
+                  <tr>
+                  <td colSpan="5" style={{ textAlign: 'center' }}>
+                    <div className="spinner-border" role="status">
+                      <span className="sr-only">Loading...</span>
+                    </div>
+                  </td>
                 </tr>
               ) : currentBoards.length > 0 ? (
                 currentBoards.map((board) => (
