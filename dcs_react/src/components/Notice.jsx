@@ -13,100 +13,93 @@ import { format } from 'date-fns';
 import { useParams } from 'react-router-dom';  
 import { FcOpenedFolder } from "react-icons/fc";
 
-
 const Notice = () => {
   const [boards, setBoards] = useState([]);  
   const [currentPage, setCurrentPage] = useState(0);  
   const [totalPages, setTotalPages] = useState(0);  
-  const [totalPosts, setTotalPosts] = useState(0);  // 전체 게시글 수
+  const [totalPosts, setTotalPosts] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchType, setSearchType] = useState('title');
-  const [filesExistence, setFilesExistence] = useState({});  // 파일 유무 상태 관리
-
+  const [filesExistence, setFilesExistence] = useState({});
   const itemsPerPage = 20; 
   const { role } = useParams();  
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
+  useEffect(() => {
+    fetchBoards();  
+  }, [role]);
 
-  
   const fetchBoards = async () => {
     try {
       const response = await axios.get(
         `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}`,
-        { withCredentials: true }  // 자격 증명 포함 설정
+        { withCredentials: true }
       );
       const sortedBoards = response.data
         .sort((a, b) => b.id - a.id) 
         .map((item, index) => ({
           ...item,
-          displayNumber: response.data.length - index,  
+          displayNumber: response.data.length - index, 
         }));
 
-
       setBoards(sortedBoards);
-      setTotalPosts(response.data.length);  // 전체 게시글 수 설정
-      setTotalPages(Math.ceil(response.data.length / itemsPerPage));      
-      // 파일 유무 확인
+      setTotalPosts(response.data.length);
+      setTotalPages(Math.ceil(response.data.length / itemsPerPage));
       fetchFilesExistence(sortedBoards);
     } catch (error) {
       console.error('Failed to fetch boards: ', error.response ? error.response.data : error.message);
     }
   };
 
- // dcsBoardId를 이용해서 파일 유무를 확인
- const fetchFilesExistence = async (boards) => {
-  const fileStatus = {};
-  for (let board of boards) {
+  const fetchFilesExistence = async (boards) => {
+    const fileStatus = {};
+    for (let board of boards) {
+      try {
+        const response = await axios.get(
+          `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${board.id}/hasFile`,
+          { withCredentials: true }
+        );
+        fileStatus[board.id] = response.data; 
+      } catch (error) {
+        fileStatus[board.id] = false;
+      }
+    }
+    setFilesExistence(fileStatus);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const searchValue = e.target.searchvalue.value;
+
     try {
       const response = await axios.get(
-        `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${board.id}/hasFile`,
-        { withCredentials: true }  // 자격 증명 포함 설정
+        `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}/search`,
+        {
+          params: { searchType, searchValue },
+          withCredentials: true,
+        }
       );
-      fileStatus[board.id] = response.data;  // 파일 유무 저장
+
+      const boardsWithNumbers = response.data.map((board, index) => ({
+        ...board, 
+        displayNumber: response.data.length - index,
+      }));
+
+      setBoards(boardsWithNumbers); 
+      setTotalPosts(response.data.length); 
+      setTotalPages(Math.ceil(response.data.length / itemsPerPage)); 
+      setCurrentPage(0);
+      fetchFilesExistence(response.data);
+
     } catch (error) {
-      fileStatus[board.id] = false;  // 오류가 나면 파일이 없다고 간주
+      console.error("Failed to search: ", error.response ? error.response.data : error.message);
     }
-  }
-  setFilesExistence(fileStatus);  // 파일 유무 상태 업데이트
-};
+  };
 
-const handlePageChange = (page) => {
-  setCurrentPage(page);
-};
-
-const handleSearch = async (e) => {
-  e.preventDefault();
-  const searchType = document.getElementById("searchname").value;
-  const searchValue = e.target.searchvalue.value;
-
-  try {
-    const response = await axios.get(
-      `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}/search`,
-      {
-        params: { searchType, searchValue },
-        withCredentials: true,  // 자격 증명 포함 설정
-      }
-    );
-
-    const boardsWithNumbers = response.data.map((board, index) => ({
-      ...board, 
-      displayNumber: response.data.length - index, // 마지막 번호부터 역순으로 번호 매기기
-    }));
-
-    setBoards(boardsWithNumbers); 
-    setTotalPosts(response.data.length); // 검색된 전체 게시글 수 업데이트
-    setTotalPages(Math.ceil(response.data.length / itemsPerPage)); // 페이지 수 업데이트
-    setCurrentPage(0); // 검색 후 첫 페이지로 이동
-    fetchFilesExistence(response.data);  // 파일 유무 확인
-
-  } catch (error) {
-    console.error("Failed to search: ", error.response ? error.response.data : error.message);
-  }
-};
-
-const currentBoards = boards.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+  const currentBoards = boards.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
 useEffect(() => {
   fetchBoards();  
