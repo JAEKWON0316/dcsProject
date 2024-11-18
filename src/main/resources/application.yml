@@ -17,7 +17,7 @@ spring:
           time_zone: Asia/Seoul  # Hibernate가 사용할 시간대 설정 (Asia/Seoul)
 
 server:
-  port: 8080    # 스프링 부트 애플리케이션이 실행될 포트 번호
+  port: ${PORT:8080}     # 스프링 부트 애플리케이션이 실행될 포트 번호
   servlet:
     encoding:
       charset: UTF-8    # 문자 인코딩을 UTF-8로 설정
