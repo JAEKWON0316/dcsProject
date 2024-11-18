@@ -33,7 +33,7 @@ const Notice = () => {
   
   const fetchBoards = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/board/role/${role}`);
+      const response = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com//api/board/role/${role}`);
       const sortedBoards = response.data
         .sort((a, b) => b.id - a.id) 
         .map((item, index) => ({
@@ -57,7 +57,7 @@ const Notice = () => {
   const fileStatus = {};
   for (let board of boards) {
     try {
-      const response = await axios.get(`http://localhost:8080/api/files/board/${board.id}/hasFile`);
+      const response = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com//api/files/board/${board.id}/hasFile`);
       fileStatus[board.id] = response.data;  // 파일 유무 저장
     } catch (error) {
       fileStatus[board.id] = false;  // 오류가 나면 파일이 없다고 간주
@@ -76,7 +76,7 @@ const Notice = () => {
     const searchValue = e.target.searchvalue.value;
   
     try {
-      const response = await axios.get(`http://localhost:8080/api/board/role/${role}/search`, {
+      const response = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com//api/board/role/${role}/search`, {
         params: { searchType, searchValue },
       });
 
