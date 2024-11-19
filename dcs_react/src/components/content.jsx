@@ -66,7 +66,6 @@ const Content = () => {
 
         // 파일 데이터 가져오기
         const fileResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${id}`);
-        console.log(fileResponse.data); // 응답 데이터 확인
         setFiles(fileResponse.data);
 
       } catch (err) {
@@ -121,7 +120,10 @@ const Content = () => {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return 
+        <div className="spinner-border" role="status">
+        <span className="sr-only">Loading...</span>
+        </div>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -174,7 +176,6 @@ const Content = () => {
                       <span>{file.fileName}</span></a> <span>({file.fileSize})</span>
                     <br/>
                     <span> 다운로드 횟수: {file.count}</span>
-                    {console.log(formatDate(file.uploadDate))}
                     <span> DATE:{formatDate(file.uploadDate)}
                     </span>
                   </li>
@@ -183,7 +184,7 @@ const Content = () => {
             </div>
           )}
          
-        
+                      
 
         {/* 이미지가 있을 경우 보여주기 */}
           {images.length > 0 && (
