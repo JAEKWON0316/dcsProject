@@ -174,8 +174,8 @@ const Content = () => {
                       <span>{file.fileName}</span></a> <span>({file.fileSize})</span>
                     <br/>
                     <span> 다운로드 횟수: {file.count}</span>
-                    {console.log(formatDate(file.uploadTime))}
-                    <span> DATE:{formatDate(file.uploadTime)}
+                    {console.log(formatDate(file.uploadDate))}
+                    <span> DATE:{formatDate(file.uploadDate)}
                     </span>
                   </li>
                 ))}
