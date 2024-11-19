@@ -30,23 +30,19 @@ const Greeting = () => {
           </div>
           <div className='ask'> 
           <p className='greeting_title'>Introduction</p>
-            <p>안녕하세요.</p>
-            <p className='blue tit'>(사)대한청년을세계로 이사장 정민기입니다.</p>
+            <p>안녕하세요. <span className=' tit blue'>(사)대한청년을세계로 이사장 정민기입니다.</span></p>
 
-            <p>우리 법인은 청년들이 변화의 물결 속에서 길을 잃지 않고 주도적으로 미래를 열어갈 수 있도록 돕기 위해 시작되었습니다. 국내외를 막론하고 청년들이 직면한 가장 큰 도전은 급변하는 기술과 환경 속에서 뒤처지지 않는 것입니다. 우리는 이러한 간극을 해소하고, 청년들에게 더 넓은 세상과 기회를 연결해주는 다리가 되고자 합니다.</p>
+            <p>오늘날 우리는 AI와 첨단 기술이 이끄는 혁신의 시대를 살아가고 있습니다. 그러나 이러한 기술의 급격한 발전은 청년들에게 새로운 기회를 열어주는 동시에, 그 속도와 격차로 인해 준비되지 못한 청년들에게 좌절감을 안겨주는 주요 요인이 되기도 합니다. 기술과 변화의 흐름에 대한 이해와 준비 부족은 단순히 기회를 놓치는 데 그치지 않고, 나아가 청년들의 불안과 우울감을 증폭시키고 있습니다. (사)대한청년을세계로는 이러한 간극을 해소하고, 청년들이 변화와 기술을 능동적으로 이해하고 주도적인 미래를 만들어갈 수 있도록 지원하는 데 최선을 다하고자 합니다.</p>
 
-            <p>국내에서는 청년들이 지역과 산업의 경계를 넘어 소통하고 협력할 수 있는 기반을 만들고, 글로벌 무대에서는 세계와의 교류를 통해 시야를 확장하며 자신감을 갖도록 돕고 있습니다. 우리가 추구하는 목표는 단순한 지원을 넘어, 청년 스스로가 변화를 이끌어낼 수 있는 리더로 성장하도록 함께하는 것입니다.</p>
+            <p>또한, 글로벌화와 AI 시대를 맞이한 오늘날, 우리 법인은 해외의 선도적인 문화, 트렌드, 그리고 혁신적인 아이디어가 대한민국에 성공적으로 정착하고 융합될 수 있도록 가교 역할을 하고자 합니다. 이는 단순히 경제적 진출에 머무르지 않고, 대한민국이 문화적·경제적, 그리고 기술적 중심지로 자리 잡는 데 기여하는 것을 목표로 합니다. 이를 통해 청년들이 세계와 연결된 대한민국의 무대에서 더 큰 가능성을 발견하고, 주도적으로 글로벌화에 참여할 수 있는 발판을 제공하고자 합니다.</p>
 
-            <p>미래를 만들어가는 것은 결국 사람입니다. 청년 한 명 한 명이 자신의 가치를 발견하고 발휘할 수 있도록 지원하며, 나아가 우리 사회와 세계가 함께 발전할 수 있는 비전을 공유하겠습니다.</p>
-
-            <p>(사)대한청년을세계로는 청년과 함께, 국내와 세계를 잇는 연결점이자 변화의 중심이 되겠습니다. 많은 관심과 응원 부탁드립니다.</p>
+            <p>(사)대한청년을세계로는 기술과 청년, 그리고 세계를 연결하며, 대한민국이 글로벌 혁신의 중심에서 빛날 수 있도록 최선을 다하겠습니다. 앞으로도 많은 관심과 응원을 부탁드립니다.</p>
 
             <p>감사합니다.</p>
             <p>정민기</p>
             <p>(사)대한청년을세계로 이사장</p>
-
-            <p>Hello.</p>
-            <p>This is Jung Min-Ki, Chairperson of The Korea Youth to the World Foundation.</p>
+<br />
+            <p>Hello.This is Jung Min-Ki, Chairperson of The Korea Youth to the World Foundation.</p>
 
             <p>Our foundation was established to empower young people to navigate the waves of change and take the lead in shaping their own futures. Across both domestic and international contexts, one of the greatest challenges faced by today’s youth is keeping pace with rapidly evolving technologies and environments. We aim to bridge this gap and serve as a platform that connects young individuals with broader opportunities and a global perspective.</p>
 
