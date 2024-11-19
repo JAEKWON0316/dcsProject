@@ -293,7 +293,15 @@ a{
 .tit{font-weight: 700;}
 .flex{display: flex;}
 /****** vision ******/
-.vision_wrap img{width: 100%;}
+.vision_wrap img{width: 100%;max-width: 1200px;}
+.vision_wrap{padding: 0 8rem;}
+/****** summary ******/
+.summary_wrap{margin-bottom: 9rem;padding: 4rem 0;display: flex;justify-content: center;}
+.summary_wrap .inner{padding: 0 8rem;display: flex;align-items: center;justify-content: space-around;}
+.summary_wrap .inner .ask{padding: 0 2rem;line-height: 2.2rem;font-size: 1.2rem;max-width: 616px;text-align:justify;padding-left: 0;}
+.summary_wrap .inner .ask h1{font-weight: 900;}
+.summary_wrap .inner .img{width: 45%;position: relative;top: 2rem;max-width: 504px;}
+.summary_wrap .inner .img img{width: 100%;border-top-right-radius: 30px;border-bottom-left-radius: 30px;}
 
 /****** oraniztion ******/
 .oraniztion_tit{font-size: 2.2rem !important;color: #454444;font-weight: 700;}
