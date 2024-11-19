@@ -43,7 +43,7 @@ const History = () => {
 
       <div className='hitory_wrap'>
         <p className='title'>
-          대한청년을 세계로
+          (사)대한청년을세계로
           <span>2023 ~ 2024</span>
         </p>
         <ol className='list' data-active-block={currentBlock}>

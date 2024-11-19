@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Img from '../images/pro.png';
+import Img from '../images/img_sec1_1.png';
 import Img2 from '../images/icon_sec1_2.png'
 
 import Img3 from '../images/001.jpg';
@@ -136,7 +136,7 @@ const Main = () => {
   return (
     <div className='main'>
       <video
-        src="/media/videos/logoVDO.mov"
+        src="/media/videos/1119.mov"
         autoPlay
         loop
         muted
@@ -166,7 +166,7 @@ const Main = () => {
                 <img src={Img} alt="" />
               </div>
               <div className='about-text'>
-                <h2>(사)대한청년을세계로”는</h2>
+                <h2>"(사)대한청년을세계로”는</h2>
                 <p className='h6'>다가오는 미래 시대를 대비하여 청년들의 인지 격차를 해소하고, 역량 있는 글로벌 인재로 성장할 수 있도록 지원하는 단체입니다. </p>
               </div>
             </div>
@@ -309,8 +309,9 @@ const Main = () => {
         className={`section visual4 motion ${isVisible[3] ? 'action' : ''}`}
         >
           <div className='title'>
-            <p>숫자로 보는 대한청년을세계로</p>
-            <span>미담장학회는 13개 대학교의 학생들이 활동하는 전국 8개의 기초·광역자치단체에서 청소년들에게 교육 기회를 나누어 주고 꿈을 꿀 수 있도록 도와주고 있습니다. <br />연간 평균 400여명의 대학생들이 4,000여명의 청소년들을 대상으로 교육기부를 진행하고 있습니다.</span>
+            <p>미래를 보는 대한청년을세계로</p>
+            <span>저희는 급변하는 시대에 맞춰 대한민국 청년들이 가지는 인식의 간극을 좁히기 위해 누구보다 발빠르게 움직이고 있습니다.<br />현재 AI로 제작한 웹사이트를 포럼 초대장 형식으로 만들어 배포중에 있습니다.</span><br></br>
+            <p className='fs-5 fw-normal mt-2'><a href="https://www.daecheongse.co.kr">https://www.daecheongse.co.kr</a></p>
           </div>
           <div className='wrap'>
             <ul>
