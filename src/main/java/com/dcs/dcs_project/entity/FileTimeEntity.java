@@ -16,5 +16,5 @@ import lombok.Getter;
 public class FileTimeEntity {
     @CreationTimestamp
     @Column(name = "upload_date", updatable = false)  
-    private LocalDateTime uploadTime;
+    private LocalDateTime uploadDate;
 }

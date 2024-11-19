@@ -35,21 +35,6 @@ public class FileEntity extends FileTimeEntity{
     @Column(name = "count")
     private int count;
 
-    
-    public static FileDto toFileDto(FileEntity fEntity){
-        FileDto fDto = new FileDto();
-
-        fDto.setId(fEntity.getId());
-        fDto.setDcsBoardId(fEntity.getDcsBoardId());
-        fDto.setFilePath(fEntity.getFilePath());
-        fDto.setFileName(fEntity.getFileName());
-        fDto.setFileSize(fEntity.getFileSize());
-        fDto.setCount(fEntity.getCount());
-        fDto.setUploadDate(fEntity.getUploadTime());
-
-
-        return fDto;
-    }
 
     public static FileEntity toFileEntity(FileDto fDto){
         

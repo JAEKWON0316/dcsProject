@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { format } from 'date-fns';
 import Img from '../images/sub_visual6.jpg';
 import { FcOpenedFolder } from "react-icons/fc";
 
@@ -65,6 +66,7 @@ const Content = () => {
 
         // 파일 데이터 가져오기
         const fileResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${id}`);
+        console.log(fileResponse.data); // 응답 데이터 확인
         setFiles(fileResponse.data);
 
       } catch (err) {
@@ -102,18 +104,24 @@ const Content = () => {
       console.error('파일 다운로드 중 오류 발생:', err);
     }
   };
+
+
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}.${month}.${day}`;
+    if (!dateString) return '';
+    
+    try {
+      const date = new Date(dateString); // Safari와 호환되는 날짜 객체 생성
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}.${month}.${day}`;
+    } catch (err) {
+      console.error("Invalid date format:", dateString);
+      return 'Invalid Date'; // 오류 처리
+    }
   };
 
-  if (loading) return   
-                      <div className="spinner-border" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </div>;
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -166,7 +174,9 @@ const Content = () => {
                       <span>{file.fileName}</span></a> <span>({file.fileSize})</span>
                     <br/>
                     <span> 다운로드 횟수: {file.count}</span>
-                    <span> DATE: {formatDate(file.uploadDate)}</span>
+                    {console.log(formatDate(file.uploadTime))}
+                    <span> DATE:{formatDate(file.uploadTime)}
+                    </span>
                   </li>
                 ))}
               </ul>
