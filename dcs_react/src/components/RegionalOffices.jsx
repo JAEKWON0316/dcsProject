@@ -1,5 +1,5 @@
 import React from 'react'
-import Img from '../images/composition3.png'
+import Img from '../images/pro.png'
 
 const RegionalOffices = () => {
   return (

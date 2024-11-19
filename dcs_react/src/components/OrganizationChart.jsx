@@ -1,5 +1,5 @@
 import React from 'react'
-import Img from '../images/intro4.png'
+import Img from '../images/pro.png'
 import Img2 from '../images/organic.png'
 
 const OrganizationChart = () => {

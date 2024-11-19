@@ -1,5 +1,5 @@
 import React from 'react'
-import Img from '../images/spon.png';
+import Img from '../images/pro.png';
 
 const SponsorAppli = () => {
   return (

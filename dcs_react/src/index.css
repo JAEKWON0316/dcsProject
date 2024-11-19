@@ -283,6 +283,7 @@ a{
 .greeting_wrap .img_bottom p:nth-child(2){margin-bottom: .3rem;}
 .greeting_wrap .img_bottom p:nth-child(2),
 .greeting_wrap .img_bottom p:nth-child(3){letter-spacing: .1rem;}
+.greeting_wrap .img_bottom p:nth-child(3){margin-left: 1.1rem;}
 .greeting_wrap .ask p:nth-child(6),
 .greeting_wrap .ask p:nth-child(7),
 .greeting_wrap .ask p:nth-child(15),

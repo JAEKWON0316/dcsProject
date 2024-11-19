@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import proImg from '../images/pro.png';
-import proImg2 from '../images/pro2.png';
-import proImg3 from '../images/pro3.png';
-import proImg4 from '../images/pro4.png';
-import proImg5 from '../images/pro5.png';
-import gallImag from '../images/gall.png';
-import gallImag2 from '../images/gall2.png';
-import notImg from '../images/not.png';
-import notImg2 from '../images/not2.png';
-import { format,  parse } from 'date-fns';
 import { useParams } from 'react-router-dom';  
 import { FcOpenedFolder } from "react-icons/fc";
 
@@ -147,15 +138,15 @@ const Notice = () => {
             <span className='img'>
               <img 
                 src={
-                  role === '1' ? notImg : 
-                  role === '2' ? notImg2 : 
-                  role === '3' ? gallImag : 
-                  role === '4' ? gallImag2 : 
+                  role === '1' ? proImg : 
+                  role === '2' ? proImg : 
+                  role === '3' ? proImg : 
+                  role === '4' ? proImg : 
                   role === '5' ? proImg : 
-                  role === '6' ? proImg2 : 
-                  role === '7' ? proImg3 : 
-                  role === '8' ? proImg4 : 
-                  role === '9' ? proImg5 : 
+                  role === '6' ? proImg : 
+                  role === '7' ? proImg : 
+                  role === '8' ? proImg : 
+                  role === '9' ? proImg : 
                   '../images/default_visual.jpg' // 기본 이미지
                 }   
                 alt='' 

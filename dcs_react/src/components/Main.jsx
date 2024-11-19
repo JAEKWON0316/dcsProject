@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Img from '../images/img_sec1_1.png';
+import Img from '../images/pro.png';
 import Img2 from '../images/icon_sec1_2.png'
 
 import Img3 from '../images/001.jpg';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Img from '../images/intro3.png';
+import Img from '../images/pro.png';
 
 const History = () => {
   const History = [

@@ -1,5 +1,5 @@
 import React from 'react'
-import Img from '../images/composition.png'
+import Img from '../images/pro.png'
 const BoardMembers = () => {
   return (
     <div className='main_wrap'>

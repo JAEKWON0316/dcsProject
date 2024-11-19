@@ -1,5 +1,5 @@
 import React from 'react'
-import Img from '../images/intro.png';
+import Img from '../images/pro.png';
 import Img2 from '../images/sign01.png';
 import Img3 from '../images/mk01.jpg';
 
@@ -39,8 +39,7 @@ const Greeting = () => {
             <p>(사)대한청년을세계로는 기술과 청년, 그리고 세계를 연결하며, 대한민국이 글로벌 혁신의 중심에서 빛날 수 있도록 최선을 다하겠습니다. 앞으로도 많은 관심과 응원을 부탁드립니다.</p>
 
             <p>감사합니다.</p>
-            <p>정민기</p>
-            <p>(사)대한청년을세계로 이사장</p>
+            <p>(사)대한청년을세계로 이사장</p> <img src={Img2} alt="서명" style={{width:200, height: 100}} />
 <br />
             <p>Hello.This is Jung Min-Ki, Chairperson of The Korea Youth to the World Foundation.</p>
 
@@ -54,8 +53,7 @@ const Greeting = () => {
 
             <p>Thank you.</p>
             <p>Jung Min-Ki</p>
-            <p>Chairperson, The Korea Youth to the World Foundation</p>
-            <img src={Img2} alt="서명" style={{width:200, height: 100}} />
+            <p>Chairman, The Korea Youth to the World Foundation</p>
           </div>
         </div>
       </div>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { format } from 'date-fns';
-import Img from '../images/sub_visual6.jpg';
+import Img from '../images/pro.png';
 import { FcOpenedFolder } from "react-icons/fc";
 
 import { Button } from 'react-bootstrap';
