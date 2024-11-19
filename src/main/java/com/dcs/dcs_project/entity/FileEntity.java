@@ -1,7 +1,5 @@
 package com.dcs.dcs_project.entity;
 
-import java.time.LocalDateTime;
-
 import com.dcs.dcs_project.dto.FileDto;
 
 import jakarta.persistence.Column;
@@ -17,7 +15,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "dcs_file")
-public class FileEntity {
+public class FileEntity extends FileTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,8 +35,21 @@ public class FileEntity {
     @Column(name = "count")
     private int count;
 
-    @Column(name = "upload_date")
-    private LocalDateTime uploadDate;
+    
+    public static FileDto toFileDto(FileEntity fEntity){
+        FileDto fDto = new FileDto();
+
+        fDto.setId(fEntity.getId());
+        fDto.setDcsBoardId(fEntity.getDcsBoardId());
+        fDto.setFilePath(fEntity.getFilePath());
+        fDto.setFileName(fEntity.getFileName());
+        fDto.setFileSize(fEntity.getFileSize());
+        fDto.setCount(fEntity.getCount());
+        fDto.setUploadDate(fEntity.getUploadTime());
+
+
+        return fDto;
+    }
 
     public static FileEntity toFileEntity(FileDto fDto){
         
@@ -50,9 +61,7 @@ public class FileEntity {
         fEntity.setFileName(fDto.getFileName());
         fEntity.setFileSize(fDto.getFileSize());
         fEntity.setCount(0);
-        fEntity.setUploadDate(fDto.getUploadDate());
-
-        
+      
         return fEntity;
 
     }

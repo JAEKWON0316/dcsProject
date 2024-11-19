@@ -102,8 +102,18 @@ const Content = () => {
       console.error('파일 다운로드 중 오류 발생:', err);
     }
   };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return   
+                      <div className="spinner-border" role="status">
+                      <span className="sr-only">Loading...</span>
+                    </div>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -156,7 +166,7 @@ const Content = () => {
                       <span>{file.fileName}</span></a> <span>({file.fileSize})</span>
                     <br/>
                     <span> 다운로드 횟수: {file.count}</span>
-                    <span> DATE:{file.uploadDate}</span>
+                    <span> DATE: {formatDate(file.uploadDate)}</span>
                   </li>
                 ))}
               </ul>
