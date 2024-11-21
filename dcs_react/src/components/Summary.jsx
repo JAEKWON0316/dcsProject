@@ -2,6 +2,7 @@ import React from 'react'
 import Img from '../images/pro.png';
 import Img2 from '../images/vision.png'
 import Img3 from '../images/intro_logo01.jpg'
+import Img4 from '../images/visions.png'
 
 const Summary = () => {
   return (
@@ -28,7 +29,7 @@ const Summary = () => {
         </div>
       </div>
       <div className='vision_wrap'>
-        <img src={Img2} alt="목표와 경영비전" />
+        <img src={Img4} alt="목표와 경영비전" />
       </div>
     </div>
   )
