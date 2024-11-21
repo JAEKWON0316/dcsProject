@@ -7,26 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    /* 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-        
-        String os = System.getProperty("os.name").toLowerCase();
-        String uploadPath;
-
-        if (os.contains("win")) {
-            uploadPath = "file:///C:/dcsDB/";
-        } else if (os.contains("mac")) {
-            uploadPath = "file:///Users/an-yeseon//dcsDB/";
-        } else {
-            uploadPath = "file:///home/YourUsername/dcsDB/";
-        }
-        
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations(uploadPath);
-    }
-        */
+  
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**") // API 경로를 설정
