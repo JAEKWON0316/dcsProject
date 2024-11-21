@@ -36,6 +36,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("mysql:mysql-connector-java:8.0.32")
     implementation("io.github.cdimascio:dotenv-java:3.0.2")
+    implementation("com.google.firebase:firebase-admin:9.1.1")
 }
 
 tasks.withType<Test> {

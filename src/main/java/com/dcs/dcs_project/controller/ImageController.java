@@ -1,6 +1,7 @@
 package com.dcs.dcs_project.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +22,15 @@ public class ImageController {
     private final ImageService iService;
 
     @GetMapping("/board/{dcsBoardId}")
-    public ResponseEntity<List<ImageEntity>> getImagesByBoardId(@PathVariable Long dcsBoardId) {
-        List<ImageEntity> images = iService.getImagesByBoardId(dcsBoardId);  // dcsBoardId로 이미지 조회
-        return ResponseEntity.ok(images);
+    public ResponseEntity<List<String>> getImagesByBoardId(@PathVariable Long dcsBoardId) {
+        // dcsBoardId에 해당하는 이미지 리스트 조회
+        List<ImageEntity> images = iService.getImagesByBoardId(dcsBoardId);
+
+        // 각 이미지의 URL을 변환하여 반환
+        List<String> imageUrls = images.stream()
+            .map(image -> iService.convertToPublicUrl(image.getImageUrl())) // 이미지 URL 변환
+            .collect(Collectors.toList());
+
+        return ResponseEntity.ok(imageUrls);
     }
 }

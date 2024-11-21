@@ -309,8 +309,8 @@ const Main = () => {
         className={`section visual4 motion ${isVisible[3] ? 'action' : ''}`}
         >
           <div className='title'>
-            <p>미래를 보는 대한청년을세계로</p>
-            <span>저희는 급변하는 시대에 맞춰 대한민국 청년들이 가지는 인식의 간극을 좁히기 위해 누구보다 발빠르게 움직이고 있습니다.<br />현재 AI로 제작한 웹사이트를 포럼 초대장 형식으로 만들어 배포중에 있습니다.</span><br></br>
+            <p>미래전략포럼 (Future Strategy Forum)</p>
+            <span>우리는 급변하는 시대, 청년들의 인식 격차를 해소하고 미래를 함께 준비하기 위해 미래전략포럼을 개최합니다.</span><br />
             <p className='fs-5 fw-normal mt-2'><a href="https://www.daecheongse.co.kr">https://www.daecheongse.co.kr</a></p>
           </div>
           <div className='wrap'>
