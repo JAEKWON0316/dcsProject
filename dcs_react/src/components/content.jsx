@@ -196,7 +196,7 @@ const Content = () => {
                 <div>
                 <img
                   key={image.id}
-                  src={`https://dcs-site-5dccc5b2f0e4.herokuapp.com/uploads/${image.imageUrl}`}
+                  src={`${image.imageUrl}`}
                   alt="게시글 이미지"
                 />
                 </div>
