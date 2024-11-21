@@ -2,15 +2,16 @@ package com.dcs.dcs_project.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+    /* 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        /*
+        
         String os = System.getProperty("os.name").toLowerCase();
         String uploadPath;
 
@@ -25,8 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations(uploadPath);
     }
- */
-
+        */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**") // API 경로를 설정
@@ -36,5 +36,4 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowCredentials(true); // 자격 증명 허용
     }
 
-    
 }
