@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        /*
         String os = System.getProperty("os.name").toLowerCase();
         String uploadPath;
 
@@ -19,11 +21,11 @@ public class WebConfig implements WebMvcConfigurer {
         } else {
             uploadPath = "file:///home/YourUsername/dcsDB/";
         }
-
+        
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations(uploadPath);
     }
-
+ */
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
