@@ -79,7 +79,7 @@ a{
 }
 
 /****** main ******/
-.main_wrap{position: relative !important;width: 140rem;padding-bottom: 2rem;max-width: calc(100% - 4rem);margin-right: auto;margin-left: auto;position: relative;}
+.main_wrap{position: relative !important;width: 140rem;padding-bottom: 2rem;max-width: 101rem;margin-right: auto;margin-left: auto;position: relative;}
 .main .section{padding: 5.6rem 0 5rem;}
 .main .section.visual2{padding: 5.6rem 0 0rem;padding-top: 0;}
 .main .visual1{width: 100%;display: flex;align-items: center;justify-content: space-between;}
