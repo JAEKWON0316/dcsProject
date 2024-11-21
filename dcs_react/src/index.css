@@ -79,7 +79,8 @@ a{
 }
 
 /****** main ******/
-.main_wrap{position: relative !important;width: 140rem;padding-bottom: 2rem;max-width: 101rem;margin-right: auto;margin-left: auto;position: relative;}
+.main .main_wrap{max-width: 101rem;min-width: 1400px;}
+.main_wrap{position: relative !important;padding-bottom: 2rem;max-width: calc(100% - 4rem);margin-right: auto;margin-left: auto;position: relative;}
 .main .section{padding: 5.6rem 0 5rem;}
 .main .section.visual2{padding: 5.6rem 0 0rem;padding-top: 0;}
 .main .visual1{width: 100%;display: flex;align-items: center;justify-content: space-between;}
@@ -275,7 +276,7 @@ a{
 }
 
 /****** greeting ******/
-.greeting_wrap{padding: 0 8rem;}
+.greeting_wrap{padding: 0 8rem;margin: 0 auto;max-width: 101rem;}
 .greeting_wrap .greeting_title{display: flex;align-items: center;justify-content: space-between;font-size: 2.7rem !important;font-weight: 700;color: #454444;}
 .greeting_wrap .img_top img{width: 24rem;}
 .greeting_wrap .img_bottom{margin-top: 1.5rem;}
@@ -283,7 +284,6 @@ a{
 .greeting_wrap .img_bottom p:nth-child(2){margin-bottom: .3rem;}
 .greeting_wrap .img_bottom p:nth-child(2),
 .greeting_wrap .img_bottom p:nth-child(3){letter-spacing: .1rem;}
-.greeting_wrap .img_bottom p:nth-child(3){margin-left: 1.1rem;}
 .greeting_wrap .ask p:nth-child(6),
 .greeting_wrap .ask p:nth-child(7),
 .greeting_wrap .ask p:nth-child(15),
@@ -292,10 +292,28 @@ a{
 .greeting_wrap .ask p{font-size: 1.2rem;color: #454444;}
 .greeting_wrap .ask p + p{margin-bottom: 1.5rem;line-height: 2rem;}
 .tit{font-weight: 700;}
-.flex{display: flex;}
+.flex{display: flex;justify-content: center;}
 /****** vision ******/
 .vision_wrap img{width: 100%;max-width: 1200px;}
-.vision_wrap{padding: 0 8rem;}
+.vision_wrap{padding: 0 8rem;max-width: 1400px;margin: 0 auto;}
+
+.vision_wrap .ask {font-size: 1.2rem;color: #454444;}
+.table_wrap{padding: 0 3rem;}
+.table_wrap h4{text-align: left;width: 100%;max-width: 55rem;font-weight: 900;font-size: 1.9rem;}
+.table{display: flex;flex-direction: column;align-items: center;padding: 5rem 0;}
+.table caption:nth-child(1){position: absolute;top: 0;left: 0;overflow: hidden;line-height: 0;}
+.table table{width: 55rem;width: 100%;max-width: 55rem;}
+.table thead td{color: #fff;background: #000080;font-weight: 700;text-align: center;font-size: 1.2rem;padding: 1rem 0;}
+.table tbody td{padding: 1rem 0;font-size: 1.1rem;font-weight: 600;text-align: center;}
+table {
+  border-collapse: separate; /* 간격을 적용하려면 separate 설정 */
+  border-spacing: 0 10px; /* 행 간격은 수직(두 번째 값), 열 간격은 수평(첫 번째 값) */
+  width: 100%; /* 테이블 너비 */
+}
+.table table, th, td {
+  border: 1px solid #eeeded;
+  border-collapse: collapse;
+}
 /****** summary ******/
 .summary_wrap{margin-bottom: 9rem;padding: 4rem 0;display: flex;justify-content: center;}
 .summary_wrap .inner{padding: 0 8rem;display: flex;align-items: center;justify-content: space-around;}
