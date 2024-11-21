@@ -22,10 +22,10 @@ AI 혁신위원회는 각 산업 분야에서 활동하는 청년들에게 AI �
         </div>
         <div className='table_wrap'>
           <div className='table'>
-          <h4>근로자 위원</h4>
+          <h4>지부</h4>
           <table>
             <caption>
-              <p>근로위원회</p>
+              <p>지부</p>
               성명, 소속 및 직책을 포함합니다.
             </caption>
             <colgroup>

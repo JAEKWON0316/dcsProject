@@ -22,10 +22,10 @@ const Vision = () => {
       </div>
       <div className='table_wrap'>
         <div className='table'>
-        <h4>근로자 위원</h4>
+        <h4>위원회</h4>
           <table>
             <caption>
-              <p>근로위원회</p>
+              <p>위원회</p>
               성명, 소속 및 직책을 포함합니다.
             </caption>
             <colgroup>
