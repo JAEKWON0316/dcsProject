@@ -16,7 +16,7 @@ public class FirebaseConfig {
             .setCredentials(GoogleCredentials.fromStream(
                 new ByteArrayInputStream(firebaseConfig.getBytes())
             ))
-            .setStorageBucket("dcsdb-1df4b.appspot.com")
+            .setStorageBucket("dcsdb-1df4b.firebasestorage.app")
             .build();
         FirebaseApp.initializeApp(options);
     }
