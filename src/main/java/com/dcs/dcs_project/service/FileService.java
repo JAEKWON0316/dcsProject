@@ -52,5 +52,18 @@ public class FileService {
       return fileRepository.existsByDcsBoardId(dcsBoardId);
   }
 
+  public String convertToPublicfUrl(String gsPath) {
+    // 예: gs://dcsdb-1df4b.firebasestorage.app/sponsor08.png
+    if (gsPath.startsWith("gs://")) {
+        String bucketName = "dcsdb-1df4b.firebasestorage.app"; // Firebase Storage 버킷 이름
+        String filePath = gsPath.substring(gsPath.indexOf('/', 5) + 1); // gs:// 이후 경로 추출
+        String encodedPath = filePath.replace("/", "%2F"); // URL-인코딩
+        return String.format("https://firebasestorage.googleapis.com/v0/b/%s/o/%s?alt=media",
+                bucketName,
+                encodedPath);
+    }
+    return gsPath; // 이미 HTTP(S) URL이면 그대로 반환
+}
+
 
 }
