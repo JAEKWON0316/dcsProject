@@ -170,7 +170,7 @@ const Content = () => {
               <ul>
                 {files.map((file) => (
                   <li key={file.id}>
-                    <a  href={`https://dcs-site-5dccc5b2f0e4.herokuapp.com/uploads/${file.filePath}`}
+                    <a  href={`${file.filePath}`}
                         onClick={(e) => {
                           e.preventDefault();  // 기본 링크 동작 방지 (자동 다운로드 방지)
                         handleFileDownload(file); // 파일 다운로드 함수 호출

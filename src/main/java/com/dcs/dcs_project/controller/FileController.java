@@ -25,19 +25,23 @@ public class FileController {
     private FileService fileService;
 
       // 다운로드 횟수 증가 처리
-      @CrossOrigin(origins = "http://localhost:3000")  // 특정 Origin만 허용
+      @CrossOrigin(origins = "http://www.daecheongse.com")  // 특정 Origin만 허용
       @PostMapping("/board/{fileId}")
         public ResponseEntity<?> incrementCount(@PathVariable Long fileId) {
             FileEntity updatedFile = fileService.incrementCount(fileId);  // 카운트 증가 서비스 호출
             return ResponseEntity.ok(updatedFile);  // 업데이트된 파일 반환
         }
     
-    @GetMapping("/board/{dcsBoardId}")
-    public ResponseEntity<List<FileEntity>> getFilesByBoardId(@PathVariable Long dcsBoardId) {
-
-        List<FileEntity> files = fileService.getFilesByBoardId(dcsBoardId); 
-        return ResponseEntity.ok(files);
-    }
+        @GetMapping("/board/{dcsBoardId}")
+        public ResponseEntity<List<FileEntity>> getFilesByBoardId(@PathVariable Long dcsBoardId) {
+            // dcsBoardId로 파일 조회
+            List<FileEntity> files = fileService.getFilesByBoardId(dcsBoardId);
+        
+            // 각 파일의 URL을 Firebase Public URL로 변환
+            files.forEach(file -> file.setFilePath(fileService.convertToPublicUrl(file.getFilePath())));
+        
+            return ResponseEntity.ok(files);
+        }
 
       // 파일 존재 여부 확인
       @GetMapping("/board/{dcsBoardId}/hasFile")
