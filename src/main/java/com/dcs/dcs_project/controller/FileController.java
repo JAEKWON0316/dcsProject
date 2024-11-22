@@ -38,7 +38,7 @@ public class FileController {
             List<FileEntity> files = fileService.getFilesByBoardId(dcsBoardId);
         
             // 각 파일의 URL을 Firebase Public URL로 변환
-            files.forEach(file -> file.setFilePath(fileService.convertToPublicUrl(file.getFilePath())));
+            files.forEach(file -> file.setFilePath(fileService.convertToPublicfUrl(file.getFilePath())));
         
             return ResponseEntity.ok(files);
         }
