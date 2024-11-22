@@ -90,7 +90,7 @@ const Content = () => {
         setFiles(prevFiles => prevFiles.map(f => (f.id === updatedFile.id ? updatedFile : f)));
         
         // 파일 다운로드
-        const downloadLink = `https://dcs-site-5dccc5b2f0e4.herokuapp.com/uploads/${file.filePath}`;
+        const downloadLink = `${file.filePath}`;
         const link = document.createElement('a');
         link.href = downloadLink;
         link.download = file.fileName;  // 파일 이름을 다운로드로 설정
