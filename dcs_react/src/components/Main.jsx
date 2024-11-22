@@ -366,7 +366,7 @@ const Main = () => {
                   480: {
                     slidesPerView: 2,
                   },
-                  320: { slidesPerView: 2 },
+                  320: { slidesPerView: 1 },
                 }}
               >
               <SwiperSlide className="swiper-slide">

@@ -224,6 +224,11 @@ a{
   .main .map-section{padding: 0 1rem;}
   .map-section p {font-size: 1.5rem !important;}
   .road_underline {width: 135px !important;}
+  .footer .f-top .t-top-l {font-size: 1rem;}
+  .footer .f-top .t-top-r {font-size: 1.1rem;}
+  .f-bottom p,.f-bottom span{font-size: .8rem;}
+  .footer .f-bottom span:not(:nth-child(3))::before {right: .9rem;top: 1px;}
+  .footer .copyright {padding: 1rem 0 0 0;}
 }
 @media (max-width: 1024px) {
   .main .main_wrap{min-width: 100%;}
