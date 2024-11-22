@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Img from '../images/img_sec1_1.png';
-import Img2 from '../images/icon_sec1_2.png'
+import Img from '../images/intro_logo01.jpg';
 
 import Img3 from '../images/001.jpg';
 import Img4 from '../images/002.jpg';
@@ -11,6 +10,10 @@ import Img6 from '../images/004.jpg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { RiSingleQuotesL } from "react-icons/ri";
+import { RiSingleQuotesR } from "react-icons/ri";
+import { SiComma } from "react-icons/si";
+import { HiCube } from "react-icons/hi";
 
 
 const KakaoMap = () => {
@@ -157,7 +160,7 @@ const Main = () => {
           <div className='visual1'>
             <div className='about-l'>
               <h1>
-                <span className='blue'>급변하는</span> 기술혁신,<br />
+                <span className='blue'>급변하는</span> 기술혁신<SiComma  className='comma'/><br />
                 <span className='blue'>뒤처지는</span> 인식의 간극
               </h1>
             </div>
@@ -166,7 +169,11 @@ const Main = () => {
                 <img src={Img} alt="" />
               </div>
               <div className='about-text'>
-                <h2>"(사)대한청년을세계로”는</h2>
+                <h2>
+                <RiSingleQuotesL className='quotes'/>
+                  (사)대한청년을세계로
+                <RiSingleQuotesR className='quotes'/>
+                  는</h2>
                 <p className='h6'>다가오는 미래 시대를 대비하여 청년들의 인지 격차를 해소하고, 역량 있는 글로벌 인재로 성장할 수 있도록 지원하는 단체입니다. </p>
               </div>
             </div>
@@ -183,7 +190,7 @@ const Main = () => {
                 <Link to={nav.path}>
                   <div className='item'>
                     <div className='icon'>
-                      <img src={Img2} alt="" />
+                    <HiCube className='icon-img'/>
                     </div>
                     <div className='desc'>
                       <strong>
@@ -339,12 +346,22 @@ const Main = () => {
           <div className="footbanner">
               <Swiper
                 className="swiper-container"
-                modules={[Autoplay, Pagination, Navigation]}  // 플러그인을 모듈로 추가
-                slidesPerView={5}
+                modules={[Autoplay, Pagination, Navigation]}  
+                slidesPerView={5} 
                 loop={true}
-                autoplay={{ delay: 2000 }}  // Autoplay 딜레이 설정
-                
-                navigation={true}  // Navigation 활성화
+                autoplay={{ delay: 2000 }} 
+                navigation={true} 
+                breakpoints={{
+                  1024: { 
+                    slidesPerView: 4, 
+                  },
+                  768: { 
+                    slidesPerView: 3, 
+                  },
+                  480: {
+                    slidesPerView: 2,
+                  },
+                }}
               >
               <SwiperSlide className="swiper-slide">
                 <Link to="">

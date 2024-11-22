@@ -1,6 +1,6 @@
 import React from 'react'
 import Img from '../images/pro.png'
-import Img2 from '../images/organic.png'
+import Img2 from '../images/organics.png'
 
 const OrganizationChart = () => {
   return (
@@ -9,7 +9,7 @@ const OrganizationChart = () => {
         <div className='visual'>
           <strong className='title'>조직도</strong>
           <span className='img'>
-              <img src={Img}/>
+              <img src={Img} alt=''/>
           </span>
         </div>
       </div>
