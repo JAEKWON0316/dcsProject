@@ -1,8 +1,7 @@
 import React from 'react'
 import Img from '../images/pro.png';
-import Img2 from '../images/vision.png'
 import Img3 from '../images/intro_logo01.jpg'
-import Img4 from '../images/visions.png'
+import Img4 from '../images/vision.png'
 
 const Summary = () => {
   return (
