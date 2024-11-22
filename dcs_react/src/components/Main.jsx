@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+
 import Img from '../images/intro_logo01.jpg';
 
 import Img3 from '../images/001.jpg';
@@ -262,7 +267,7 @@ const Main = () => {
                   <div
                     className={`swiper pop_slide ${currentIndex === index ? 'active' : 'inactive'}`}
                     style={{
-                      backgroundImage: `url(${image.url})`,  // image.url로 경로 참조
+                      backgroundImage: `url(${image.url})`,  
                       opacity: currentIndex === index ? 1 : 0,
                       transition: 'opacity 1s ease-in-out',
                       width: '100%',
@@ -361,6 +366,7 @@ const Main = () => {
                   480: {
                     slidesPerView: 2,
                   },
+                  320: { slidesPerView: 1 },
                 }}
               >
               <SwiperSlide className="swiper-slide">
