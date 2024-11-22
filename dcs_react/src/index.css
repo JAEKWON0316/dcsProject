@@ -191,24 +191,45 @@ a{
   .header .logo img {width: 166px;}
   .header .headerbtn{font-size: 3rem;}
 
+  .main .main_wrap {padding: 0 .3rem;}
   .main_wrap .about-l h1{font-size: 2rem !important;}
   .main .comma {font-size: .9rem;top: 8px;}
   .main .visual1 img {width: 4.5rem;height: 4.5rem;transform: scale(1.2);}
   .main .visual1 .about-text h2 {font-size: 1rem;}
   .main .visual1 .about-text p {font-size: .9rem;margin-top: 0.5rem;font-weight: 500;}
-  .main .visual2 li {width: calc(60% - 2.8rem) !important;margin: 0;}
+  .main .visual2 li {width: calc(60% - 2.8rem) !important;margin: 0;max-width: calc(57% - 2.8rem);}
   .main .visual2 .icon .icon-img {font-size: 3rem;}
   .main .visual2 .icon {width: 3.6rem;height: 3.6rem;}
   .main .visual2 .item {flex-direction: column;gap: .7rem;padding:1.1rem;}
   .main .visual2 .desc {padding-left: 0; text-align: center;}
   .main .visual2 .desc strong {font-size: 1rem;}
   .main .visual2 .desc p {line-height: 1rem;font-size: 0.8rem;}
+  .main .section.visual3 .noitce {padding: 1rem 1rem;}
+  .main .section.visual3 .noitce .visual3m {font-size: 1.4rem;margin-bottom: 0.7rem;}
+  .main .section.visual3 .noitce em {top: 3px;font-size: .8rem;padding: .3rem 1rem;}
+  .main .section.visual3 .noitce strong {font-size: 0.9rem;}
+  .main .section.visual3 .noitce .ul li {padding: 0 0rem 0.2rem 3.5rem;line-height: 1.4;}
+  .main .section.visual3 .visual3m {font-size: 1.4rem;}
+  .main .section.visual3 .actives {padding: 1rem;}
+  .activecomment {background: #040860;padding: .8rem;font-size: 0.9rem;}
+  .main .section.visual4 .title p {font-size: 1.3rem;}
+  .main .section.visual4 .title span {font-size: 1rem;}
+  .main .section.visual4 .title .fw-normal a {font-size: 1rem;}
+  .main .section.visual4 .wrap-menu a {font-size: 1rem;line-height: 1.2rem;}
+  .main .section.visual4 .wrap ul {display: flex;align-items: center;justify-content: center;flex-direction: column;gap: 0.7rem;}
+  .main .section.visual4 .wrap-menu {width: 100%;height: auto;max-width: 500px;}
+  .main .section.visual4 .wrap-title{font-size: 1.5rem;}
+  .main .section.visual4 .wrap-menu span {height: 0;}
+  .main .section.visual4 {padding: 0rem 1rem 0rem;}
+  .main .map-section{padding: 0 1rem;}
+  .map-section p {font-size: 1.5rem !important;}
+  .road_underline {width: 135px !important;}
 }
 @media (max-width: 1024px) {
   .main .main_wrap{min-width: 100%;}
   .main .visual1 {display: flex;flex-direction: column;gap: 2rem;}
   /* .main .visual1 .about-l h1{text-align: center;} */
-  .main .visual2 ul {flex-wrap: wrap !important;justify-content: space-between;}
+  .main .visual2 ul {flex-wrap: wrap !important;}
   .header .depth1 {line-height: 3rem;}
   .header .depth2 {left: -12rem;top: 2rem;width: 14rem;padding-right: 3rem;}
   .depth1.underline::after {bottom: -1.3rem;}
@@ -225,7 +246,7 @@ a{
   .header::before {transition: none;transition-delay: none;}
   header .depth1 {line-height: 0;font-weight: 700;padding-bottom:0;transition: color 0.3s ease;font-size: 18px;position: relative;display: block;}
   .hitory_wrap ol {padding: 0 9rem !important;}
-  .main .visual2 li {width: calc(53% - 2.8rem);margin-top: 1rem;}
+  .main .main_wrap .section.visual2 ul li {width: calc(53% - 2.8rem) !important;margin-top: 1rem;}
   .main .section.visual3{flex-direction: column;gap: 2rem;}
   .main .section.visual3 .noitce {width: 100%;}
   .main .section.visual3 .noitce ul li{padding: 0 1rem 1.2rem 5rem;text-align: left;}
