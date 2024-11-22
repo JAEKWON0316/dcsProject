@@ -346,12 +346,22 @@ const Main = () => {
           <div className="footbanner">
               <Swiper
                 className="swiper-container"
-                modules={[Autoplay, Pagination, Navigation]}  // 플러그인을 모듈로 추가
-                slidesPerView={5}
+                modules={[Autoplay, Pagination, Navigation]}  
+                slidesPerView={5} 
                 loop={true}
-                autoplay={{ delay: 2000 }}  // Autoplay 딜레이 설정
-                
-                navigation={true}  // Navigation 활성화
+                autoplay={{ delay: 2000 }} 
+                navigation={true} 
+                breakpoints={{
+                  1024: { 
+                    slidesPerView: 4, 
+                  },
+                  768: { 
+                    slidesPerView: 3, 
+                  },
+                  480: {
+                    slidesPerView: 2,
+                  },
+                }}
               >
               <SwiperSlide className="swiper-slide">
                 <Link to="">

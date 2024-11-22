@@ -182,6 +182,8 @@ a{
 }
 @media (max-width: 1024px) {
   .main .main_wrap{min-width: 100%;}
+  .main .visual1 {display: flex;flex-direction: column;gap: 2rem;}
+  /* .main .visual1 .about-l h1{text-align: center;} */
   .main .visual2 ul {flex-wrap: wrap !important;justify-content: space-between;}
   .header .depth1 {line-height: 3rem;}
   .header .depth2 {left: -12rem;top: 2rem;width: 14rem;padding-right: 3rem;}
@@ -212,9 +214,15 @@ a{
 }
 @media (max-width: 1024px) {
   .main .visual2 li {
-      width: calc(49% - 2.8rem) !important;
+      width: calc(53% - 2.8rem) !important;
       margin-top: 1rem;
   }
+  .main .section.visual3{flex-direction: column;gap: 2rem;}
+  .main .section.visual3 .noitce {width: 100%;}
+  .main .section.visual3 .noitce ul li{padding: 0 1rem 1.2rem 5rem;text-align: left;}
+  .main .section.visual3 .actives {width: 100%;}
+  .main .section.visual4 .wrap-menu {padding: 1.9rem 1.2rem;}
+  .wrapLink {margin-top: 6rem;}
   .main .visual2 ul li:hover {transform: translateY(-0.6rem);}
   .hitory_wrap ol {
     padding: 0 2rem !important;
