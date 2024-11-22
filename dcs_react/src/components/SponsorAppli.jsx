@@ -6,14 +6,14 @@ const SponsorAppli = () => {
     <div className='main_wrap'>
     <div className='intro'>
       <div className='visual'>
-        <strong className='title'>후원신청</strong>
+        <strong className='title'>문의하기</strong>
         <span className='img'>
             <img src={Img} alt="" />
         </span>
       </div>
     </div>
     <div className='sponseralli_wrap'>
-      후원신청
+      문의하기
     </div>
   </div>
   )

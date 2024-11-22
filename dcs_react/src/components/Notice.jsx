@@ -1,78 +1,105 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import proImg from '../images/pro.png';
-import { useParams } from 'react-router-dom';  
-import { FcOpenedFolder } from "react-icons/fc";
+import { useParams } from 'react-router-dom';
+import { FcOpenedFolder } from 'react-icons/fc';
 
 const Notice = () => {
-  const [boards, setBoards] = useState([]);  
-  const [currentPage, setCurrentPage] = useState(0);  
-  const [totalPages, setTotalPages] = useState(0);  
+  const [boards, setBoards] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [totalPosts, setTotalPosts] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchType, setSearchType] = useState('title');
   const [filesExistence, setFilesExistence] = useState({});
-  const [loading, setLoading] = useState(false);  // 로딩 상태 추가
-  const itemsPerPage = 20; 
-  const { role } = useParams();  
+  const [loadingBoards, setLoadingBoards] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const itemsPerPage = 20;
+  const { role } = useParams();
 
   useEffect(() => {
-    fetchBoards();  
+    fetchBoards();
   }, [role]);
 
   const fetchBoards = async () => {
-    setLoading(true);  // 로딩 시작
+    const cacheKey = `boards_role_${role}`;
+    const cachedData = localStorage.getItem(cacheKey);
+
+    if (cachedData) {
+      const { boards, totalPosts, totalPages, filesExistence } = JSON.parse(cachedData);
+      setBoards(boards);
+      setTotalPosts(totalPosts);
+      setTotalPages(totalPages);
+      setFilesExistence(filesExistence);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
     try {
       const response = await axios.get(
         `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}`,
         { withCredentials: true }
       );
+
       const sortedBoards = response.data
-        .sort((a, b) => b.id - a.id) 
+        .sort((a, b) => b.id - a.id)
         .map((item, index) => ({
           ...item,
-          displayNumber: response.data.length - index, 
+          displayNumber: response.data.length - index,
         }));
+
+      const fileStatus = await fetchFilesExistence(sortedBoards);
 
       setBoards(sortedBoards);
       setTotalPosts(response.data.length);
       setTotalPages(Math.ceil(response.data.length / itemsPerPage));
-      fetchFilesExistence(sortedBoards);
+      setFilesExistence(fileStatus);
+
+      // 캐싱 데이터 저장
+      localStorage.setItem(
+        cacheKey,
+        JSON.stringify({
+          boards: sortedBoards,
+          totalPosts: response.data.length,
+          totalPages: Math.ceil(response.data.length / itemsPerPage),
+          filesExistence: fileStatus,
+        })
+      );
     } catch (error) {
       console.error('Failed to fetch boards: ', error.response ? error.response.data : error.message);
       alert('게시판 데이터를 불러오는 데 실패했습니다.');
     } finally {
-      setLoading(false);  // 로딩 종료
+      setLoading(false);
     }
   };
 
   const fetchFilesExistence = async (boards) => {
-    const fileStatusPromises = boards.map(async (board) => {
-      try {
-        const response = await axios.get(
-          `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${board.id}/hasFile`,
-          { withCredentials: true }
-        );
-        return { [board.id]: response.data };
-      } catch (error) {
-        return { [board.id]: false };
-      }
-    });
-  
-    const results = await Promise.all(fileStatusPromises);
-    const fileStatus = Object.assign({}, ...results);
-    setFilesExistence(fileStatus);
+    try {
+      const results = await Promise.all(
+        boards.map((board) =>
+          axios
+            .get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${board.id}/hasFile`, {
+              withCredentials: true,
+            })
+            .then((response) => ({ [board.id]: response.data }))
+            .catch(() => ({ [board.id]: false }))
+        )
+      );
+      return Object.assign({}, ...results);
+    } catch (error) {
+      console.error('Failed to fetch file existence: ', error);
+      return {};
+    }
   };
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+  const handlePageChange = (page) => setCurrentPage(page);
 
   const handleSearch = async (e) => {
     e.preventDefault();
     const searchValue = e.target.searchvalue.value;
 
-    setLoading(true);  // 로딩 시작
+    setLoadingBoards(true);
     try {
       const response = await axios.get(
         `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}/search`,
@@ -83,126 +110,92 @@ const Notice = () => {
       );
 
       const boardsWithNumbers = response.data.map((board, index) => ({
-        ...board, 
+        ...board,
         displayNumber: response.data.length - index,
       }));
 
-      setBoards(boardsWithNumbers); 
-      setTotalPosts(response.data.length); 
-      setTotalPages(Math.ceil(response.data.length / itemsPerPage)); 
+      setBoards(boardsWithNumbers);
+      setTotalPosts(response.data.length);
+      setTotalPages(Math.ceil(response.data.length / itemsPerPage));
       setCurrentPage(0);
-      fetchFilesExistence(response.data);
-
+      await fetchFilesExistence(response.data);
     } catch (error) {
-      console.error("Failed to search: ", error.response ? error.response.data : error.message);
+      console.error('Failed to search:', error.response?.data || error.message);
       alert('검색 중 오류가 발생했습니다.');
     } finally {
-      setLoading(false);  // 로딩 종료
+      setLoadingBoards(false);
     }
   };
 
   const currentBoards = boards.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
-  /*
-  const formatDate = (dateStr) => {
-    const isoDate = new Date(dateStr).toISOString(); // ISO 형식으로 변환
-    const formattedDate = new Date(isoDate);
-    const isValidDate = !isNaN(formattedDate.getTime());
-    
-    if (isValidDate) {
-      return format(formattedDate, 'yyyy.MM.dd');
-    } else {
-      return '날짜 정보 없음';
-    }
-  }; */
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
+  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
+
 
   return (
-    
-      <div className='main_wrap'>
-        <div className='intro'>
-          <div className='visual'>
-            <strong className='title'>
-              {role === '1' && '공지사항'}
-              {role === '2' && 'Q & A'}
-              {role === '3' && '활동사진'}
-              {role === '4' && '언론보도'}
-              {role === '5' && '미래전략포럼'}
-              {role === '6' && 'AI혁신위원회'}
-              {role === '7' && '글로벌 네트워킹'}
-              {role === '8' && '지역 청년 네트워킹'}
-            </strong>
-            <span className='img'>
-              <img 
-                src={
-                  role === '1' ? proImg : 
-                  role === '2' ? proImg : 
-                  role === '3' ? proImg : 
-                  role === '4' ? proImg : 
-                  role === '5' ? proImg : 
-                  role === '6' ? proImg : 
-                  role === '7' ? proImg : 
-                  role === '8' ? proImg : 
-                  '../images/default_visual.jpg' // 기본 이미지
-                }   
-                alt='' 
-              />
-            </span>
-          </div>
+    <div className="main_wrap">
+      <div className="intro">
+        <div className="visual">
+          <strong className="title">
+            {role === '1' && '공지사항'}
+            {role === '2' && 'Q & A'}
+            {role === '3' && '활동사진'}
+            {role === '4' && '언론보도'}
+            {/* 나머지 조건 추가 */}
+          </strong>
+          <span className="img">
+            <img
+              src={role ? proImg : '../images/default_visual.jpg'}
+              alt="Role Image"
+            />
+          </span>
         </div>
-        <div className="listbox mt-5">
-          <div className="total-pg-info">
-            <p className='me-3'>전체 게시글 수: {totalPosts}</p>
-            <p>총 페이지 수: {totalPages}</p>
-          </div>
-          <table className="table table-box">
-            <colgroup>
-              <col width="8%" />
-              <col width="62%"/>
-              <col width="10%" />
-              <col width="10%" />
-              <col width="10%" />
-            </colgroup>
-            <thead>
+      </div>
+
+      <div className="listbox mt-5">
+        <div className="total-pg-info">
+          <p>전체 게시글 수: {totalPosts}</p>
+          <p>총 페이지 수: {totalPages}</p>
+        </div>
+        <table className="table table-box">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>제목</th>
+              <th>글쓴이</th>
+              <th>날짜</th>
+              <th>조회수</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loadingBoards ? (
               <tr>
-                <th scope="col">번호</th>
-                <th scope="col">제목</th>
-                <th scope="col">글쓴이</th>
-                <th scope="col">날짜</th>
-                <th scope="col">조회수</th>
+                <td colSpan="5" style={{ textAlign: 'center' }}>
+                  <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {loading ? (  // 로딩 중이면 로딩 메시지 표시
-                  <tr>
-                  <td colSpan="5" style={{ textAlign: 'center' }}>
-                    <div className="spinner-border" role="status">
-                      <span className="sr-only">Loading...</span>
-                    </div>
+            ) : currentBoards.length > 0 ? (
+              currentBoards.map((board) => (
+                <tr key={board.id}>
+                  <td>{board.displayNumber}</td>
+                  <td>
+                    <a href={`/board/${role}/${board.id}`}>{board.title}</a>
+                    {filesExistence[board.id] && <span className='file_font'><FcOpenedFolder /></span>}
                   </td>
+                  <td>{board.writer}</td>
+                  <td>{board.bbsCreatedTime}</td>
+                  <td>{board.hit}</td>
                 </tr>
-              ) : currentBoards.length > 0 ? (
-                currentBoards.map((board) => (
-                  <tr key={board.id}>
-                    <td>{board.displayNumber}</td>
-                    <td>
-                      <a href={`/board/${role}/${board.id}`}>{board.title}</a>
-                      {filesExistence[board.id] && <span className='file_font'><FcOpenedFolder /></span>}
-                    </td>
-                    <td>{board.writer}</td>
-                    <td>{board.bbsCreatedTime}</td>
-                    <td>{board.hit}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="5">No boards available</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5">No boards available</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
           
           <div className="pagination paging">
             <a className="page-link" onClick={() => handlePageChange(0)} disabled={currentPage === 0}>first</a>
@@ -247,8 +240,7 @@ const Notice = () => {
             </div>
           </form>
         </div>
-      </div>
-  
+   </div>
   );
 };
 

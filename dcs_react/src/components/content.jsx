@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { FcOpenedFolder } from "react-icons/fc";
+import { FcOpenedFolder } from 'react-icons/fc';
 import proImg from '../images/pro.png';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 
 const Content = () => {
   const { role, id } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [board, setBoard] = useState(null);
-  const navigate = useNavigate(); // navigate 함수 생성
-  const [images, setImages] = useState([]);  // 이미지 데이터를 저장할 상태
-  const [files, setFiles] = useState([]);    // 파일 데이터를 저장할 상태 추가
+  const [images, setImages] = useState([]);
+  const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [previousId, setPreviousId] = useState(null);
@@ -19,144 +20,166 @@ const Content = () => {
 
   const generateNavigationUrl = (id) => {
     const urlParts = location.pathname.split('/');
-    if (urlParts.includes('role')) {
-      // URL에 'role'이 포함된 경우
-      return `/board/role/${role}/${id}`;
-    } else {
-      // URL에 'role'이 포함되지 않은 경우
-      return `/board/${role}/${id}`;
-    }
+    return urlParts.includes('role')
+      ? `/board/role/${role}/${id}`
+      : `/board/${role}/${id}`;
   };
 
   useEffect(() => {
-    const fetchBoard = async () => {
-   
+    const fetchBoardData = async () => {
       try {
         setLoading(true);
-        
-        // 로컬 스토리지에서 조회 시간 확인
+        setError(null);
+  
+        // 로컬 캐시 확인
+        const cachedBoardData = JSON.parse(localStorage.getItem(`board_${id}`));
+        const cachedImages = JSON.parse(localStorage.getItem(`images_${id}`));
+        const cachedFiles = JSON.parse(localStorage.getItem(`files_${id}`));
+  
+        if (cachedBoardData && cachedImages && cachedFiles) {
+          setBoard(cachedBoardData.board);
+          setImages(cachedImages);
+          setFiles(cachedFiles);
+          setPreviousId(cachedBoardData.previousId);
+          setNextId(cachedBoardData.nextId);
+          setLoading(false);
+          return;
+        }
+  
+        // 로컬 스토리지 조회수 처리
         const viewedBoards = JSON.parse(localStorage.getItem('viewedBoards')) || {};
         const lastViewedTime = viewedBoards[id];
         const currentTime = new Date().getTime();
-        
-        // 마지막 조회 시간이 24시간 이상 지났을 경우 조회수 증가
+  
         if (!lastViewedTime || currentTime - lastViewedTime > 24 * 60 * 60 * 1000) {
           await axios.post(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${id}/increment-hit`);
           viewedBoards[id] = currentTime;
           localStorage.setItem('viewedBoards', JSON.stringify(viewedBoards));
         }
-        
-        // 게시글 데이터 가져오기
-        const boardResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}/${id}`);
-        setBoard(boardResponse.data);
-
-
-    
-        // 이전/다음 게시글 ID 가져오기
-        const response = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${role}/${id}/btn`);
-        setPreviousId(response.data.prev?.id || null);
-        setNextId(response.data.next?.id || null);
-      
-
-        // 이미지 데이터 가져오기
-        const imageResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/images/board/${id}`);
-        setImages(imageResponse.data);
-
-        // 파일 데이터 가져오기
-        const fileResponse = await axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${id}`);
-        setFiles(fileResponse.data);
-
+  
+        // 병렬로 데이터 요청
+        const [boardRes, navRes, imageRes, fileRes] = await Promise.all([
+          axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}/${id}`),
+          axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${role}/${id}/btn`),
+          axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/images/board/${id}`),
+          axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${id}`)
+        ]);
+  
+        const boardData = {
+          board: boardRes.data,
+          previousId: navRes.data.prev?.id || null,
+          nextId: navRes.data.next?.id || null,
+        };
+  
+        // 상태 업데이트
+        setBoard(boardData.board);
+        setPreviousId(boardData.previousId);
+        setNextId(boardData.nextId);
+        setImages(imageRes.data);
+        setFiles(fileRes.data);
+  
+        // 로컬 캐시에 저장
+        localStorage.setItem(`board_${id}`, JSON.stringify(boardData));
+        localStorage.setItem(`images_${id}`, JSON.stringify(imageRes.data));
+        localStorage.setItem(`files_${id}`, JSON.stringify(fileRes.data));
       } catch (err) {
-        setError('게시글을 불러오는 중 오류가 발생했습니다.');
+        console.error(err);
+        setError('데이터를 불러오는 중 오류가 발생했습니다.');
       } finally {
         setLoading(false);
       }
     };
-
-    fetchBoard();
+  
+    fetchBoardData();
   }, [role, id]);
 
   const handleFileDownload = async (file) => {
     try {
-      // 파일 다운로드 횟수 증가 요청 보내기 (POST 방식)
       const response = await axios.post(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${file.id}`);
-      
-      // 서버에서 카운트 증가 후, 업데이트된 카운트를 받아오기
       if (response.status === 200) {
-        // 카운트 증가 성공 시 파일 카운트 업데이트
-        const updatedFile = { ...file, count: file.count + 1 }; // 카운트 증가 반영
-        // 업데이트된 파일 정보를 파일 리스트에서 변경
-        setFiles(prevFiles => prevFiles.map(f => (f.id === updatedFile.id ? updatedFile : f)));
-        
-        // 파일 다운로드
+        // 파일 다운로드 처리
         const downloadLink = `${file.filePath}`;
         const link = document.createElement('a');
         link.href = downloadLink;
-        link.download = file.fileName;  // 파일 이름을 다운로드로 설정
+        link.download = file.fileName;
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);  // 다운로드 후 링크 제거
+        document.body.removeChild(link);
+
+        // 다운로드 카운트 업데이트
+        setFiles((prevFiles) =>
+          prevFiles.map((f) => (f.id === file.id ? { ...f, count: f.count + 1 } : f))
+        );
       }
     } catch (err) {
       console.error('파일 다운로드 중 오류 발생:', err);
     }
   };
 
-
   const formatDate = (dateString) => {
     if (!dateString) return '';
-    
     try {
-      const date = new Date(dateString); // Safari와 호환되는 날짜 객체 생성
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      return `${year}.${month}.${day}`;
-    } catch (err) {
-      console.error("Invalid date format:", dateString);
-      return 'Invalid Date'; // 오류 처리
+      const date = new Date(dateString);
+      return `${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date
+        .getDate()
+        .toString()
+        .padStart(2, '0')}`;
+    } catch {
+      return 'Invalid Date';
     }
   };
 
-  if (loading) return 
-        <div className="spinner-border" role="status">
-        <span className="sr-only">Loading...</span>
-        </div>;
+  if (loading) {
+    return (
+      <div className="main_wrap">
+        <div className="intro">
+          <div className="visual">
+            <strong className="title">
+              {role === '1' && '공지사항'}
+              {role === '2' && 'Q & A'}
+              {role === '3' && '활동사진'}
+              {role === '4' && '언론보도'}
+              {role === '5' && '미래전략포럼'}
+              {role === '6' && 'AI혁신위원회'}
+              {role === '7' && '글로벌 네트워킹'}
+              {role === '8' && '지역 청년 네트워킹'}
+            </strong>
+            <span className="img">
+              <img src={proImg} alt="banner" />
+            </span>
+          </div>
+        </div>
+        <div className="loading-spinner">
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        </div>
+      </div>
+    );
+  }
+
   if (error) return <p>{error}</p>;
 
   return (
-   
-    <div className='main_wrap'>
-    <div className='intro'>
-      <div className='visual'>
-        <strong className='title'>
-          {role === '1' && '공지사항'}
-          {role === '2' && 'Q & A'}
-          {role === '3' && '활동사진'}
-          {role === '4' && '언론보도'}
-          {role === '5' && '미래전략포럼'}
-          {role === '6' && 'AI혁신위원회'}
-          {role === '7' && '글로벌 네트워킹'}
-          {role === '8' && '지역 청년 네트워킹'}
-        </strong>
-        <span className='img'>
-          <img 
-            src={
-              role === '1' ? proImg : 
-              role === '2' ? proImg : 
-              role === '3' ? proImg : 
-              role === '4' ? proImg : 
-              role === '5' ? proImg : 
-              role === '6' ? proImg : 
-              role === '7' ? proImg : 
-              role === '8' ? proImg : 
-              '../images/default_visual.jpg' // 기본 이미지
-            }   
-            alt='' 
-          />
-        </span>
+    <div className="main_wrap">
+      {/* 헤더와 배너 */}
+      <div className="intro">
+        <div className="visual">
+          <strong className="title">
+            {role === '1' && '공지사항'}
+            {role === '2' && 'Q & A'}
+            {role === '3' && '활동사진'}
+            {role === '4' && '언론보도'}
+            {role === '5' && '미래전략포럼'}
+            {role === '6' && 'AI혁신위원회'}
+            {role === '7' && '글로벌 네트워킹'}
+            {role === '8' && '지역 청년 네트워킹'}
+          </strong>
+          <span className="img">
+            <img src={proImg} alt="banner" />
+          </span>
+        </div>
       </div>
-    </div>
       {board ? (
         <div className="listbox">
        <div className="btn_box my-5 pt-5">
@@ -258,9 +281,8 @@ const Content = () => {
       ) : (
         <p>게시글이 존재하지 않습니다.</p>
       )}
+
       </div>
-
-
   );
 };
 

@@ -109,10 +109,10 @@ const Header = () => {
       ],
     },
     {
-        depth1: '후원하기',
+        depth1: '후원&문의',
         depth2: [
           { link: '/sponsor', label: '후원하기' },
-          { link: '/sponsorappli', label: '후원신청' },
+          { link: '/sponsorappli', label: '문의하기' },
         ],
       },
   ];
@@ -157,6 +157,9 @@ const Header = () => {
         </div>
       </div>
     </div>
+
+
+
   </header>
   
   )
