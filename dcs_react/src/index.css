@@ -190,7 +190,7 @@ a{
   .header .container {padding: 0 !important;}
   .header .logo img {width: 166px;}
   .header .headerbtn{font-size: 3rem;}
-
+  .main_wrap.hitory {max-width: calc(100% - 1rem);}
   .main .main_wrap {padding: 0 .3rem;}
   .main_wrap .about-l h1{font-size: 2rem !important;}
   .main .comma {font-size: .9rem;top: 8px;}
@@ -229,6 +229,46 @@ a{
   .f-bottom p,.f-bottom span{font-size: .8rem;}
   .footer .f-bottom span:not(:nth-child(3))::before {right: .9rem;top: 1px;}
   .footer .copyright {padding: 1rem 0 0 0;}
+  .header-content button {top: 45% !important;padding: 0;}
+
+  .main_wrap .summary_wrap .inner {padding: 0rem; flex-direction: column;}
+  .main_wrap .summary_wrap .inner .ask {padding: 0rem;line-height: 1.5rem;font-size: 1rem;}
+  .main_wrap .summary_wrap .inner .ask h1 {font-size: 1.4rem;}
+  .main_wrap .summary_wrap .inner .img {width: 100%;}
+  .main_wrap .summary_wrap {padding: 0;}
+  .main_wrap .vision_wrap {width: 100%;padding: 0;}
+
+  .main_wrap .intro .visual strong {bottom: 4.5rem;font-size: 2.9rem;}
+
+  .main_wrap .hitory_wrap .title {font-size: 1.2rem;margin-bottom: 1rem;}
+  .main_wrap .hitory_wrap .title span {font-size: 1rem;}
+  .main_wrap .hitory_wrap .year {font-size: 1.6rem;}
+  .main_wrap .hitory_wrap .detail p {font-size: .9rem;}
+  .main_wrap .hitory_wrap .list .y_block .right {padding-top: 2rem;}
+  .main_wrap .hitory_wrap .num {font-size: .9rem;}
+  .main_wrap .hitory_wrap ol {padding: 0rem !important;}
+  .main_wrap .hitory_wrap .list .y_block .txt {max-width: 9rem;}
+  .main_wrap .hitory_wrap .y_block {display: flex;align-items: center;}
+  .main_wrap .greeting_wrap {padding: 0rem;margin: 0 auto;max-width: 101rem;}
+  .flex {display: flex;justify-content: center;flex-direction: column;gap: 4rem;}
+  .main_wrap .greeting_wrap .greeting_title {display: flex;align-items: center;justify-content: space-between;font-size: 1.5rem !important;}
+  .main_wrap .greeting_wrap .img_top img {width: 100%;}
+  .main_wrap .greeting_wrap .img_bottom p:nth-child(1) {font-size: 1.2rem;margin-bottom: .5rem;}
+  .main_wrap .greeting_wrap .img_bottom p:nth-child(2), .greeting_wrap .img_bottom p:nth-child(3) {font-size: 0.8rem;}
+  .main_wrap .greeting_wrap .ask {margin-left: 0rem;}
+  .main_wrap .greeting_wrap .ask p + p {line-height: 1.5rem;}
+  .main_wrap .greeting_wrap .ask p {font-size: 1rem;}
+
+  .main_wrap .oraniztion_wrap .ask {padding: 0rem;font-size: 1rem;margin-bottom: 4rem;}
+  .main_wrap .oraniztion_tit {font-size: 1.5rem !important;}
+
+  .vision_wrap .table_wrap {padding: 0rem;}
+  .vision_wrap .table_wrap .table thead tr th {font-size: 1rem;}
+  .vision_wrap .table_wrap .table tbody th,
+  .vision_wrap .table_wrap .table tbody td{font-size: 0.9rem;}
+  .vision_wrap .table_wrap .table.img img {width: 5.5rem;}
+  .vision_wrap .table_wrap h4 {font-size: 1.4rem;}
+  .vision_wrap .ask {text-align: justify;}
 }
 @media (max-width: 1024px) {
   .main .main_wrap{min-width: 100%;}
@@ -283,16 +323,12 @@ a{
       width: 100%;
   }
 }
-.swiper-container {
-  width: 100%;
-  height: auto; /* 모바일에서도 높이가 유지되도록 설정 */
+.swiper-slide {
+  visibility: visible !important; 
+  opacity: 1 !important;
+  display: block !important;
 }
 
-.swiper-slide {
-  flex-shrink: 0; /* 슬라이드 크기 축소 방지 */
-  width: auto; /* 크기를 명확히 지정 */
-  height: auto; /* 이미지나 콘텐츠에 맞게 조정 */
-}
 .visual5 .swiper{opacity: 1;}
 .visual5 .footbanner {width: 100%;padding: 20px;}
 .visual5 .swiper-wrapper{justify-content: space-around;}
@@ -345,8 +381,8 @@ a{
 .table_wrap .table table, tr, th {border: 1px solid #eeeded;position: relative;}
 /****** summary ******/
 .summary_wrap{margin-bottom: 9rem;padding: 4rem 0;display: flex;justify-content: center;}
-.summary_wrap .inner{padding: 0 8rem;display: flex;align-items: center;justify-content: space-around;}
-.summary_wrap .inner .ask{padding: 0 2rem;line-height: 2.2rem;font-size: 1.2rem;max-width: 616px;text-align:justify;padding-left: 0;}
+.summary_wrap .inner{display: flex;align-items: center;justify-content: space-around;}
+.summary_wrap .inner .ask{padding: 0 2rem;line-height: 2.2rem;font-size: 1.2rem;max-width: 36rem;text-align:justify;padding-left: 0;}
 .summary_wrap .inner .ask h1{font-weight: 900;}
 .summary_wrap .inner .img{width: 45%;position: relative;top: 2rem;max-width: 504px;}
 .summary_wrap .inner .img img{width: 100%;border-top-right-radius: 30px;border-bottom-left-radius: 30px;}
