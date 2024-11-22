@@ -120,7 +120,7 @@ const Notice = () => {
   };
 
   return (
-    <div className='container2'>
+    
       <div className='main_wrap'>
         <div className='intro'>
           <div className='visual'>
@@ -133,7 +133,6 @@ const Notice = () => {
               {role === '6' && 'AI혁신위원회'}
               {role === '7' && '글로벌 네트워킹'}
               {role === '8' && '지역 청년 네트워킹'}
-              {role === '9' && 'ESG 청년 연합 봉사 활동'}
             </strong>
             <span className='img'>
               <img 
@@ -146,7 +145,6 @@ const Notice = () => {
                   role === '6' ? proImg : 
                   role === '7' ? proImg : 
                   role === '8' ? proImg : 
-                  role === '9' ? proImg : 
                   '../images/default_visual.jpg' // 기본 이미지
                 }   
                 alt='' 
@@ -250,7 +248,7 @@ const Notice = () => {
           </form>
         </div>
       </div>
-    </div>
+  
   );
 };
 

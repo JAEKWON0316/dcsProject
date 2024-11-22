@@ -91,9 +91,7 @@ const Header = () => {
         { link: '/board/5', label: '미래전략포럼' },
         { link: '/board/6', label: 'AI혁신위원회' },
         { link: '/board/7', label: '글로벌 네트워킹' },
-        { link: '/board/8', label: '지역 청년 네트워킹' },
-        { link: '/board/9', label: 'ESG 청년 연합 봉사 활동' }
-       
+        { link: '/board/8', label: '지역 청년 네트워킹' },       
       ],
     },
     {

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import Img from '../images/pro.png';
 import { FcOpenedFolder } from "react-icons/fc";
-
+import proImg from '../images/pro.png';
 import { Button } from 'react-bootstrap';
 
 const Content = () => {
@@ -126,16 +125,38 @@ const Content = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className='container2'>
-        <div className='main_wrap'>
-        <div className='intro'>
-          <div className='visual'>
-            <strong className='title'>게시판</strong>
-      <span className='img'>
-            <img src={Img} alt='' />
-          </span>
-          </div>
+   
+    <div className='main_wrap'>
+    <div className='intro'>
+      <div className='visual'>
+        <strong className='title'>
+          {role === '1' && '공지사항'}
+          {role === '2' && 'Q & A'}
+          {role === '3' && '활동사진'}
+          {role === '4' && '언론보도'}
+          {role === '5' && '미래전략포럼'}
+          {role === '6' && 'AI혁신위원회'}
+          {role === '7' && '글로벌 네트워킹'}
+          {role === '8' && '지역 청년 네트워킹'}
+        </strong>
+        <span className='img'>
+          <img 
+            src={
+              role === '1' ? proImg : 
+              role === '2' ? proImg : 
+              role === '3' ? proImg : 
+              role === '4' ? proImg : 
+              role === '5' ? proImg : 
+              role === '6' ? proImg : 
+              role === '7' ? proImg : 
+              role === '8' ? proImg : 
+              '../images/default_visual.jpg' // 기본 이미지
+            }   
+            alt='' 
+          />
+        </span>
       </div>
+    </div>
       {board ? (
         <div className="listbox">
        <div className="btn_box my-5 pt-5">
@@ -172,8 +193,8 @@ const Content = () => {
                   <li key={file.id}>
                     <a  href={`${file.filePath}`}
                         onClick={(e) => {
-                          e.preventDefault();  // 기본 링크 동작 방지 (자동 다운로드 방지)
-                        handleFileDownload(file); // 파일 다운로드 함수 호출
+                          e.preventDefault();  
+                        handleFileDownload(file); 
 
                       }}>
                       <span>{file.fileName}</span></a> <span>({file.fileSize})</span>
@@ -189,7 +210,7 @@ const Content = () => {
          
                       
 
-        {/* 이미지가 있을 경우 보여주기 */}
+        {/* 이미지 */}
           {images.length > 0 && (
             <div className="image-gallery">
               {images.map((image) => (
@@ -239,7 +260,7 @@ const Content = () => {
       )}
       </div>
 
-    </div>
+
   );
 };
 
