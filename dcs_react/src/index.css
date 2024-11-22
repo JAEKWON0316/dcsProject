@@ -187,7 +187,7 @@ a{
   
 }
 @media (max-width: 768px) {
-  .header .container {padding: 0;}
+  .header .container {padding: 0 !important;}
   .header .logo img {width: 166px;}
   .header .headerbtn{font-size: 3rem;}
 
@@ -283,7 +283,16 @@ a{
       width: 100%;
   }
 }
+.swiper-container {
+  width: 100%;
+  height: auto; /* 모바일에서도 높이가 유지되도록 설정 */
+}
 
+.swiper-slide {
+  flex-shrink: 0; /* 슬라이드 크기 축소 방지 */
+  width: auto; /* 크기를 명확히 지정 */
+  height: auto; /* 이미지나 콘텐츠에 맞게 조정 */
+}
 .visual5 .swiper{opacity: 1;}
 .visual5 .footbanner {width: 100%;padding: 20px;}
 .visual5 .swiper-wrapper{justify-content: space-around;}
