@@ -180,6 +180,30 @@ a{
       max-width: 100% !important;
   }
 }
+@media (min-width: 768px) {
+  .container, .container-md, .container-sm {
+      max-width: 100% !important;
+  }
+  
+}
+@media (max-width: 768px) {
+  .header .container {padding: 0;}
+  .header .logo img {width: 166px;}
+  .header .headerbtn{font-size: 3rem;}
+
+  .main_wrap .about-l h1{font-size: 2rem !important;}
+  .main .comma {font-size: .9rem;top: 8px;}
+  .main .visual1 img {width: 4.5rem;height: 4.5rem;transform: scale(1.2);}
+  .main .visual1 .about-text h2 {font-size: 1rem;}
+  .main .visual1 .about-text p {font-size: .9rem;margin-top: 0.5rem;font-weight: 500;}
+  .main .visual2 li {width: calc(60% - 2.8rem) !important;margin: 0;}
+  .main .visual2 .icon .icon-img {font-size: 3rem;}
+  .main .visual2 .icon {width: 3.6rem;height: 3.6rem;}
+  .main .visual2 .item {flex-direction: column;gap: .7rem;padding:1.1rem;}
+  .main .visual2 .desc {padding-left: 0; text-align: center;}
+  .main .visual2 .desc strong {font-size: 1rem;}
+  .main .visual2 .desc p {line-height: 1rem;font-size: 0.8rem;}
+}
 @media (max-width: 1024px) {
   .main .main_wrap{min-width: 100%;}
   .main .visual1 {display: flex;flex-direction: column;gap: 2rem;}
@@ -200,23 +224,8 @@ a{
   .header .container {padding: 0 2rem;margin: 0;}
   .header::before {transition: none;transition-delay: none;}
   header .depth1 {line-height: 0;font-weight: 700;padding-bottom:0;transition: color 0.3s ease;font-size: 18px;position: relative;display: block;}
-
-}
-@media (min-width: 768px) {
-  .container, .container-md, .container-sm {
-      max-width: 100% !important;
-  }
-}
-@media (max-width: 1204px) {
-  .hitory_wrap ol {
-    padding: 0 9rem !important;
-  }
-}
-@media (max-width: 1024px) {
-  .main .visual2 li {
-      width: calc(53% - 2.8rem) !important;
-      margin-top: 1rem;
-  }
+  .hitory_wrap ol {padding: 0 9rem !important;}
+  .main .visual2 li {width: calc(53% - 2.8rem);margin-top: 1rem;}
   .main .section.visual3{flex-direction: column;gap: 2rem;}
   .main .section.visual3 .noitce {width: 100%;}
   .main .section.visual3 .noitce ul li{padding: 0 1rem 1.2rem 5rem;text-align: left;}
@@ -224,35 +233,13 @@ a{
   .main .section.visual4 .wrap-menu {padding: 1.9rem 1.2rem;}
   .wrapLink {margin-top: 6rem;}
   .main .visual2 ul li:hover {transform: translateY(-0.6rem);}
-  .hitory_wrap ol {
-    padding: 0 2rem !important;
-  }
+  .hitory_wrap ol {padding: 0 2rem !important;}
   .header .nav{position: absolute;right: 0;top: 5rem;}
-  .header.fixed::before {
-    opacity: 0;
-    visibility: hidden;
-    height: 0;
-  }
-  .header.click::before {
-    position: absolute;
-    width: 28rem !important;
-    left: 26rem !important;
-    height: 100vh !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-  .header.hover::before{
-    position: absolute;
-    width: 28rem;
-    left: 26rem;
-    height: 100vh !important;
-  }
-  .header.white::before{
-    background: rgb(8 15 61 / 78%);
-  }
-  .header.white.hover .depth1, .header.white.hover .depth2 a {
-    color: #fff;
-}
+  .header.fixed::before {opacity: 0;visibility: hidden;height: 0;}
+  .header.click::before {position: absolute;width: 28rem !important;left: 26rem !important;height: 100vh !important;opacity: 1 !important;visibility: visible !important;}
+  .header.hover::before{position: absolute;width: 28rem;left: 26rem;height: 100vh !important;}
+  .header.white::before{background: rgb(8 15 61 / 78%);}
+  .header.white.hover .depth1, .header.white.hover .depth2 a {color: #fff;}
 }
 @media (max-width: 1425px) {
   .hitory_wrap .right .year::before {
