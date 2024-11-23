@@ -172,7 +172,7 @@ const Notice = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="5">No boards available</td>
+                <td colSpan="5">게시글이 없습니다.</td>
               </tr>
             )}
           </tbody>
