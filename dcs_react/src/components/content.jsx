@@ -30,56 +30,31 @@ const Content = () => {
       try {
         setLoading(true);
         setError(null);
-  
-        const cachedBoardData = JSON.parse(localStorage.getItem(`board_${id}`));
-        const cachedImages = JSON.parse(localStorage.getItem(`images_${id}`));
-        const cachedFiles = JSON.parse(localStorage.getItem(`files_${id}`));
-  
-        if (cachedBoardData && cachedImages && cachedFiles) {
-          setBoard(cachedBoardData.board);
-          setImages(cachedImages);
-          setFiles(cachedFiles);
-          setPreviousId(cachedBoardData.previousId);
-          setNextId(cachedBoardData.nextId);
-          setLoading(false);
-          return;
-        }
-  
-        // 로컬 스토리지 조회수 처리
-        const viewedBoards = JSON.parse(localStorage.getItem('viewedBoards')) || {};
-        const lastViewedTime = viewedBoards[id];
-        const currentTime = new Date().getTime();
-  
-        // 24시간 이내에는 조회수 증가 요청을 하지 않음
-        if (!lastViewedTime || currentTime - lastViewedTime > 24 * 60 * 60 * 1000) {
-          await axios.post(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${id}/increment-hit`);
-          viewedBoards[id] = currentTime;
-          localStorage.setItem('viewedBoards', JSON.stringify(viewedBoards));
-        }
-  
+
+        // 캐시 관련 로직 제거: 로컬 스토리지에서 데이터를 가져오지 않음
+        // 로컬 캐시 확인 코드를 빼고 API 호출을 바로 진행
+
+        // 병렬로 데이터 요청
         const [boardRes, navRes, imageRes, fileRes] = await Promise.all([
           axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}/${id}`),
           axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${role}/${id}/btn`),
           axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/images/board/${id}`),
           axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${id}`)
         ]);
-  
+
         const boardData = {
           board: boardRes.data,
           previousId: navRes.data.prev?.id || null,
           nextId: navRes.data.next?.id || null,
         };
-  
+
+        // 상태 업데이트
         setBoard(boardData.board);
         setPreviousId(boardData.previousId);
         setNextId(boardData.nextId);
         setImages(imageRes.data);
         setFiles(fileRes.data);
-  
-        // 로컬 캐시에 저장
-        localStorage.setItem(`board_${id}`, JSON.stringify(boardData));
-        localStorage.setItem(`images_${id}`, JSON.stringify(imageRes.data));
-        localStorage.setItem(`files_${id}`, JSON.stringify(fileRes.data));
+        
       } catch (err) {
         console.error(err);
         setError('데이터를 불러오는 중 오류가 발생했습니다.');
@@ -180,78 +155,74 @@ const Content = () => {
       </div>
       {board ? (
         <div className="listbox">
-       <div className="btn_box my-5 pt-5">
-       <div className="btn_box1">
-      {previousId !== null && (
-        <Button variant="primary" onClick={() => navigate(generateNavigationUrl(previousId))}>
-          이전글
-        </Button>
-      )}
-      {nextId !== null && (
-        <Button variant="primary" onClick={() => navigate(generateNavigationUrl(nextId))}>
-          다음글
-        </Button>
-      )}
-      </div>
-      <Button variant="primary" onClick={() => navigate(`/board/${role}`)}>목록</Button>
-    </div>
+          <div className="btn_box my-5 pt-5">
+            <div className="btn_box1">
+              {previousId !== null && (
+                <Button variant="primary" onClick={() => navigate(generateNavigationUrl(previousId))}>
+                  이전글
+                </Button>
+              )}
+              {nextId !== null && (
+                <Button variant="primary" onClick={() => navigate(generateNavigationUrl(nextId))}>
+                  다음글
+                </Button>
+              )}
+            </div>
+            <Button variant="primary" onClick={() => navigate(`/board/${role}`)}>목록</Button>
+          </div>
 
           <div className="mt-2 pt-2 board-box">
-          <span className="ft-bold">작성자: {board.writer}</span>
-          <span className="mr-2">
-              등록일: {board.bbsCreatedTime}
-            </span>
+            <span className="ft-bold">작성자: {board.writer}</span>
+            <span className="mr-2">등록일: {board.bbsCreatedTime}</span>
             <span className="mr-4"><label className="font-italic">조회</label> {board.hit}회</span>
           </div>
           
-           <h5 className="mt-3 title_box p-3">{board.title}</h5> 
-            {/* 파일이 있을 경우 파일 목록 표시 */}
-            {files.length > 0 && (
+          <h5 className="mt-3 title_box p-3">{board.title}</h5> 
+
+          {/* 파일이 있을 경우 파일 목록 표시 */}
+          {files.length > 0 && (
             <div className="mt-2 pt-2 border-top file-box">
               <h5 className='fw-bold'>첨부 파일: <FcOpenedFolder /></h5>
               <ul>
                 {files.map((file) => (
                   <li key={file.id}>
-                    <a  href={`${file.filePath}`}
-                        onClick={(e) => {
-                          e.preventDefault();  
-                        handleFileDownload(file); 
-
-                      }}>
-                      <span>{file.fileName}</span></a> <span>({file.fileSize})</span>
-                    <br/>
+                    <a
+                      href={`${file.filePath}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleFileDownload(file);
+                      }}
+                    >
+                      <span>{file.fileName}</span>
+                    </a>
+                    <span>({file.fileSize})</span>
+                    <br />
                     <span> 다운로드 횟수: {file.count}</span>
-                    <span> DATE:{formatDate(file.uploadDate)}
-                    </span>
+                    <span> DATE:{formatDate(file.uploadDate)}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
-         
-                      
 
-        {/* 이미지 */}
+          {/* 이미지 */}
           {images.length > 0 && (
             <div className="image-gallery">
               {images.map((image) => (
-                <div>
-                <img
-                  key={image.id}
-                  src={`${image.imageUrl}`}
-                  alt="게시글 이미지"
-                />
+                <div key={image.id}>
+                  <img
+                    src={`${image.imageUrl}`}
+                    alt="게시글 이미지"
+                  />
                 </div>
               ))}
             </div>
           )}
 
-        
-
           <div className="mt-3 content_box">
             {board.content.split('\\n').map((line, index) => (
-              <p 
-                key={index} 
+              <p
+                key={index}
                 className="content-paragraph"
                 style={{ fontWeight: index === 0 ? 'bold' : 'normal' }}
               >
@@ -260,27 +231,26 @@ const Content = () => {
             ))}
           </div>
 
-        <div className="btn_box my-5 pt-5">
-          <div className="btn_box1">
-      {previousId !== null && (
-        <Button variant="primary" onClick={() => navigate(generateNavigationUrl(previousId))}>
-          이전글
-        </Button>
-      )}
-      {nextId !== null && (
-        <Button variant="primary" onClick={() => navigate(generateNavigationUrl(nextId))}>
-          다음글
-        </Button>
-      )}
-      </div>
-      <Button variant="primary" onClick={() => navigate(`/board/${role}`)}>목록</Button>
-    </div>
+          <div className="btn_box my-5 pt-5">
+            <div className="btn_box1">
+              {previousId !== null && (
+                <Button variant="primary" onClick={() => navigate(generateNavigationUrl(previousId))}>
+                  이전글
+                </Button>
+              )}
+              {nextId !== null && (
+                <Button variant="primary" onClick={() => navigate(generateNavigationUrl(nextId))}>
+                  다음글
+                </Button>
+              )}
+            </div>
+            <Button variant="primary" onClick={() => navigate(`/board/${role}`)}>목록</Button>
+          </div>
         </div>
       ) : (
         <p>게시글이 존재하지 않습니다.</p>
       )}
-
-      </div>
+    </div>
   );
 };
 

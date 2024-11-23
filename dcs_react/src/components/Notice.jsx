@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import proImg from '../images/pro.png';
 import { useParams } from 'react-router-dom';
@@ -20,62 +20,58 @@ const Notice = () => {
   useEffect(() => {
     fetchBoards();
   }, [role]);
-  
+
   const fetchBoards = async () => {
-    const cacheKey = `boards_role_${role}`;
-    const cachedData = localStorage.getItem(cacheKey);
-  
-    if (cachedData) {
-      const { boards, totalPosts, totalPages, filesExistence } = JSON.parse(cachedData);
-      setBoards(boards);
-      setTotalPosts(totalPosts);
-      setTotalPages(totalPages);
-      setFilesExistence(filesExistence);
-      setLoading(false);
-      return;
-    }
-  
-    setLoading(true);
+    setLoading(true); // 로딩 시작
+
     try {
+      // 최신 게시글 데이터를 가져오기 위한 API 호출
       const response = await axios.get(
         `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}`,
         { withCredentials: true }
       );
-  
+
+      // 게시글을 최신 순으로 정렬 후 조회수를 업데이트
       const sortedBoards = response.data
         .sort((a, b) => b.id - a.id)
         .map((item, index) => ({
           ...item,
           displayNumber: response.data.length - index,
         }));
-  
+
       // 파일 존재 여부 체크
       const fileStatus = await fetchFilesExistence(sortedBoards);
-  
-      // 조회수를 최신 값으로 업데이트
-      sortedBoards.forEach((board) => {
-        board.hit = board.hit || 0; // 조회수가 없으면 0으로 설정
-      });
-  
-      setBoards(sortedBoards);
+
+      // 각 게시글의 조회수를 서버에서 최신 값으로 갱신
+      const boardsWithHit = await fetchBoardsHit(sortedBoards);
+
+      setBoards(boardsWithHit); // 상태 업데이트
       setTotalPosts(response.data.length);
       setTotalPages(Math.ceil(response.data.length / itemsPerPage));
-      setFilesExistence(fileStatus);
-  
-      localStorage.setItem(
-        cacheKey,
-        JSON.stringify({
-          boards: sortedBoards,
-          totalPosts: response.data.length,
-          totalPages: Math.ceil(response.data.length / itemsPerPage),
-          filesExistence: fileStatus,
-        })
-      );
+      setFilesExistence(fileStatus); // 파일 존재 여부 상태 업데이트
     } catch (error) {
       console.error('게시판 데이터를 불러오는 데 실패했습니다: ', error.response ? error.response.data : error.message);
       alert('게시판 데이터를 불러오는 데 실패했습니다.');
     } finally {
-      setLoading(false);
+      setLoading(false); // 로딩 끝
+    }
+  };
+
+  // 각 게시글의 조회수를 최신 값으로 갱신하는 함수
+  const fetchBoardsHit = async (boards) => {
+    try {
+      const updatedBoards = await Promise.all(
+        boards.map(async (board) => {
+          const hitResponse = await axios.get(
+            `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${board.id}/hit`
+          );
+          return { ...board, hit: hitResponse.data.hit || 0 }; // 조회수가 없으면 0으로 설정
+        })
+      );
+      return updatedBoards;
+    } catch (error) {
+      console.error('조회수 업데이트에 실패했습니다: ', error);
+      return boards; // 조회수 갱신에 실패해도 원본 게시글 배열을 반환
     }
   };
 

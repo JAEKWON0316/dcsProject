@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +37,12 @@ public class BoardController {
     public ResponseEntity<List<BoardDto>> getBoardsByRole(@PathVariable("role") int role) {
         System.out.println("Role received: " + role);  // 역할 값이 제대로 들어오는지 확인
         List<BoardDto> boards = bService.findByRole(role); // 역할에 맞는 게시글 리스트 가져오기
-        return ResponseEntity.ok(boards); // JSON 형태로 반환
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue()); // no-cache 헤더 추가
+        return ResponseEntity.ok()
+        .headers(headers)
+        .body(boards); // JSON 형태로 반환
     }
 
     //btn 네비게이션
@@ -66,7 +73,11 @@ public class BoardController {
     @GetMapping("/role/{role}/{id}")
     public ResponseEntity<BoardDto> getBoardByRoleAndId(@PathVariable("role") int role, @PathVariable("id") Long id) {
         BoardDto boardDto = bService.findByRoleAndId(role, id); // role과 id에 맞는 게시글 조회
-        return ResponseEntity.ok(boardDto); // JSON 형태로 반환
+        HttpHeaders headers = new HttpHeaders();
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue()); // no-cache 헤더 추가
+        return ResponseEntity.ok()
+        .headers(headers)
+        .body(boardDto);
     }
     
 
