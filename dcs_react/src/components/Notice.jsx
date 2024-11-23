@@ -42,10 +42,7 @@ const Notice = () => {
       // 파일 존재 여부 체크
       const fileStatus = await fetchFilesExistence(sortedBoards);
 
-      // 각 게시글의 조회수를 서버에서 최신 값으로 갱신
-      const boardsWithHit = await fetchBoardsHit(sortedBoards);
-
-      setBoards(boardsWithHit); // 상태 업데이트
+      setBoards(sortedBoards); // 상태 업데이트
       setTotalPosts(response.data.length);
       setTotalPages(Math.ceil(response.data.length / itemsPerPage));
       setFilesExistence(fileStatus); // 파일 존재 여부 상태 업데이트
@@ -57,23 +54,6 @@ const Notice = () => {
     }
   };
 
-  // 각 게시글의 조회수를 최신 값으로 갱신하는 함수
-  const fetchBoardsHit = async (boards) => {
-    try {
-      const updatedBoards = await Promise.all(
-        boards.map(async (board) => {
-          const hitResponse = await axios.get(
-            `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${board.id}/hit`
-          );
-          return { ...board, hit: hitResponse.data.hit || 0 }; // 조회수가 없으면 0으로 설정
-        })
-      );
-      return updatedBoards;
-    } catch (error) {
-      console.error('조회수 업데이트에 실패했습니다: ', error);
-      return boards; // 조회수 갱신에 실패해도 원본 게시글 배열을 반환
-    }
-  };
 
   const fetchFilesExistence = async (boards) => {
     try {
