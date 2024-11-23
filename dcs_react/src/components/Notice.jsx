@@ -140,7 +140,9 @@ const Notice = () => {
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
-
+  console.log('Fetched boards:', response.data); // API 응답 데이터
+  console.log('Sorted boards:', sortedBoards);   // 정렬 후 데이터
+  console.log('Final boards:', boards);         // 최종 상태 데이터
   return (
     <div className="main_wrap">
       <div className="intro">
