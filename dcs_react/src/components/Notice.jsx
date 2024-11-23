@@ -186,6 +186,7 @@ const Notice = () => {
                   </td>
                   <td>{board.writer}</td>
                   <td>{board.bbsCreatedTime}</td>
+                  {(console.log(board.hit))}
                   <td>{board.hit}</td>
                 </tr>
               ))
