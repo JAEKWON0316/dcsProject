@@ -31,7 +31,6 @@ const Content = () => {
         setLoading(true);
         setError(null);
   
-        // 로컬 캐시 확인
         const cachedBoardData = JSON.parse(localStorage.getItem(`board_${id}`));
         const cachedImages = JSON.parse(localStorage.getItem(`images_${id}`));
         const cachedFiles = JSON.parse(localStorage.getItem(`files_${id}`));
@@ -51,13 +50,13 @@ const Content = () => {
         const lastViewedTime = viewedBoards[id];
         const currentTime = new Date().getTime();
   
+        // 24시간 이내에는 조회수 증가 요청을 하지 않음
         if (!lastViewedTime || currentTime - lastViewedTime > 24 * 60 * 60 * 1000) {
           await axios.post(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${id}/increment-hit`);
           viewedBoards[id] = currentTime;
           localStorage.setItem('viewedBoards', JSON.stringify(viewedBoards));
         }
   
-        // 병렬로 데이터 요청
         const [boardRes, navRes, imageRes, fileRes] = await Promise.all([
           axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}/${id}`),
           axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/${role}/${id}/btn`),
@@ -71,7 +70,6 @@ const Content = () => {
           nextId: navRes.data.next?.id || null,
         };
   
-        // 상태 업데이트
         setBoard(boardData.board);
         setPreviousId(boardData.previousId);
         setNextId(boardData.nextId);

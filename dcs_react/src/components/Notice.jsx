@@ -20,68 +20,64 @@ const Notice = () => {
   useEffect(() => {
     fetchBoards();
   }, [role]);
-
+  
   const fetchBoards = async () => {
     const cacheKey = `boards_role_${role}`;
     const cachedData = localStorage.getItem(cacheKey);
-
-    // 캐시된 데이터가 있을 경우, 캐시된 데이터를 우선 사용
-  if (cachedData) {
-    const { boards, totalPosts, totalPages, filesExistence } = JSON.parse(cachedData);
-    setBoards(boards);
-    setTotalPosts(totalPosts);
-    setTotalPages(totalPages);
-    setFilesExistence(filesExistence);
-    setLoading(false);
-    return;
-  }
-
+  
+    if (cachedData) {
+      const { boards, totalPosts, totalPages, filesExistence } = JSON.parse(cachedData);
+      setBoards(boards);
+      setTotalPosts(totalPosts);
+      setTotalPages(totalPages);
+      setFilesExistence(filesExistence);
+      setLoading(false);
+      return;
+    }
+  
     setLoading(true);
     try {
       const response = await axios.get(
         `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}`,
         { withCredentials: true }
       );
-
+  
       const sortedBoards = response.data
         .sort((a, b) => b.id - a.id)
         .map((item, index) => ({
           ...item,
           displayNumber: response.data.length - index,
         }));
-
+  
+      // 파일 존재 여부 체크
       const fileStatus = await fetchFilesExistence(sortedBoards);
-
-          // 기존 데이터와 비교 후, 차이가 있을 경우에만 상태 업데이트
-    setBoards((prevBoards) => {
-      const newBoards = sortedBoards;
-      // 기존의 boards와 새로운 boards를 비교
-      if (JSON.stringify(prevBoards) !== JSON.stringify(newBoards)) {
-        return newBoards;
-      }
-      return prevBoards;
-    });
+  
+      // 조회수를 최신 값으로 업데이트
+      sortedBoards.forEach((board) => {
+        board.hit = board.hit || 0; // 조회수가 없으면 0으로 설정
+      });
+  
+      setBoards(sortedBoards);
       setTotalPosts(response.data.length);
       setTotalPages(Math.ceil(response.data.length / itemsPerPage));
       setFilesExistence(fileStatus);
-
-         // 새로운 데이터 캐시 저장
-    localStorage.setItem(
-      cacheKey,
-      JSON.stringify({
-        boards: sortedBoards,
-        totalPosts: response.data.length,
-        totalPages: Math.ceil(response.data.length / itemsPerPage),
-        filesExistence: fileStatus,
-      })
-    );
-  } catch (error) {
-    console.error('게시판 데이터를 불러오는 데 실패했습니다: ', error.response ? error.response.data : error.message);
-    alert('게시판 데이터를 불러오는 데 실패했습니다.');
-  } finally {
-    setLoading(false);
-  }
-};
+  
+      localStorage.setItem(
+        cacheKey,
+        JSON.stringify({
+          boards: sortedBoards,
+          totalPosts: response.data.length,
+          totalPages: Math.ceil(response.data.length / itemsPerPage),
+          filesExistence: fileStatus,
+        })
+      );
+    } catch (error) {
+      console.error('게시판 데이터를 불러오는 데 실패했습니다: ', error.response ? error.response.data : error.message);
+      alert('게시판 데이터를 불러오는 데 실패했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchFilesExistence = async (boards) => {
     try {
@@ -140,9 +136,7 @@ const Notice = () => {
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
-  console.log('Fetched boards:', response.data); // API 응답 데이터
-  console.log('Sorted boards:', sortedBoards);   // 정렬 후 데이터
-  console.log('Final boards:', boards);         // 최종 상태 데이터
+
   return (
     <div className="main_wrap">
       <div className="intro">
@@ -197,7 +191,6 @@ const Notice = () => {
                   </td>
                   <td>{board.writer}</td>
                   <td>{board.bbsCreatedTime}</td>
-                  {(console.log(board.hit))}
                   <td>{board.hit}</td>
                 </tr>
               ))
