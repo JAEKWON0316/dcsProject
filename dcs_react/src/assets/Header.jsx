@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { IoMenu } from "react-icons/io5";
+import { IoIosArrowDown } from "react-icons/io";
 
 import Logo from '../images/logo03.png';
 import Logo2 from '../images/logo04.png';
@@ -91,7 +92,9 @@ const Header = () => {
         { link: '/board/5', label: '미래전략포럼' },
         { link: '/board/6', label: 'AI혁신위원회' },
         { link: '/board/7', label: '글로벌 네트워킹' },
-        { link: '/board/8', label: '지역 청년 네트워킹' },       
+        { link: '/board/8', label: '지역 청년 네트워킹' },
+        { link: '/board/9', label: 'ESG 청년 연합 봉사 활동' }
+       
       ],
     },
     {
@@ -149,11 +152,15 @@ const Header = () => {
                       ))}
                     </ul>
                   </div>
+
+                  <button type='button' className={`depthbtn ${activeIndex === index ? 'underline hover' : ''}`}>
+                    <IoIosArrowDown />
+                  </button>
                 </li>
               ))}
             </ul>
           </nav>
-          <button type='button' onClick={handleClick} className={`${clcikButton ? 'click' : ''}`}><IoMenu /></button>
+          <button type='button' onClick={handleClick} className={`${clcikButton ? 'click' : ''}`}><IoMenu className='headerbtn'/></button>
         </div>
       </div>
     </div>

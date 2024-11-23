@@ -19,10 +19,12 @@ a{
 :root{
   --anim-duration: 100ms;
   --header-height: 100px;
+  --mini-header-height: 62px;
 }
 .App{position: relative;}
 /****** header  ******/
 .header{width: 100%;position: fixed;background-color: rgba(255, 255, 255, 0);z-index: 1000;transition: background-color 0.3s, box-shadow 0.3s;transition: transform calc(var(--anim-duration)* 6) cubic-bezier(.165,.84,.44,1), background calc(var(--anim-duration)* 3);letter-spacing: 0.05em;}
+.header .depthbtn{opacity: 0;visibility: 0;}
 .header.white .depth1,.header.white .depth2 a{color: #fff;}
 .header.white.hover .depth1,.header.white.hover .depth2 a{color: #000;}
 .header.white.hover:hover .depth2 a:hover{color: blue;}
@@ -187,9 +189,19 @@ a{
   
 }
 @media (max-width: 768px) {
-  .header .container {padding: 0 !important;}
-  .header .logo img {width: 166px;}
-  .header .headerbtn{font-size: 3rem;}
+  .header .container {padding: 0 !important;cursor: auto;}
+  .header .logo img {width: 138px;}
+  .header .headerbtn{font-size: 2.3rem;}
+  .header .nav{width: 100%;}
+  .header-content .nav .gnb.click {width: 100%;position: absolute;display: grid;gap: 1.5rem;}
+  .header-content .nav .gnb.click li {display: flex;padding: 0 1rem;}
+  .header.hover::before {height: var(--mini-header-height, 100px) !important;}
+  .depth1.underline::after {bottom: -2.3rem;}
+  .header .depth1 {font-size: 23px;}
+  .header .header-content {height: var(--mini-header-height, 100px) !important;}
+  .header.click::before {position: absolute;width: 100vw;left: 0rem !important;height: 100vh !important;}
+  .header .depthbtn{opacity: 1 !important;visibility: 1 !important;}
+  .header .depthbtn.hover{color: #007bff !important;}
   .main_wrap.hitory {max-width: calc(100% - 1rem);}
   .main .main_wrap {padding: 0 .3rem;}
   .main_wrap .about-l h1{font-size: 2rem !important;}
@@ -277,13 +289,12 @@ a{
   .main .visual2 ul {flex-wrap: wrap !important;}
   .header .depth1 {line-height: 3rem;}
   .header .depth2 {left: -12rem;top: 2rem;width: 14rem;padding-right: 3rem;}
-  .depth1.underline::after {bottom: -1.3rem;}
   .header .depth2 ul {gap: .4333333333em;display: grid;place-items: flex-end;text-align: right;}
   .gnb .depth1[aria-expanded="true"] + .depth2 {opacity: 0;visibility: hidden;transform: translateY(-1.6em);}
   .gnb .depth1.hover .depth2{opacity: 1;visibility: visible;}
   .header-content .nav .gnb{opacity: 0;visibility: hidden;}
   .header .nav .gnb{opacity: 0;visibility: hidden;}
-  .header-content .nav .gnb.click{opacity: 1;visibility: visible;right: 0;top: 5rem;display: block;}
+  .header-content .nav .gnb.click{opacity: 1;visibility: visible;right: 0;top: 5rem;}
   .header-content button{color: #fff;background: none 0;border: 0;font-size: 3rem;position: absolute;right: 0;top: 50%;transform: translate(0, -50%);opacity: 1;visibility: visible;}
   .header-content .nav .gnb li{opacity: 0;visibility: hidden;position: relative;}
   .header-content .nav .gnb.click li{opacity: 1;visibility: visible;}
@@ -300,10 +311,7 @@ a{
   .wrapLink {margin-top: 6rem;}
   .main .visual2 ul li:hover {transform: translateY(-0.6rem);}
   .hitory_wrap ol {padding: 0 2rem !important;}
-  .header .nav{position: absolute;right: 0;top: 5rem;}
-  .header.fixed::before {opacity: 0;visibility: hidden;height: 0;}
-  .header.click::before {position: absolute;width: 28rem !important;left: 26rem !important;height: 100vh !important;opacity: 1 !important;visibility: visible !important;}
-  .header.hover::before{position: absolute;width: 28rem;left: 26rem;height: 100vh !important;}
+  .header.click::before {position: absolute;height: 100vh !important;opacity: 1 !important;visibility: visible !important;}
   .header.white::before{background: rgb(8 15 61 / 78%);}
   .header.white.hover .depth1, .header.white.hover .depth2 a {color: #fff;}
 }
