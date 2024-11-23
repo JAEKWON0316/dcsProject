@@ -25,15 +25,16 @@ const Notice = () => {
     const cacheKey = `boards_role_${role}`;
     const cachedData = localStorage.getItem(cacheKey);
 
-    if (cachedData) {
-      const { boards, totalPosts, totalPages, filesExistence } = JSON.parse(cachedData);
-      setBoards(boards);
-      setTotalPosts(totalPosts);
-      setTotalPages(totalPages);
-      setFilesExistence(filesExistence);
-      setLoading(false);
-      return;
-    }
+    // 캐시된 데이터가 있을 경우, 캐시된 데이터를 우선 사용
+  if (cachedData) {
+    const { boards, totalPosts, totalPages, filesExistence } = JSON.parse(cachedData);
+    setBoards(boards);
+    setTotalPosts(totalPosts);
+    setTotalPages(totalPages);
+    setFilesExistence(filesExistence);
+    setLoading(false);
+    return;
+  }
 
     setLoading(true);
     try {
@@ -51,28 +52,36 @@ const Notice = () => {
 
       const fileStatus = await fetchFilesExistence(sortedBoards);
 
-      setBoards(sortedBoards);
+          // 기존 데이터와 비교 후, 차이가 있을 경우에만 상태 업데이트
+    setBoards((prevBoards) => {
+      const newBoards = sortedBoards;
+      // 기존의 boards와 새로운 boards를 비교
+      if (JSON.stringify(prevBoards) !== JSON.stringify(newBoards)) {
+        return newBoards;
+      }
+      return prevBoards;
+    });
       setTotalPosts(response.data.length);
       setTotalPages(Math.ceil(response.data.length / itemsPerPage));
       setFilesExistence(fileStatus);
 
-      // 캐싱 데이터 저장
-      localStorage.setItem(
-        cacheKey,
-        JSON.stringify({
-          boards: sortedBoards,
-          totalPosts: response.data.length,
-          totalPages: Math.ceil(response.data.length / itemsPerPage),
-          filesExistence: fileStatus,
-        })
-      );
-    } catch (error) {
-      console.error('Failed to fetch boards: ', error.response ? error.response.data : error.message);
-      alert('게시판 데이터를 불러오는 데 실패했습니다.');
-    } finally {
-      setLoading(false);
-    }
-  };
+         // 새로운 데이터 캐시 저장
+    localStorage.setItem(
+      cacheKey,
+      JSON.stringify({
+        boards: sortedBoards,
+        totalPosts: response.data.length,
+        totalPages: Math.ceil(response.data.length / itemsPerPage),
+        filesExistence: fileStatus,
+      })
+    );
+  } catch (error) {
+    console.error('게시판 데이터를 불러오는 데 실패했습니다: ', error.response ? error.response.data : error.message);
+    alert('게시판 데이터를 불러오는 데 실패했습니다.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   const fetchFilesExistence = async (boards) => {
     try {
