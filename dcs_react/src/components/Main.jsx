@@ -359,11 +359,7 @@ const Main = () => {
                   disableOnInteraction: false, // 터치 후 autoplay 유지
                 }}
                 loop={true}
-                onSwiper={(swiper) => {
-                  setTimeout(() => {
-                    swiper.update(); // Swiper 강제 업데이트
-                  }, 100);
-                }}
+                loopAdditionalSlides={5}
                 navigation={true} 
                 touchEventsTarget="wrapper" // 추가
                 passiveListeners={true}    // 추가
@@ -377,8 +373,9 @@ const Main = () => {
                   480: {
                     slidesPerView: 2,
                   },
-                  320: { slidesPerView: 1 },
+                  0: { slidesPerView: 1 },
                 }}
+                cssMode={false}
               >
               <SwiperSlide className="swiper-slide">
                 <Link to="">
