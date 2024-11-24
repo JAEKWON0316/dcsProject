@@ -354,9 +354,15 @@ const Main = () => {
                 className="swiper-container"
                 modules={[Autoplay, Pagination, Navigation]}  
                 slidesPerView={5} 
+                autoplay={{
+                  delay: 2000,
+                  disableOnInteraction: false, // 터치 후 autoplay 유지
+                }}
                 loop={true}
-                autoplay={{ delay: 2000 }} 
                 navigation={true} 
+                cssMode={true} 
+                touchEventsTarget="wrapper" // 추가
+                passiveListeners={true}    // 추가
                 breakpoints={{
                   1024: { 
                     slidesPerView: 4, 
