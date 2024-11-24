@@ -355,8 +355,7 @@ a{
 
 .visual5 .swiper{opacity: 1;}
 .visual5 .footbanner {width: 100%;padding: 20px;}
-.visual5 .swiper-wrapper{  display: flex;
-  justify-content: space-between;}
+.visual5 .swiper-wrapper{  display: flex; justify-content: space-between;}
 .visual5 .swiper-container {width: 100%;height: auto;  -webkit-overflow-scrolling: touch; overflow: hidden;}
 .visual5 .swiper-slide {   width: calc(100% / 2);box-sizing: border-box;}
 .visual5 .swiper-slide img {width: 13rem;height: 8rem;object-fit: cover;border-radius: 1rem; }
@@ -380,6 +379,9 @@ a{
 .greeting_wrap .img_bottom p:nth-child(2){margin-bottom: .3rem;}
 .greeting_wrap .img_bottom p:nth-child(2),
 .greeting_wrap .img_bottom p:nth-child(3){letter-spacing: .1rem;}
+.greeting_wrap .img_bottom p:nth-child(3){
+  margin-left: 1.1rem;
+}
 .greeting_wrap .ask{margin-left:4rem;text-align: justify;}
 .greeting_wrap .ask p{font-size: 1.2rem;color: #454444;}
 .greeting_wrap .ask p + p{margin-bottom: 1.5rem;line-height: 2rem;}

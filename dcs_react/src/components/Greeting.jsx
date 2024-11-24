@@ -25,7 +25,7 @@ const Greeting = () => {
             <div className='img_bottom'>
               <p>(사)대한청년을세계로</p>
               <p>이사장 | 정 민 기</p>
-              <p>Chairman | Jeong Min Ki</p>
+              <p>President | Jeong Min Ki</p>
             </div>
           </div>
           <div className='ask'> 
@@ -53,7 +53,7 @@ const Greeting = () => {
 
             <p>Our organization aims to serve as a bridge connecting technological innovation and generational collaboration in the midst of a transformative era defined by AI. We strive to foster communication and cooperation among the older, younger, and future generations, opening new possibilities together.</p>
 
-            <p>Today, we are entering a new era that extends beyond industrialization and digitalization into what can be called the AI Revolution—a national agenda deeply intertwined with our society. While AI has become a central strategy in economics, security, and policy, it still feels unfamiliar and inaccessible to many.</p>
+            <p>Today, we are entering a new era that extends beyond industrialization and digitalization into what can be called the AI Revolution national agenda deeply intertwined with our society. While AI has become a central strategy in economics, security, and policy, it still feels unfamiliar and inaccessible to many.</p>
 
             <p>The evolution of AI technology has unfolded through several stages. It began with commercialization, where companies leveraged AI to create value and integrate it into industries and software. Subsequently, it expanded into the national sphere, embedding AI as a key factor in the economy and policymaking. Finally, as we approach the superintelligence phase, where technology surpasses human creativity and intelligence, a new paradigm of intergenerational thinking and collaboration is required.</p>
 
