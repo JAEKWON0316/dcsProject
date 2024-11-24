@@ -359,8 +359,8 @@ const Main = () => {
                   disableOnInteraction: false, // 터치 후 autoplay 유지
                 }}
                 loop={true}
+                loopAdditionalSlides={5}
                 navigation={true} 
-                cssMode={true} 
                 touchEventsTarget="wrapper" // 추가
                 passiveListeners={true}    // 추가
                 breakpoints={{
@@ -414,6 +414,11 @@ const Main = () => {
               <SwiperSlide className="swiper-slide">
                 <Link to="">
                   <img src={Img6} alt="slide3" />
+                </Link>
+              </SwiperSlide>
+              <SwiperSlide className="swiper-slide">
+                <Link to="">
+                  <img src={Img3} alt="slide3" />
                 </Link>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
