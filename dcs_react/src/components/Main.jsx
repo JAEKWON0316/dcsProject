@@ -365,6 +365,8 @@ const Main = () => {
                   }, 100);
                 }}
                 navigation={true} 
+                touchEventsTarget="wrapper" // 추가
+                passiveListeners={true}    // 추가
                 breakpoints={{
                   1024: { 
                     slidesPerView: 4, 
