@@ -373,7 +373,7 @@ const Main = () => {
                   480: {
                     slidesPerView: 2,
                   },
-                  0: { slidesPerView: 1 },
+                  320: { slidesPerView: 1 },
                 }}
                 cssMode={false}
               >
