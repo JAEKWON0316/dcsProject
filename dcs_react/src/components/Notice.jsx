@@ -24,27 +24,14 @@ const Notice = () => {
   const fetchBoards = async () => {
     setLoading(true); // 로딩 시작
 
-    // 로컬 스토리지에서 캐시된 데이터 가져오기
-    const cacheKey = `boards_role_${role}`;
-    const cachedData = localStorage.getItem(cacheKey);
-
-    if (cachedData) {
-      const { boards, totalPosts, totalPages, filesExistence } = JSON.parse(cachedData);
-      setBoards(boards);
-      setTotalPosts(totalPosts);
-      setTotalPages(totalPages);
-      setFilesExistence(filesExistence);
-      setLoading(false); // 로딩 끝
-      return; // 캐시된 데이터가 있을 경우 API 호출을 건너뜁니다.
-    }
-
-    // 캐시된 데이터가 없을 경우 서버에서 최신 데이터 가져오기
     try {
+      // 최신 게시글 데이터를 가져오기 위한 API 호출
       const response = await axios.get(
         `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}`,
         { withCredentials: true }
       );
 
+      // 게시글을 최신 순으로 정렬 후 조회수를 업데이트
       const sortedBoards = response.data
         .sort((a, b) => b.id - a.id)
         .map((item, index) => ({
@@ -52,23 +39,13 @@ const Notice = () => {
           displayNumber: response.data.length - index,
         }));
 
+      // 파일 존재 여부 체크
       const fileStatus = await fetchFilesExistence(sortedBoards);
 
-      setBoards(sortedBoards);
+      setBoards(sortedBoards); // 상태 업데이트
       setTotalPosts(response.data.length);
       setTotalPages(Math.ceil(response.data.length / itemsPerPage));
-      setFilesExistence(fileStatus);
-
-      // 서버에서 데이터를 받은 후 로컬 스토리지에 저장
-      localStorage.setItem(
-        cacheKey,
-        JSON.stringify({
-          boards: sortedBoards,
-          totalPosts: response.data.length,
-          totalPages: Math.ceil(response.data.length / itemsPerPage),
-          filesExistence: fileStatus,
-        })
-      );
+      setFilesExistence(fileStatus); // 파일 존재 여부 상태 업데이트
     } catch (error) {
       console.error('게시판 데이터를 불러오는 데 실패했습니다: ', error.response ? error.response.data : error.message);
       alert('게시판 데이터를 불러오는 데 실패했습니다.');
@@ -76,6 +53,7 @@ const Notice = () => {
       setLoading(false); // 로딩 끝
     }
   };
+
 
   const fetchFilesExistence = async (boards) => {
     try {
