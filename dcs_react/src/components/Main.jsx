@@ -359,10 +359,12 @@ const Main = () => {
                   disableOnInteraction: false, // 터치 후 autoplay 유지
                 }}
                 loop={true}
-                loopAdditionalSlides={5}
+                onSwiper={(swiper) => {
+                  setTimeout(() => {
+                    swiper.update(); // Swiper 강제 업데이트
+                  }, 100);
+                }}
                 navigation={true} 
-                touchEventsTarget="wrapper" // 추가
-                passiveListeners={true}    // 추가
                 breakpoints={{
                   1024: { 
                     slidesPerView: 4, 
@@ -371,7 +373,7 @@ const Main = () => {
                     slidesPerView: 3, 
                   },
                   480: {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                   },
                   320: { slidesPerView: 1 },
                 }}
