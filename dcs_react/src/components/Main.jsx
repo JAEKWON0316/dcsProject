@@ -371,7 +371,7 @@ const Main = () => {
                     slidesPerView: 3, 
                   },
                   480: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                   },
                   320: { slidesPerView: 1 },
                 }}
