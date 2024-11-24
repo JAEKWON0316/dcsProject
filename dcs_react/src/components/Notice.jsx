@@ -24,14 +24,27 @@ const Notice = () => {
   const fetchBoards = async () => {
     setLoading(true); // 로딩 시작
 
+    // 로컬 스토리지에서 캐시된 데이터 가져오기
+    const cacheKey = `boards_role_${role}`;
+    const cachedData = localStorage.getItem(cacheKey);
+
+    if (cachedData) {
+      const { boards, totalPosts, totalPages, filesExistence } = JSON.parse(cachedData);
+      setBoards(boards);
+      setTotalPosts(totalPosts);
+      setTotalPages(totalPages);
+      setFilesExistence(filesExistence);
+      setLoading(false); // 로딩 끝
+      return; // 캐시된 데이터가 있을 경우 API 호출을 건너뜁니다.
+    }
+
+    // 캐시된 데이터가 없을 경우 서버에서 최신 데이터 가져오기
     try {
-      // 최신 게시글 데이터를 가져오기 위한 API 호출
       const response = await axios.get(
         `https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}`,
         { withCredentials: true }
       );
 
-      // 게시글을 최신 순으로 정렬 후 조회수를 업데이트
       const sortedBoards = response.data
         .sort((a, b) => b.id - a.id)
         .map((item, index) => ({
@@ -39,13 +52,23 @@ const Notice = () => {
           displayNumber: response.data.length - index,
         }));
 
-      // 파일 존재 여부 체크
       const fileStatus = await fetchFilesExistence(sortedBoards);
 
-      setBoards(sortedBoards); // 상태 업데이트
+      setBoards(sortedBoards);
       setTotalPosts(response.data.length);
       setTotalPages(Math.ceil(response.data.length / itemsPerPage));
-      setFilesExistence(fileStatus); // 파일 존재 여부 상태 업데이트
+      setFilesExistence(fileStatus);
+
+      // 서버에서 데이터를 받은 후 로컬 스토리지에 저장
+      localStorage.setItem(
+        cacheKey,
+        JSON.stringify({
+          boards: sortedBoards,
+          totalPosts: response.data.length,
+          totalPages: Math.ceil(response.data.length / itemsPerPage),
+          filesExistence: fileStatus,
+        })
+      );
     } catch (error) {
       console.error('게시판 데이터를 불러오는 데 실패했습니다: ', error.response ? error.response.data : error.message);
       alert('게시판 데이터를 불러오는 데 실패했습니다.');
@@ -53,7 +76,6 @@ const Notice = () => {
       setLoading(false); // 로딩 끝
     }
   };
-
 
   const fetchFilesExistence = async (boards) => {
     try {
@@ -122,7 +144,10 @@ const Notice = () => {
             {role === '2' && 'Q & A'}
             {role === '3' && '활동사진'}
             {role === '4' && '언론보도'}
-            {/* 나머지 조건 추가 */}
+            {role === '5' && '미래전략포럼'}
+            {role === '6' && 'AI혁신위원회'}
+            {role === '7' && '글로벌 네트워킹'}
+            {role === '8' && '지역 청년 네트워킹'}
           </strong>
           <span className="img">
             <img
@@ -135,7 +160,7 @@ const Notice = () => {
 
       <div className="listbox mt-5">
         <div className="total-pg-info">
-          <p>전체 게시글 수: {totalPosts}</p>
+          <p className='me-3'>전체 게시글 수: {totalPosts}</p>
           <p>총 페이지 수: {totalPages}</p>
         </div>
         <table className="table table-box">
@@ -148,34 +173,36 @@ const Notice = () => {
               <th>조회수</th>
             </tr>
           </thead>
-          <tbody>
-            {loadingBoards ? (
-              <tr>
-                <td colSpan="5" style={{ textAlign: 'center' }}>
-                  <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                  </div>
+                  <tbody>
+          {loading ? (
+            <tr>
+              <td colSpan="5" style={{ textAlign: 'center' }}>
+                <div className="spinner-border" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </td>
+            </tr>
+          ) : currentBoards.length > 0 ? (
+            currentBoards.map((board) => (
+              <tr key={board.id}>
+                <td>{board.displayNumber}</td>
+                <td>
+                  <a href={`/board/${role}/${board.id}`}>{board.title}</a>
+                  {filesExistence[board.id] && <span className='file_font'><FcOpenedFolder /></span>}
                 </td>
+                <td>{board.writer}</td>
+                <td>{board.bbsCreatedTime}</td>
+                <td>{board.hit}</td>
               </tr>
-            ) : currentBoards.length > 0 ? (
-              currentBoards.map((board) => (
-                <tr key={board.id}>
-                  <td>{board.displayNumber}</td>
-                  <td>
-                    <a href={`/board/${role}/${board.id}`}>{board.title}</a>
-                    {filesExistence[board.id] && <span className='file_font'><FcOpenedFolder /></span>}
-                  </td>
-                  <td>{board.writer}</td>
-                  <td>{board.bbsCreatedTime}</td>
-                  <td>{board.hit}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5">게시글이 없습니다.</td>
-              </tr>
-            )}
-          </tbody>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="5" style={{ textAlign: 'center' }}>
+                게시글이 없습니다.
+              </td>
+            </tr>
+          )}
+        </tbody>
         </table>
           
           <div className="pagination paging">

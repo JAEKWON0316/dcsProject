@@ -51,6 +51,7 @@ public class FileService {
     public boolean doesFileExistForBoard(Long dcsBoardId) {
       return fileRepository.existsByDcsBoardId(dcsBoardId);
   }
+  
 
   public String convertToPublicfUrl(String gsPath) {
     // 예: gs://dcsdb-1df4b.firebasestorage.app/sponsor08.png

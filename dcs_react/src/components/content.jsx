@@ -30,23 +30,8 @@ const Content = () => {
       try {
         setLoading(true);
         setError(null);
-  
-        // 로컬 캐시 확인
-        const cachedBoardData = JSON.parse(localStorage.getItem(`board_${id}`));
-        const cachedImages = JSON.parse(localStorage.getItem(`images_${id}`));
-        const cachedFiles = JSON.parse(localStorage.getItem(`files_${id}`));
-  
-        if (cachedBoardData && cachedImages && cachedFiles) {
-          setBoard(cachedBoardData.board);
-          setImages(cachedImages);
-          setFiles(cachedFiles);
-          setPreviousId(cachedBoardData.previousId);
-          setNextId(cachedBoardData.nextId);
-          setLoading(false);
-          return;
-        }
-  
-        // 로컬 스토리지 조회수 처리
+
+                // 로컬 스토리지 조회수 처리
         const viewedBoards = JSON.parse(localStorage.getItem('viewedBoards')) || {};
         const lastViewedTime = viewedBoards[id];
         const currentTime = new Date().getTime();
@@ -57,6 +42,8 @@ const Content = () => {
           localStorage.setItem('viewedBoards', JSON.stringify(viewedBoards));
         }
   
+
+
         // 병렬로 데이터 요청
         const [boardRes, navRes, imageRes, fileRes] = await Promise.all([
           axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/board/role/${role}/${id}`),
@@ -64,24 +51,13 @@ const Content = () => {
           axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/images/board/${id}`),
           axios.get(`https://dcs-site-5dccc5b2f0e4.herokuapp.com/api/files/board/${id}`)
         ]);
-  
-        const boardData = {
-          board: boardRes.data,
-          previousId: navRes.data.prev?.id || null,
-          nextId: navRes.data.next?.id || null,
-        };
-  
+
         // 상태 업데이트
-        setBoard(boardData.board);
-        setPreviousId(boardData.previousId);
-        setNextId(boardData.nextId);
+        setBoard(boardRes.data);
+        setPreviousId(navRes.data.prev?.id || null);
+        setNextId(navRes.data.next?.id || null);
         setImages(imageRes.data);
         setFiles(fileRes.data);
-  
-        // 로컬 캐시에 저장
-        localStorage.setItem(`board_${id}`, JSON.stringify(boardData));
-        localStorage.setItem(`images_${id}`, JSON.stringify(imageRes.data));
-        localStorage.setItem(`files_${id}`, JSON.stringify(fileRes.data));
       } catch (err) {
         console.error(err);
         setError('데이터를 불러오는 중 오류가 발생했습니다.');
@@ -89,7 +65,7 @@ const Content = () => {
         setLoading(false);
       }
     };
-  
+
     fetchBoardData();
   }, [role, id]);
 
