@@ -36,12 +36,12 @@ a{
 .header .container{padding: 0 clamp(40px, 3.125vw, 80px);margin: 0 auto;}
 .header .header-content{width: 100%;max-width: 192rem;display: flex;justify-content: center;margin: auto;position: relative;height: var(--header-height, 100px);}
 .header .logo{position: absolute;top: 50%;transform: translateY(-50%);left: 0;}
-.header .logo img{width:200px; height:100px; object-fit: contain; }
-.header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: .3rem;transition: color 0.3s ease; font-size:18px;position: relative;display: block;}
+.header .logo img{width:248px; height:100px; object-fit: contain; }
+.header .depth1{line-height: 6rem;font-weight: 700;padding-bottom: .6rem;transition: color 0.3s ease; font-size:18px;position: relative;display: block;font-size: 1.4rem;}
 .header a{text-decoration: none; color: #fff;}
 .header .nav .gnb{display: flex;}
 .header button{opacity: 0;visibility: hidden;position: absolute;}
-.header .nav ul{list-style-type: none;padding: 0;margin: 0;gap: 4.1333333333em;}
+.header .nav ul{list-style-type: none;padding: 0;margin: 0;gap: 5.1333333333em;}
 .header .depth2 ul{gap: .4333333333em; display: grid;place-items: start;}
 .header .depth2 ul a{white-space: nowrap;}
 .header .gnb > li{position: relative;}
@@ -50,6 +50,7 @@ a{
   transition: opacity calc(var(--anim-duration)* 3), 
   visibility calc(var(--anim-duration)* 3), 
   transform calc(var(--anim-duration)* 5) cubic-bezier(.19,1,.22,1);
+  font-size: 1.3rem;
 }
 .depth2.click{opacity: 1 !important; visibility: visible;}
 .header .depth2 li{display: inline-flex;}
@@ -189,19 +190,34 @@ a{
   
 }
 @media (max-width: 768px) {
-  .header .container {padding: 0 !important;cursor: auto;}
+  .header .container {padding: 0 !important;}
   .header .logo img {width: 138px;}
   .header .headerbtn{font-size: 2.3rem;}
   .header .nav{width: 100%;}
+  .header.white::before{background: rgb(8 15 61) !important;}
   .header-content .nav .gnb.click {width: 100%;position: absolute;display: grid;gap: 1.5rem;}
-  .header-content .nav .gnb.click li {display: flex;padding: 0 1rem;}
+  .header-content .nav .gnb.click li {padding: 0 1rem;}
   .header.hover::before {height: var(--mini-header-height, 100px) !important;}
   .depth1.underline::after {bottom: -2.3rem;}
   .header .depth1 {font-size: 23px;}
   .header .header-content {height: var(--mini-header-height, 100px) !important;}
-  .header.click::before {position: absolute;width: 100vw;left: 0rem !important;height: 100vh !important;}
-  .header .depthbtn{opacity: 1 !important;visibility: 1 !important;}
+  .header.click::before {position: absolute;width: 100vw;left: 0rem !important;height: 100vh !important;    background: rgb(8 15 61);}
+  .header .depthbtn{opacity: 1 !important;visibility: 1 !important;position: absolute;right: 0;top: 0;}
   .header .depthbtn.hover{color: #007bff !important;}
+  .depth2.hover {
+    display: block;
+    position: relative;
+    top: 33px;
+    left: 0px;
+    opacity: 1;
+    visibility: visible;
+}
+.depth2.hover ul{
+  position: relative;
+  left: 40px;
+  top: 2px;
+  margin: 10px 0;
+}
   .main_wrap.hitory {max-width: calc(100% - 1rem);}
   .main .main_wrap {padding: 0 .3rem;}
   .main_wrap .about-l h1{font-size: 2rem !important;}
@@ -364,10 +380,6 @@ a{
 .greeting_wrap .img_bottom p:nth-child(2){margin-bottom: .3rem;}
 .greeting_wrap .img_bottom p:nth-child(2),
 .greeting_wrap .img_bottom p:nth-child(3){letter-spacing: .1rem;}
-.greeting_wrap .ask p:nth-child(6),
-.greeting_wrap .ask p:nth-child(7),
-.greeting_wrap .ask p:nth-child(15),
-.greeting_wrap .ask p:nth-child(16){margin-bottom: 0;}
 .greeting_wrap .ask{margin-left:4rem;text-align: justify;}
 .greeting_wrap .ask p{font-size: 1.2rem;color: #454444;}
 .greeting_wrap .ask p + p{margin-bottom: 1.5rem;line-height: 2rem;}
@@ -377,7 +389,7 @@ a{
 .vision_wrap img{width: 100%;max-width: 1200px;}
 .vision_wrap{padding: 0 8rem;max-width: 1400px;margin: 0 auto;}
 
-.vision_wrap .ask {font-size: 1.2rem;color: #454444;}
+.vision_wrap .ask {font-size: 1.2rem;color: #454444;text-align: justify;}
 .table_wrap {padding: 0 3rem;}
 .table_wrap h4{text-align: left;width: 100%;max-width: 55rem;font-weight: 900;font-size: 1.9rem;}
 .table_wrap .table{display: flex;flex-direction: column;align-items: center;padding: 5rem 0;}

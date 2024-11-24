@@ -56,7 +56,7 @@ const Header = () => {
       if (depth2Element) {
         const height = depth2Element.offsetHeight;
         const height2 = depth1Element.offsetHeight;
-        document.documentElement.style.setProperty('--depth2-height', `${height + height2}px + 3.5rem`);
+        document.documentElement.style.setProperty('--depth2-height', `${height + height2}px + .5rem`);
       }
     };
 

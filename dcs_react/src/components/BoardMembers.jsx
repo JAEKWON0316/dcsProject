@@ -30,14 +30,16 @@ AI 혁신위원회는 각 산업 분야에서 활동하는 청년들에게 AI �
             </caption>
             <colgroup>
               <col style={{ width: "25%" }} />
-              <col style={{ width: "28%" }} />
-              <col style={{ width: "47%" }} />
+              <col style={{ width: "25%" }} />
+              <col style={{ width: "25%" }} />
+              <col style={{ width: "25%" }} />
             </colgroup>
             <thead>
               <tr>
                 <th scope='col'></th> 
-                <th scope='col'>성명</th> 
-                <th scope='col'>소속 및 직책</th> 
+                <th scope='col'>이름</th> 
+                <th scope='col'>직책</th> 
+                <th scope='col'>직업</th>
               </tr>
             </thead>
             <tbody>
@@ -45,16 +47,19 @@ AI 혁신위원회는 각 산업 분야에서 활동하는 청년들에게 AI �
                 <td><img src={Img2} alt='인물사진' /></td>
                 <th scope='row' className='nam'>홍길동</th> 
                 <td>대학생AI혁신위원회</td>
+                <td>뭘까용</td>
               </tr>
               <tr>
                 <td><img src={Img2} alt='인물사진' /></td>
                 <th scope='row' className='nam'>홍길동</th> 
                 <td>직장인AI혁신위원회</td>
+                <td>뭘까용</td>
               </tr>
               <tr>
                 <td><img src={Img2} alt='인물사진' /></td>
                 <th scope='row' className='nam'>홍길동</th> 
                 <td>취창업AI혁신위원회</td>
+                <td>뭘까용</td>
               </tr>
             </tbody>
           </table>

@@ -29,27 +29,32 @@ const Vision = () => {
               성명, 소속 및 직책을 포함합니다.
             </caption>
             <colgroup>
-              <col style={{ width: "38%" }} />
-              <col style={{ width: "62%" }} />
+              <col style={{ width: "30%" }} />
+              <col style={{ width: "35%" }} />
+              <col style={{ width: "35%" }} />
             </colgroup>
             <thead>
               <tr>
                 <th scope="col">성명</th> 
-                <th scope="col">소속 및 직책</th> 
+                <th scope="col">직책</th> 
+                <th scope="col">직업</th> 
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th scope="row" className="nam">홍길동</th> 
                 <td>대학생AI혁신위원회</td>
+                <td>뭘까용</td>
               </tr>
               <tr>
                 <th scope="row" className="nam">홍길동</th> 
                 <td>직장인AI혁신위원회</td>
+                <td>뭘까용</td>
               </tr>
               <tr>
                 <th scope="row" className="nam">홍길동</th> 
                 <td>취창업AI혁신위원회</td>
+                <td>뭘까용</td>
               </tr>
             </tbody>
           </table>
