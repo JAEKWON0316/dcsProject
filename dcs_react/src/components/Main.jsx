@@ -144,6 +144,7 @@ const Main = () => {
   return (
     <div className='main'>
       <video
+        playsInline
         src="/media/videos/1119.mov"
         autoPlay
         loop
