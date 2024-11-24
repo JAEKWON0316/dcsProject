@@ -340,8 +340,8 @@ a{
 .visual5 .swiper{opacity: 1;}
 .visual5 .footbanner {width: 100%;padding: 20px;}
 .visual5 .swiper-wrapper{justify-content: space-around;}
-.visual5 .swiper-container {width: 100%;height: auto;}
-.visual5 .swiper-slide {display: flex;justify-content: center;align-items: center;}
+.visual5 .swiper-container {width: 100%;height: auto; overflow: hidden;}
+.visual5 .swiper-slide {display: flex;justify-content: center;align-items: center;  flex-shrink: 0;}
 .visual5 .swiper-slide img {width: 13rem;height: 8rem;object-fit: cover;border-radius: 1rem; }
 .visual5 {padding-bottom: 0 !important;}
 /****** notice ******/
