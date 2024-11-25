@@ -12,7 +12,7 @@ const Header = () => {
   const [isHover, setIsHover] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
   const [clcikButton, setClickButton] = useState(false);
-
+  const [isVisible, setIsVisible] = useState(Array(5).fill(false));
 
   const location = useLocation();
   const isNotMain = location.pathname !== '/';
@@ -38,6 +38,12 @@ const Header = () => {
     handleMouseLeave();
     setActiveIndex(null);
   };
+
+  const handletoggle = (index) => {
+    setIsVisible((prev) => 
+      prev.map((isVisible, i) => (i === index ? !isVisible : isVisible))
+    );
+  }
   
   useEffect(()=>{
     const handleScroll = () => {
@@ -141,7 +147,7 @@ const Header = () => {
                   >
                     {menu.depth1}
                   </Link>
-                  <div className={`depth2 `}>
+                  <div className={`depth2 ${isVisible[index] ? "hoverbtn" : ""}`}>
                     <ul>
                       {menu.depth2.map((subMenu, subIndex) => (
                         <li key={subIndex}>
@@ -151,7 +157,7 @@ const Header = () => {
                     </ul>
                   </div>
 
-                  <button type='button' className={`depthbtn ${activeIndex === index ? 'underline hover' : ''}`}>
+                  <button type='button' onClick={() => handletoggle(index)} className={`depthbtn ${activeIndex === index ? 'underline hover' : ''}`}>
                     <IoIosArrowDown />
                   </button>
                 </li>
